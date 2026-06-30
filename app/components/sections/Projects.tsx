@@ -17,7 +17,8 @@ export function Projects() {
             <span className="gradient-rule mt-6" />
           </div>
           <p className="max-w-xl text-lg leading-8 text-ink-soft md:justify-self-end">
-            Produtos reais, construidos do zero, com problema, solucao e resultado. <span className="placeholder-copy">[Projetos publicos a definir]</span>
+            Soluções digitais criadas para comunicar melhor, facilitar processos e aproximar empresas
+            dos seus clientes. <span className="placeholder-copy">[Cases públicos em organização]</span>
           </p>
         </RevealOnScroll>
         <motion.div

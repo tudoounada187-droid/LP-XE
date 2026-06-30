@@ -1,17 +1,19 @@
 export const insights = [
   {
-    date: "[Data]",
-    title: "[Insight a definir]",
-    summary: "[Resumo curto do conteudo ou bastidor a publicar]",
+    date: "2026",
+    title: "Por que uma landing page ajuda profissionais e negócios locais",
+    summary: "Uma página ligada ao perfil pode organizar serviços, contatos e diferenciais em um só lugar.",
   },
   {
-    date: "[Data]",
-    title: "[Nota tecnica a definir]",
-    summary: "[Resumo curto do conteudo ou bastidor a publicar]",
+    date: "2026",
+    title: "Site bonito não é suficiente",
+    summary:
+      "A página precisa ter clareza, boa estrutura, carregamento rápido e um caminho simples para o cliente entrar em contato.",
   },
   {
-    date: "[Data]",
-    title: "[Bastidor a definir]",
-    summary: "[Resumo curto do conteudo ou bastidor a publicar]",
+    date: "2026",
+    title: "Quando um sistema personalizado faz sentido",
+    summary:
+      "Se o negócio depende de planilhas, mensagens soltas ou controles manuais, um sistema simples pode organizar melhor a rotina.",
   },
 ];

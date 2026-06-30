@@ -26,12 +26,18 @@ export function Experience() {
       <div className="container-x relative z-10">
         <RevealOnScroll className="grid gap-6 md:grid-cols-[0.7fr_1fr] md:items-end">
           <div>
-            <p className="font-mono text-sm text-ink-soft">Experiencia.</p>
-            <h2 className="editorial-h2 mt-4">+[N] projetos entregues</h2>
+            <p className="font-mono text-sm text-ink-soft">Experiência.</p>
+            <h2 className="editorial-h2 mt-4">
+              A XE Software nasce com foco em soluções digitais sob medida para profissionais, empresas e negócios locais.
+            </h2>
             <span className="gradient-rule mt-6" />
           </div>
           <p className="text-lg leading-8 text-ink-soft md:justify-self-end">
-            <span className="placeholder-copy">[Numeros e depoimentos reais a preencher]</span>
+            A atuação une visão de Engenharia de Software, desenvolvimento web, design de interface
+            e construção de páginas profissionais.{" "}
+            <span className="placeholder-copy">
+              [Adicionar números reais de projetos/clientes quando houver autorização para divulgar]
+            </span>
           </p>
         </RevealOnScroll>
         <div className="mt-12">

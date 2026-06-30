@@ -1,7 +1,17 @@
 import { assetPath } from "@/lib/assets";
 
-const nav = ["Projetos", "Servicos", "Sobre", "Insights"];
-const socials = ["Instagram", "GitHub", "LinkedIn"];
+const nav = [
+  { label: "Projetos", href: "#projetos" },
+  { label: "Serviços", href: "#servicos" },
+  { label: "Sobre", href: "#sobre" },
+  { label: "Insights", href: "#insights" },
+];
+
+const socials = [
+  { label: "Instagram", href: "https://www.instagram.com/xe_software/" },
+  { label: "GitHub", href: "https://github.com/EmanuelCandido" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/emanuecandido" },
+];
 
 export function Footer() {
   return (
@@ -18,7 +28,9 @@ export function Footer() {
             />
             <div>
               <p className="font-mono text-xs font-semibold uppercase text-ink-soft">Software</p>
-              <p className="mt-2 max-w-md text-sm leading-6 text-ink-soft">Design, engenharia front-end e produtos digitais sob medida.</p>
+              <p className="mt-2 max-w-md text-sm leading-6 text-ink-soft">
+                Sites, landing pages e sistemas sob medida para profissionais, empresas e negócios locais.
+              </p>
             </div>
           </div>
           <a href="#contato" className="brand-gradient relative z-10 inline-flex min-h-11 items-center justify-center rounded-pill px-5 text-sm font-bold text-white shadow-[0_16px_36px_rgba(37,99,235,0.2)]">
@@ -29,20 +41,23 @@ export function Footer() {
           <div>
             <p className="font-mono text-xs font-semibold uppercase text-ink-soft">Contato</p>
             <div className="mt-4 space-y-2 text-sm">
-              <a href="mailto:[email-a-definir]" className="block transition hover:text-accent">
-                [email a definir]
+              <a href="https://www.instagram.com/xe_software/" className="block transition hover:text-accent">
+                Instagram: @xe_software
+              </a>
+              <a href="mailto:emanoelcandidolima@gmail.com" className="block transition hover:text-accent">
+                E-mail: emanoelcandidolima@gmail.com
               </a>
               <a href="#contato" className="block transition hover:text-accent">
-                [WhatsApp a definir]
+                WhatsApp: [a definir, caso queira divulgar]
               </a>
             </div>
           </div>
           <div>
-            <p className="font-mono text-xs font-semibold uppercase text-ink-soft">Navegacao</p>
+            <p className="font-mono text-xs font-semibold uppercase text-ink-soft">Navegação</p>
             <div className="mt-4 flex flex-wrap gap-3 text-sm">
               {nav.map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} className="transition hover:text-accent">
-                  {item}
+                <a key={item.href} href={item.href} className="transition hover:text-accent">
+                  {item.label}
                 </a>
               ))}
             </div>
@@ -51,8 +66,8 @@ export function Footer() {
             <p className="font-mono text-xs font-semibold uppercase text-ink-soft">Redes</p>
             <div className="mt-4 flex flex-wrap gap-3 text-sm">
               {socials.map((item) => (
-                <a key={item} href="#contato" className="transition hover:text-accent">
-                  {item}
+                <a key={item.href} href={item.href} className="transition hover:text-accent">
+                  {item.label}
                 </a>
               ))}
             </div>

@@ -8,7 +8,7 @@ export function Insights() {
       <div className="container-x relative z-10">
         <RevealOnScroll>
           <p className="font-mono text-sm text-ink-soft">Insights</p>
-          <h2 className="editorial-h2 mt-4">Conteudo e bastidores</h2>
+          <h2 className="editorial-h2 mt-4">Conteúdo e bastidores</h2>
           <span className="gradient-rule mt-6" />
         </RevealOnScroll>
         <div className="mt-12 grid gap-4 md:grid-cols-3">

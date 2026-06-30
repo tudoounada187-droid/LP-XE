@@ -1,9 +1,9 @@
 import { RevealOnScroll } from "@/components/animations/RevealOnScroll";
 
 const methods = [
-  ["Escopo fechado", "Projeto com entrega definida, prazo claro e criterios objetivos de aceite."],
-  ["Escopo aberto", "Descoberta e construcao iterativa quando ainda ha incerteza relevante."],
-  ["Parceria continua", "Evolucao recorrente para produtos que precisam de melhoria constante."],
+  ["Escopo fechado", "Projeto com objetivo definido, entrega clara, prazo combinado e critérios simples de aprovação."],
+  ["Escopo aberto", "Construção por etapas quando a ideia ainda precisa ser refinada antes da entrega final."],
+  ["Parceria contínua", "Acompanhamento para evoluir páginas, sistemas e presença digital conforme o negócio cresce."],
 ];
 
 export function WorkMethod() {
@@ -13,8 +13,8 @@ export function WorkMethod() {
       <div className="section-wave-out wave-to-white" aria-hidden="true" />
       <div className="container-x relative z-10 grid gap-12 lg:grid-cols-[0.9fr_1fr] lg:items-center">
         <RevealOnScroll>
-          <p className="font-mono text-sm text-ink-soft">Metodo</p>
-          <h2 className="editorial-h2 mt-4">Metodo claro, adaptado ao seu contexto</h2>
+          <p className="font-mono text-sm text-ink-soft">Método</p>
+          <h2 className="editorial-h2 mt-4">Processo claro, simples e adaptado ao tamanho do projeto</h2>
           <span className="gradient-rule mt-6" />
           <div className="mt-10 space-y-4">
             {methods.map(([title, body], index) => (
@@ -35,7 +35,7 @@ export function WorkMethod() {
                 <span className="size-3 rounded-full bg-line" />
               </div>
               <div className="mt-8 space-y-3">
-                {["Diagnostico", "Spec validada", "Design", "Front-end", "Entrega"].map((item, index) => (
+                {["Diagnóstico", "Estrutura da solução", "Design", "Desenvolvimento", "Entrega e ajustes finais"].map((item, index) => (
                   <div key={item} className="flex items-center gap-4 rounded-2xl border border-line bg-bg p-4">
                     <span className="brand-gradient grid size-8 place-items-center rounded-pill font-mono text-xs font-semibold text-white">{String(index + 1).padStart(2, "0")}</span>
                     <span className="font-medium">{item}</span>

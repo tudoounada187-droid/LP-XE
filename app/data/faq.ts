@@ -1,32 +1,32 @@
 export const faq = [
   {
-    question: "A XE Software trabalha com projetos de escopo fechado?",
+    question: "A XE Software cria apenas landing pages?",
     answer:
-      "Sim. Quando o objetivo, as telas e os criterios de entrega estao claros, o projeto pode seguir com escopo fechado, prazo definido e checkpoints objetivos.",
+      "Não. A XE Software cria landing pages, sites institucionais e sistemas personalizados, de acordo com a necessidade do cliente.",
   },
   {
-    question: "O que acontece antes de comecar a codar?",
+    question: "Minha landing page pode ficar ligada ao Instagram?",
     answer:
-      "Antes do desenvolvimento, estruturamos o problema, a oferta, os fluxos e os requisitos. A ideia e reduzir retrabalho e aprovar uma direcao clara antes da execucao.",
+      "Sim. A página pode ser usada na bio do Instagram para apresentar seus serviços, mostrar informações importantes e facilitar o contato com clientes.",
   },
   {
-    question: "Posso contratar apenas UI/UX ou apenas front-end?",
+    question: "Vocês fazem sistemas personalizados?",
     answer:
-      "Sim. O projeto pode ser design, desenvolvimento ou ponta a ponta. A recomendacao depende do que ja existe e do nivel de maturidade do material atual.",
+      "Sim. Também desenvolvemos sistemas sob medida para cadastros, agendamentos, controles internos, dashboards simples e outras necessidades específicas.",
   },
   {
-    question: "Qual stack voces usam?",
+    question: "O que acontece antes de começar a desenvolver?",
     answer:
-      "A stack varia conforme o projeto, mas a base costuma envolver React, TypeScript, Tailwind, Vite/TanStack e ferramentas modernas de deploy como Vercel ou Netlify.",
+      "Antes do desenvolvimento, entendemos o objetivo, o público, as informações principais e o tipo de entrega necessária. Isso evita retrabalho e deixa o projeto mais claro.",
   },
   {
-    question: "O cliente fica com autonomia sobre o que foi entregue?",
+    question: "O site funciona no celular?",
     answer:
-      "Sim. A entrega inclui codigo, estrutura de componentes e orientacao sobre como evoluir o produto sem depender de ajustes invisiveis ou improvisados.",
+      "Sim. As páginas são pensadas para funcionar bem em celulares, tablets e computadores, já que boa parte dos clientes acessa pelo Instagram ou pelo WhatsApp.",
   },
   {
-    question: "Voces atendem demandas urgentes?",
+    question: "Como faço um orçamento?",
     answer:
-      "Quando ha disponibilidade e escopo bem delimitado, sim. Projetos urgentes precisam de decisao rapida, prioridade real e criterios de aprovacao simples.",
+      "O orçamento pode ser solicitado pelo direct do Instagram da XE Software. Depois disso, levantamos a necessidade, o tipo de projeto e o melhor formato de entrega.",
   },
 ];

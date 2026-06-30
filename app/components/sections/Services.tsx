@@ -13,12 +13,13 @@ export function Services() {
       <div className="container-x relative z-10">
         <RevealOnScroll className="grid gap-8 md:grid-cols-[0.7fr_1fr]">
           <div>
-            <SectionLabel light>Servicos ({services.length})</SectionLabel>
-            <h2 className="editorial-h2 mt-4">Servicos.</h2>
+            <SectionLabel light>Serviços ({services.length})</SectionLabel>
+            <h2 className="editorial-h2 mt-4">Serviços.</h2>
             <span className="gradient-rule mt-6" />
           </div>
           <p className="max-w-2xl text-lg leading-8 text-contrast-ink-soft">
-            Atuamos onde estrategia, interface e engenharia precisam conversar sem ruido.
+            Atuamos na criação de páginas, sistemas e experiências digitais sob medida para quem
+            precisa sair do improviso e ter uma presença online mais profissional.
           </p>
         </RevealOnScroll>
         <div className="mt-12">

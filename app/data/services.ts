@@ -1,38 +1,38 @@
 export const services = [
   {
-    title: "Landing Pages de alta conversao",
+    title: "Landing Pages de alta conversão",
     description:
-      "Quando a oferta e boa, mas a pagina nao comunica com clareza, desenhamos e implementamos uma experiencia de uma pagina focada em entendimento, confianca e contato.",
-    tags: ["Lancamentos", "Servicos premium", "Validacao de oferta"],
+      "Criamos páginas de uma única estrutura, objetivas e bem apresentadas, para explicar sua oferta, mostrar confiança e facilitar o contato do cliente.",
+    tags: ["Serviços profissionais", "Captação de clientes", "Perfil ligado à página"],
   },
   {
-    title: "Sistemas e plataformas web",
+    title: "Sites institucionais",
     description:
-      "Quando planilhas, ferramentas soltas ou fluxos manuais limitam a operacao, construimos aplicacoes sob medida com interface, regra de negocio e base tecnica consistente.",
-    tags: ["Dashboards", "SaaS", "Ferramentas internas"],
+      "Desenvolvemos sites para empresas, profissionais liberais e negócios locais que precisam apresentar serviços, diferenciais, contatos e presença digital com mais credibilidade.",
+    tags: ["Empresas locais", "Profissionais liberais", "Marcas em crescimento"],
+  },
+  {
+    title: "Sistemas personalizados",
+    description:
+      "Construímos sistemas sob medida para substituir planilhas, organizar cadastros, controlar informações e facilitar rotinas internas do negócio.",
+    tags: ["Cadastros", "Agendamentos", "Controle interno"],
   },
   {
     title: "UI/UX Design",
     description:
-      "Quando a interface parece bonita, mas o uso ainda trava, organizamos fluxos, hierarquia e estados reais para reduzir friccao antes do desenvolvimento.",
-    tags: ["Wireframes", "Prototipos", "Pesquisa aplicada"],
+      "Organizamos telas, seções, fluxos e hierarquia visual para que a experiência fique mais simples, agradável e fácil de entender.",
+    tags: ["Wireframes", "Protótipos", "Experiência do usuário"],
   },
   {
-    title: "Front-end de performance",
+    title: "Front-end responsivo",
     description:
-      "Quando o design precisa virar produto sem perder acabamento, implementamos interfaces responsivas, rapidas e fiéis ao sistema visual aprovado.",
-    tags: ["React", "Motion", "SEO tecnico"],
+      "Transformamos o design em interface funcional, responsiva e adaptada para celular, tablet e computador, com atenção ao visual e à performance.",
+    tags: ["HTML", "CSS", "JavaScript / React"],
   },
   {
-    title: "Design System",
+    title: "APIs, automações e integrações",
     description:
-      "Quando o produto cresce e cada tela parece nascer de um lugar diferente, criamos componentes, tokens e padroes para escalar com consistencia.",
-    tags: ["Tokens", "Componentes", "Documentacao"],
-  },
-  {
-    title: "Consultoria em produto digital",
-    description:
-      "Quando o caminho ainda esta nebuloso, fazemos diagnostico tecnico e de experiencia para transformar intencao em plano executavel.",
-    tags: ["Auditoria", "Roadmap", "Especificacao"],
+      "Ajudamos a conectar sistemas, formulários e fluxos digitais para reduzir tarefas manuais e deixar o processo mais organizado.",
+    tags: ["APIs", "Automações", "Integrações"],
   },
 ];

@@ -8,21 +8,24 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 const reasons = [
   {
     index: "01",
-    title: "Tempo",
-    question: "Voce precisa sair do ciclo de tentativa?",
-    answer: "Trabalhamos com decisao documentada, checkpoints curtos e execucao concentrada.",
+    title: "Presença digital",
+    question: "Seu perfil passa confiança, mas ainda não tem uma página profissional?",
+    answer:
+      "Criamos páginas ligadas ao seu perfil para apresentar seus serviços com mais clareza e facilitar o contato dos clientes.",
   },
   {
     index: "02",
-    title: "Custo",
-    question: "O barato ja saiu caro?",
-    answer: "A especificacao vem antes do codigo para reduzir refacao invisivel e improviso.",
+    title: "Clareza",
+    question: "Sua oferta é boa, mas o cliente não entende rápido o que você faz?",
+    answer:
+      "Organizamos texto, visual e estrutura para que sua solução seja compreendida sem confusão.",
   },
   {
     index: "03",
-    title: "Entrega",
-    question: "Precisa de acabamento de produto?",
-    answer: "Design, front-end e performance sao tratados como partes do mesmo sistema.",
+    title: "Sob medida",
+    question: "Você precisa de algo mais específico do que um modelo pronto?",
+    answer:
+      "Criamos sites, landing pages e sistemas adaptados ao contexto do seu negócio, com foco no que realmente precisa ser entregue.",
   },
 ];
 
@@ -35,7 +38,7 @@ export function WhyChooseUs() {
       <div className="section-wave-out wave-to-dark" aria-hidden="true" />
       <div className="container-x relative z-10">
         <RevealOnScroll>
-          <SectionLabel>Por que nos escolher</SectionLabel>
+          <SectionLabel>Por que escolher a XE Software</SectionLabel>
           <h2 className="editorial-h2 mt-4 max-w-3xl">Quando contratar a XE Software faz sentido</h2>
           <span className="gradient-rule mt-6" />
         </RevealOnScroll>
@@ -65,10 +68,10 @@ export function WhyChooseUs() {
           })}
         </motion.div>
         <div className="mt-16 grid gap-4 md:grid-cols-4">
-          <Counter value={100} suffix="%" label="dos projetos com spec validada antes do codigo" />
-          <Counter value={3} suffix="" label="[Formatos de contratacao a definir]" />
-          <Counter value={1} suffix="" label="fundador full stack dedicado a qualidade" />
-          <Counter value={0} suffix="" label="[Numero real de projetos a preencher]" />
+          <Counter value={3} suffix="" label="frentes principais: sites, landing pages e sistemas" />
+          <Counter value={2026} suffix="" label="ano de estruturação e expansão da XE Software" />
+          <Counter value={1} suffix="" label="equipe enxuta com atendimento direto e foco em qualidade" />
+          <Counter value={100} suffix="%" label="das entregas pensadas para celular, clareza e contato fácil" />
         </div>
       </div>
     </section>
