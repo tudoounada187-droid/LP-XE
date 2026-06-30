@@ -4,9 +4,9 @@ import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  base: "./",
+  base: "/LP-XE/",
   build: {
-    outDir: "dist-pages",
+    outDir: "docs",
     emptyOutDir: true,
   },
   plugins: [tsConfigPaths(), tailwindcss(), react()],
