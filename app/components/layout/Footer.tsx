@@ -1,3 +1,5 @@
+import { assetPath } from "@/lib/assets";
+
 const nav = ["Projetos", "Servicos", "Sobre", "Insights"];
 const socials = ["Instagram", "GitHub", "LinkedIn"];
 
@@ -9,7 +11,7 @@ export function Footer() {
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
             <img
-              src="/images/logo-xe-mark.svg"
+              src={assetPath("/images/logo-xe-mark.svg")}
               alt="Logo da XE Software"
               loading="lazy"
               className="h-16 w-auto"

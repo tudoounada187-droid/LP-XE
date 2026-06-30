@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
+import { assetPath } from "@/lib/assets";
 import { cn } from "@/lib/utils";
 
 const links = [
@@ -94,7 +95,7 @@ export function Header() {
         <span className="site-header-wave" aria-hidden="true" />
 
         <a href="#top" className="site-header-brand" aria-label="XE Software - inicio">
-          <img src="/images/logo-xe-mark.svg" alt="XE Software" className="h-12 w-auto" />
+          <img src={assetPath("/images/logo-xe-mark.svg")} alt="XE Software" className="h-12 w-auto" />
           <span className="hidden font-mono text-xs font-semibold uppercase text-ink md:inline">
             Software
           </span>

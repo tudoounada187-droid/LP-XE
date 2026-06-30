@@ -1,4 +1,5 @@
 import { HeadContent, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
+import { assetPath } from "@/lib/assets";
 import appCss from "@/styles/globals.css?url";
 
 export const Route = createRootRoute({
@@ -20,7 +21,7 @@ export const Route = createRootRoute({
         content: "Design com proposito, codigo com performance e processo claro antes da execucao.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "/images/og-cover.svg" },
+      { property: "og:image", content: assetPath("/images/og-cover.svg") },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "stylesheet", href: appCss }],

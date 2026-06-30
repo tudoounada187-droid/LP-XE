@@ -95,7 +95,7 @@ body {
   width: min(49%, 37rem);
   overflow: hidden;
   border-radius: 0 1.25rem 1.25rem 0;
-  background-image: url("/images/header-wave.svg");
+  background-image: url("../../public/images/header-wave.svg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   will-change: width, border-radius, opacity;
@@ -297,15 +297,15 @@ body {
 }
 
 .wave-to-dark {
-  background-image: url("/images/section-wave-to-dark.svg");
+  background-image: url("../../public/images/section-wave-to-dark.svg");
 }
 
 .wave-to-white {
-  background-image: url("/images/section-wave-to-white.svg");
+  background-image: url("../../public/images/section-wave-to-white.svg");
 }
 
 .wave-to-bg {
-  background-image: url("/images/section-wave-to-bg.svg");
+  background-image: url("../../public/images/section-wave-to-bg.svg");
 }
 
 @media (min-width: 1024px) {
@@ -426,7 +426,7 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url("/images/brand-wave-soft.svg");
+  background-image: url("../../public/images/brand-wave-soft.svg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   filter: drop-shadow(0 -12px 34px rgba(37, 99, 235, 0.07));

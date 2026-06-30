@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "motion/react";
 import { fadeUp, staggerContainer } from "@/components/animations/variants";
+import { assetPath } from "@/lib/assets";
 
 export function Hero() {
   const reduceMotion = useReducedMotion();
@@ -20,7 +21,7 @@ export function Hero() {
         <div className="relative z-10 flex min-h-[calc(100vh-14rem)] flex-col">
           <motion.div variants={fadeUp} className="flex items-center gap-4">
             <img
-              src="/images/logo-xe-mark.svg"
+              src={assetPath("/images/logo-xe-mark.svg")}
               alt="XE Software"
               className="h-14 w-auto"
             />
