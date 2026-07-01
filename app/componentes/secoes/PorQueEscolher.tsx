@@ -1,12 +1,16 @@
 import { motion } from "motion/react";
-import { Clock3, Gem, Layers3 } from "lucide-react";
 import { RevelarAoRolar } from "@/componentes/animacoes/RevelarAoRolar";
 import { animacaoEmSequencia } from "@/componentes/animacoes/variantes";
 import { Contador } from "@/componentes/interface/Contador";
 import { RotuloSecao } from "@/componentes/interface/RotuloSecao";
 import { metricasEscolha, motivosEscolha } from "@/dados/motivosEscolha";
+import { caminhoDoAsset } from "@/utilitarios/assets";
 
-const icones = [Clock3, Gem, Layers3];
+const icones = [
+  "/images/motivo-cursor.svg",
+  "/images/motivo-message.svg",
+  "/images/motivo-time-alert.svg",
+];
 
 export function PorQueEscolher() {
   return (
@@ -27,7 +31,7 @@ export function PorQueEscolher() {
           variants={animacaoEmSequencia}
         >
           {motivosEscolha.map((motivo, indice) => {
-            const Icone = icones[indice];
+            const icone = caminhoDoAsset(icones[indice]);
             return (
               <motion.article
                 key={motivo.indice}
@@ -35,7 +39,15 @@ export function PorQueEscolher() {
                 className="brand-card rounded-card p-7 transition-transform duration-300 hover:-translate-y-1"
               >
                 <div className="grid size-14 place-items-center rounded-2xl bg-accent-soft">
-                  <Icone className="outline-icon size-7" aria-hidden="true" />
+                  <span
+                    className="block size-8"
+                    style={{
+                      backgroundImage: "var(--brand-gradient)",
+                      WebkitMask: `url("${icone}") center / contain no-repeat`,
+                      mask: `url("${icone}") center / contain no-repeat`,
+                    }}
+                    aria-hidden="true"
+                  />
                 </div>
                 <h3 className="mt-8 text-2xl font-bold">{motivo.titulo}</h3>
                 <p className="mt-4 font-semibold">{motivo.pergunta}</p>

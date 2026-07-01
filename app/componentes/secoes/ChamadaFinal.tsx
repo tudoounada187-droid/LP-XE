@@ -25,7 +25,7 @@ export function ChamadaFinal() {
               </div>
             </div>
             <Botao href="https://www.instagram.com/xe_software/" className="mt-6">
-              Começar conversa
+              Falar sobre meu projeto
             </Botao>
           </div>
         </RevelarAoRolar>

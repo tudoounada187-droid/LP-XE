@@ -19,7 +19,7 @@ export function ChamadaProjetoTravado() {
             visual e objetivo claro.
           </p>
           <Botao href="#contato" variante="destaque" className="mt-8">
-            Destravar meu projeto
+            Falar sobre meu projeto
           </Botao>
         </RevelarAoRolar>
         <RevelarAoRolar atraso={0.1} className="grid gap-4">
@@ -45,10 +45,6 @@ export function ChamadaProjetoTravado() {
               ))}
             </ul>
           </div>
-          <blockquote className="rounded-card bg-white p-6 text-ink shadow-card">
-            <p>"[Depoimento real a definir]"</p>
-            <footer className="mt-5 text-sm text-ink-soft">[Nome do cliente] · [Cargo/empresa]</footer>
-          </blockquote>
         </RevelarAoRolar>
       </div>
     </section>

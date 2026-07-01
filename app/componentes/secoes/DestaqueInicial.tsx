@@ -2,6 +2,24 @@ import { motion } from "motion/react";
 import { aparecerSubindo, animacaoEmSequencia } from "@/componentes/animacoes/variantes";
 import { caminhoDoAsset } from "@/utilitarios/assets";
 
+const entregasHero = [
+  {
+    titulo: "Presença profissional",
+    descricao: "Uma página clara, moderna e preparada para apresentar seu negócio.",
+    icone: "/images/hero-monitor.svg",
+  },
+  {
+    titulo: "Contato mais fácil",
+    descricao: "Botões, formulários e chamadas diretas para WhatsApp ou orçamento.",
+    icone: "/images/hero-chat.svg",
+  },
+  {
+    titulo: "Soluções sob medida",
+    descricao: "Sistemas simples ou completos para melhorar a rotina da empresa.",
+    icone: "/images/hero-puzzle.svg",
+  },
+];
+
 export function DestaqueInicial() {
   return (
     <section id="top" className="relative overflow-hidden px-2 pb-8 pt-24 md:pt-28">
@@ -33,44 +51,45 @@ export function DestaqueInicial() {
             <div>
               <span className="gradient-rule mb-6" />
               <h1 className="max-w-4xl text-4xl font-extrabold leading-[1.05] text-ink md:text-5xl xl:text-6xl">
-                Sites, landing pages e sistemas para empresas que querem crescer no digital.
+                Sites, landing pages e sistemas para empresas que querem crescer no digital
               </h1>
             </div>
-            <p className="max-w-sm text-lg font-medium leading-8 text-ink-soft xl:justify-self-end">
-              Criamos soluções digitais sob medida para transformar perfis, ideias e processos em
-              páginas e sistemas profissionais.
-            </p>
           </motion.div>
 
           <motion.div
             variants={aparecerSubindo}
-            className="mt-auto grid gap-8 pt-10 lg:grid-cols-[1fr_0.8fr] lg:items-end"
+            className="mt-auto pt-10"
           >
-            <div>
-              <p className="max-w-2xl text-xl font-medium leading-8 text-ink">
-                Unimos design, front-end e estratégia para construir uma presença digital mais clara,
-                confiável e pronta para gerar oportunidades.
+            <div className="rounded-[1.75rem] border border-line bg-white/92 p-6 shadow-card backdrop-blur-xl md:p-7">
+              <p className="text-xl font-extrabold leading-tight md:text-2xl">
+                O que entregamos além de um site bonito
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a href="#contato" className="brand-gradient relative z-10 inline-flex min-h-12 items-center justify-center rounded-pill px-6 text-sm font-bold text-white shadow-[0_16px_38px_rgba(37,99,235,0.22)] transition-transform hover:scale-[1.02]">
-                  Começar meu projeto
-                </a>
-                <a href="#projetos" className="inline-flex min-h-12 items-center justify-center rounded-pill border border-line bg-white px-6 text-sm font-bold text-ink transition hover:border-accent/40 hover:text-accent">
-                  Ver soluções
-                </a>
-              </div>
-            </div>
-            <div className="rounded-[1.75rem] border border-line bg-white/88 p-6 shadow-card">
-              <p className="text-sm font-bold leading-tight">Para profissionais e empresas que querem</p>
-              <p className="mt-2 text-sm leading-6 text-ink-soft">
-                vender melhor, apresentar seus serviços com mais profissionalismo, facilitar o contato
-                com clientes e evoluir sua presença no digital.
+              <p className="mt-2 max-w-4xl text-sm leading-6 text-ink-soft md:text-base">
+                Mais do que um site ou sistema, entregamos soluções que geram resultados para o seu negócio.
               </p>
-              <div className="mt-6 grid grid-cols-3 gap-3 text-center">
-                {["Landing Pages", "Sites", "Sistemas"].map((item) => (
-                  <span key={item} className="rounded-2xl bg-accent-soft px-3 py-2 text-xs font-bold text-accent">
-                    {item}
-                  </span>
+              <div className="mt-6 grid gap-4 lg:grid-cols-3">
+                {entregasHero.map(({ titulo, descricao, icone }) => (
+                  <article
+                    key={titulo}
+                    className="flex items-center gap-4 rounded-[1.25rem] border border-line bg-white/82 p-4 text-left shadow-[0_14px_34px_rgba(16,24,40,0.05)]"
+                  >
+                    <span className="grid size-20 shrink-0 place-items-center overflow-hidden rounded-2xl">
+                      <img
+                        src={caminhoDoAsset(icone)}
+                        alt=""
+                        aria-hidden="true"
+                        className="size-20 object-contain"
+                      />
+                    </span>
+                    <span>
+                      <strong className="block text-sm font-extrabold text-ink md:text-base">
+                        {titulo}
+                      </strong>
+                      <span className="mt-1 block text-sm font-medium leading-6 text-ink-soft">
+                        {descricao}
+                      </span>
+                    </span>
+                  </article>
                 ))}
               </div>
             </div>

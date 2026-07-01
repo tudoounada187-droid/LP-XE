@@ -1,24 +1,24 @@
 export const motivosEscolha = [
   {
     indice: "01",
-    titulo: "Presença digital",
-    pergunta: "Seu perfil passa confiança, mas ainda não tem uma página profissional?",
+    titulo: "Perfil sem conversão",
+    pergunta: "Seu perfil chama atenção, mas não transforma visitas em clientes?",
     resposta:
-      "Criamos páginas ligadas ao seu perfil para apresentar seus serviços com mais clareza e facilitar o contato dos clientes.",
+      "Criamos páginas que direcionam o público do Instagram, WhatsApp ou Google para uma apresentação mais clara, com informações organizadas e chamada para orçamento.",
   },
   {
     indice: "02",
-    titulo: "Clareza",
-    pergunta: "Sua oferta é boa, mas o cliente não entende rápido o que você faz?",
+    titulo: "Atendimento confuso",
+    pergunta: "Você perde tempo explicando sempre as mesmas coisas?",
     resposta:
-      "Organizamos texto, visual e estrutura para que sua solução seja compreendida sem confusão.",
+      "Estruturamos seus serviços, preços, diferenciais e formas de contato em um fluxo simples, para o cliente entender rápido e chegar mais decidido até você.",
   },
   {
     indice: "03",
-    titulo: "Sob medida",
-    pergunta: "Você precisa de algo mais específico do que um modelo pronto?",
+    titulo: "Processos manuais",
+    pergunta: "Sua empresa ainda depende de planilha, papel ou mensagens soltas?",
     resposta:
-      "Criamos sites, landing pages e sistemas adaptados ao contexto do seu negócio, com foco no que realmente precisa ser entregue.",
+      "Desenvolvemos soluções digitais para organizar cadastros, pedidos, agendamentos, controle interno e outras rotinas que hoje tomam tempo da sua equipe.",
   },
 ];
 

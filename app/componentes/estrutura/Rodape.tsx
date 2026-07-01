@@ -34,7 +34,7 @@ export function Rodape() {
             </div>
           </div>
           <a href="#contato" className="brand-gradient relative z-10 inline-flex min-h-11 items-center justify-center rounded-pill px-5 text-sm font-bold text-white shadow-[0_16px_36px_rgba(37,99,235,0.2)]">
-            Começar um projeto
+            Solicitar orçamento
           </a>
         </div>
         <div className="mt-10 grid gap-8 border-t border-line pt-8 md:grid-cols-3">

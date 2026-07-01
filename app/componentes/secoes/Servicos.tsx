@@ -14,7 +14,7 @@ export function Servicos() {
         <RevelarAoRolar className="grid gap-8 md:grid-cols-[0.7fr_1fr]">
           <div>
             <RotuloSecao claro>Serviços ({servicos.length})</RotuloSecao>
-            <h2 className="editorial-h2 mt-4">Serviços.</h2>
+            <h2 className="editorial-h2 mt-4">Serviços</h2>
             <span className="gradient-rule mt-6" />
           </div>
           <p className="max-w-2xl text-lg leading-8 text-contrast-ink-soft">

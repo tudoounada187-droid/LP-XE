@@ -13,7 +13,7 @@ export function Projetos() {
         <RevelarAoRolar className="grid gap-6 md:grid-cols-[0.7fr_1fr] md:items-end">
           <div>
             <p className="font-mono text-sm font-semibold uppercase text-ink-soft">XE Software</p>
-            <h2 className="editorial-h2 mt-3">Projetos.</h2>
+            <h2 className="editorial-h2 mt-3">Projetos</h2>
             <span className="gradient-rule mt-6" />
           </div>
           <p className="max-w-xl text-lg leading-8 text-ink-soft md:justify-self-end">
