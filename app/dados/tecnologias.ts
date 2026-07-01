@@ -1,0 +1,16 @@
+export const tecnologias = [
+  "HTML",
+  "CSS",
+  "JavaScript",
+  "TypeScript",
+  "React",
+  "Tailwind CSS",
+  "Vite",
+  "Git",
+  "GitHub",
+  "Netlify",
+  "Vercel",
+  "Java",
+  "Spring Boot",
+  "PostgreSQL",
+];

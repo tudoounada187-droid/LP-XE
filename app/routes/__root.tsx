@@ -1,6 +1,6 @@
 import { HeadContent, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
-import { assetPath } from "@/lib/assets";
-import appCss from "@/styles/globals.css?url";
+import { caminhoDoAsset } from "@/utilitarios/assets";
+import estilosGlobais from "@/estilos/globais.css?url";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -22,10 +22,10 @@ export const Route = createRootRoute({
           "Soluções digitais sob medida com design profissional, código organizado e foco em clareza, confiança e conversão.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: assetPath("/images/og-cover.svg") },
+      { property: "og:image", content: caminhoDoAsset("/images/og-cover.svg") },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "stylesheet", href: appCss }],
+    links: [{ rel: "stylesheet", href: estilosGlobais }],
   }),
   component: RootComponent,
 });
