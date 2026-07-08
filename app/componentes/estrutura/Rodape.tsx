@@ -13,7 +13,11 @@ const linksRedes = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/emanuecandido" },
 ];
 
-export function Rodape() {
+type PropriedadesRodape = {
+  aoSolicitarOrcamento: () => void;
+};
+
+export function Rodape({ aoSolicitarOrcamento }: PropriedadesRodape) {
   return (
     <footer className="relative overflow-hidden border-t border-line bg-white py-14">
       <span className="soft-orb -right-52 -top-52 h-[34rem] w-[34rem] opacity-60" aria-hidden="true" />
@@ -33,9 +37,13 @@ export function Rodape() {
               </p>
             </div>
           </div>
-          <a href="#contato" className="brand-gradient relative z-10 inline-flex min-h-11 items-center justify-center rounded-pill px-5 text-sm font-bold text-white shadow-[0_16px_36px_rgba(37,99,235,0.2)]">
+          <button
+            type="button"
+            onClick={aoSolicitarOrcamento}
+            className="brand-gradient relative z-10 inline-flex min-h-11 items-center justify-center rounded-pill px-5 text-sm font-bold text-white shadow-[0_16px_36px_rgba(37,99,235,0.2)]"
+          >
             Solicitar orçamento
-          </a>
+          </button>
         </div>
         <div className="mt-10 grid gap-8 border-t border-line pt-8 md:grid-cols-3">
           <div>

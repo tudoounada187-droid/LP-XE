@@ -75,9 +75,11 @@ body {
   justify-content: center;
   border-radius: var(--radius-pill);
   padding-inline: 1.8rem;
+  border: 0;
   background: linear-gradient(90deg, rgba(31, 102, 242, 0.9), rgba(123, 107, 255, 0.86), rgba(212, 90, 242, 0.9));
   box-shadow: 0 18px 42px rgba(37, 99, 235, 0.16);
   color: #FFFFFF;
+  cursor: pointer;
   font-size: 0.95rem;
   font-weight: 800;
   text-decoration: none;

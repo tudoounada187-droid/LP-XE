@@ -1,6 +1,10 @@
 import { motion } from "motion/react";
 
-export function Cabecalho() {
+type PropriedadesCabecalho = {
+  aoSolicitarOrcamento: () => void;
+};
+
+export function Cabecalho({ aoSolicitarOrcamento }: PropriedadesCabecalho) {
   return (
     <motion.header
       className="site-header"
@@ -9,9 +13,9 @@ export function Cabecalho() {
       transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="site-header-shell">
-        <a href="#contato" className="site-header-cta">
+        <button type="button" className="site-header-cta" onClick={aoSolicitarOrcamento}>
           Solicitar orçamento
-        </a>
+        </button>
       </div>
     </motion.header>
   );

@@ -1,7 +1,11 @@
 import { Botao } from "@/componentes/interface/Botao";
 import { RevelarAoRolar } from "@/componentes/animacoes/RevelarAoRolar";
 
-export function ChamadaFinal() {
+type PropriedadesChamadaFinal = {
+  aoSolicitarOrcamento: () => void;
+};
+
+export function ChamadaFinal({ aoSolicitarOrcamento }: PropriedadesChamadaFinal) {
   return (
     <section id="contato" className="section-pad section-transition relative overflow-hidden bg-bg">
       <div className="section-wave-out wave-to-white" aria-hidden="true" />
@@ -24,7 +28,7 @@ export function ChamadaFinal() {
                 <p className="mt-2 text-sm text-ink-soft">Diagnóstico, escopo e decisão.</p>
               </div>
             </div>
-            <Botao href="https://www.instagram.com/xe_software/" className="mt-6">
+            <Botao tipo="botao" onClick={aoSolicitarOrcamento} className="mt-6">
               Falar sobre meu projeto
             </Botao>
           </div>
