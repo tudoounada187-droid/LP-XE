@@ -1,22 +1,22 @@
 export const formatosMetodo = [
   {
-    titulo: "Escopo fechado",
-    descricao: "Projeto com objetivo definido, entrega clara, prazo combinado e critérios simples de aprovação.",
+    titulo: "Diagnóstico do negócio",
+    descricao: "Entendemos oferta, público, objeções, rotina e objetivo para separar prioridade real de detalhe secundário.",
   },
   {
-    titulo: "Escopo aberto",
-    descricao: "Construção por etapas quando a ideia ainda precisa ser refinada antes da entrega final.",
+    titulo: "Conteúdo com intenção",
+    descricao: "Definimos seções, textos, imagens, ícones e chamadas de ação de acordo com a decisão que o cliente precisa tomar.",
   },
   {
-    titulo: "Parceria contínua",
-    descricao: "Acompanhamento para evoluir páginas, sistemas e presença digital conforme o negócio cresce.",
+    titulo: "Entrega com função",
+    descricao: "A página, site ou sistema sai responsivo, coerente com a marca e com caminho de contato, venda ou uso definido.",
   },
 ];
 
 export const etapasMetodo = [
   "Diagnóstico",
-  "Estrutura da solução",
-  "Design",
+  "Conteúdo e estrutura",
+  "Interface",
   "Desenvolvimento",
-  "Entrega e ajustes finais",
+  "Publicação e ajustes",
 ];

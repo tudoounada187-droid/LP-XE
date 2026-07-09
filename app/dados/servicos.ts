@@ -1,38 +1,20 @@
 export const servicos = [
   {
-    titulo: "Landing Pages de alta conversão",
+    titulo: "Página profissional de venda",
     descricao:
-      "Criamos páginas de uma única estrutura, objetivas e bem apresentadas, para explicar sua oferta, mostrar confiança e facilitar o contato do cliente.",
-    tags: ["Serviços profissionais", "Captação de clientes", "Perfil ligado à página"],
+      "Uma página focada em explicar uma oferta, mostrar diferenciais, responder objeções e conduzir o visitante para contato.",
+    indicado: "para lojas, profissionais e serviços que vendem pelo Instagram, indicação ou tráfego pago",
   },
   {
-    titulo: "Sites institucionais",
+    titulo: "Site institucional",
     descricao:
-      "Desenvolvemos sites para empresas, profissionais liberais e negócios locais que precisam apresentar serviços, diferenciais, contatos e presença digital com mais credibilidade.",
-    tags: ["Empresas locais", "Profissionais liberais", "Marcas em crescimento"],
+      "Um site para organizar quem é a empresa, o que ela oferece, por que confiar, onde atende e como iniciar uma conversa.",
+    indicado: "para escritórios, clínicas, consultórios, marcas locais e empresas em crescimento",
   },
   {
-    titulo: "Sistemas personalizados",
+    titulo: "Sistema sob medida",
     descricao:
-      "Construímos sistemas sob medida para substituir planilhas, organizar cadastros, controlar informações e facilitar rotinas internas do negócio.",
-    tags: ["Cadastros", "Agendamentos", "Controle interno"],
-  },
-  {
-    titulo: "UI/UX Design",
-    descricao:
-      "Organizamos telas, seções, fluxos e hierarquia visual para que a experiência fique mais simples, agradável e fácil de entender.",
-    tags: ["Wireframes", "Protótipos", "Experiência do usuário"],
-  },
-  {
-    titulo: "Front-end responsivo",
-    descricao:
-      "Transformamos o design em interface funcional, responsiva e adaptada para celular, tablet e computador, com atenção ao visual e à performance.",
-    tags: ["HTML", "CSS", "JavaScript / React"],
-  },
-  {
-    titulo: "APIs, automações e integrações",
-    descricao:
-      "Ajudamos a conectar sistemas, formulários e fluxos digitais para reduzir tarefas manuais e deixar o processo mais organizado.",
-    tags: ["APIs", "Automações", "Integrações"],
+      "Uma solução para transformar cadastros, consultas, pedidos, agendamentos e etapas repetidas em um fluxo próprio.",
+    indicado: "para reduzir retrabalho quando planilhas e mensagens já não dão conta",
   },
 ];

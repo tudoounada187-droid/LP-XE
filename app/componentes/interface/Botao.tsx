@@ -26,7 +26,7 @@ export function Botao(props: PropriedadesBotao) {
   const reduzirMovimento = useReducedMotion();
   const variantes = {
     escuro: "bg-ink text-white hover:bg-[#17181C]",
-    destaque: "brand-gradient text-white shadow-[0_16px_38px_rgba(37,99,235,0.2)]",
+    destaque: "bg-accent text-white shadow-[0_14px_32px_rgba(30,91,184,0.18)] hover:bg-accent-dark",
     claro: "border border-line bg-white text-ink hover:border-accent/40 hover:text-accent",
   };
 

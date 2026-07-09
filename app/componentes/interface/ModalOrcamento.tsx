@@ -39,14 +39,14 @@ export function ModalOrcamento({ aberto, aoFechar }: PropriedadesModalOrcamento)
       `Contato: ${contato}`,
       nome ? `Nome ou empresa: ${nome}` : "",
       "",
-      "O que preciso:",
+      "Briefing:",
       projeto,
     ]
       .filter(Boolean)
       .join("\n");
 
     window.location.href = `mailto:emanoelcandidolima@gmail.com?subject=${encodeURIComponent(
-      "Solicitação de orçamento",
+      "Briefing para página, site ou sistema",
     )}&body=${encodeURIComponent(corpo)}`;
   }
 
@@ -54,7 +54,7 @@ export function ModalOrcamento({ aberto, aoFechar }: PropriedadesModalOrcamento)
     <AnimatePresence>
       {aberto ? (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/45 px-4 py-6 backdrop-blur-sm"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/45 px-4 py-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -64,7 +64,7 @@ export function ModalOrcamento({ aberto, aoFechar }: PropriedadesModalOrcamento)
           onMouseDown={aoFechar}
         >
           <motion.div
-            className="relative max-h-[calc(100vh-3rem)] w-full max-w-2xl overflow-y-auto rounded-[2rem] border border-line bg-white p-6 shadow-[0_28px_90px_rgba(16,24,40,0.22)] md:p-10"
+            className="relative max-h-[calc(100vh-3rem)] w-full max-w-2xl overflow-y-auto rounded-[1.5rem] border border-line bg-white p-6 shadow-[0_22px_70px_rgba(16,24,40,0.2)] md:p-10"
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 18, scale: 0.98 }}
@@ -82,10 +82,11 @@ export function ModalOrcamento({ aberto, aoFechar }: PropriedadesModalOrcamento)
 
             <span className="gradient-rule h-1 w-24" aria-hidden="true" />
             <h2 id="titulo-modal-orcamento" className="mt-5 text-4xl font-black tracking-tight text-ink md:text-5xl">
-              Solicitar orçamento
+              Enviar briefing
             </h2>
             <p className="mt-4 max-w-lg text-sm font-medium leading-6 text-ink-soft md:text-base">
-              Preencha seus dados e conte o que você precisa. Entraremos em contato com uma proposta personalizada.
+              Conte o tipo de negócio, o público e o que precisa mudar: vender melhor, apresentar
+              autoridade, receber contatos preparados ou organizar uma rotina.
             </p>
 
             <form className="mt-7 space-y-5" onSubmit={enviarSolicitacao}>
@@ -120,7 +121,7 @@ export function ModalOrcamento({ aberto, aoFechar }: PropriedadesModalOrcamento)
 
               <label className="block">
                 <span className="text-sm font-bold text-ink">
-                  O que você quer? <span className="text-accent-2">*</span>
+                  O que você quer resolver? <span className="text-accent-2">*</span>
                 </span>
                 <span className="mt-2 flex items-start gap-3 rounded-2xl border border-line bg-white px-4 text-ink-soft focus-within:border-accent/50 focus-within:ring-2 focus-within:ring-accent/15">
                   <MessageSquare className="mt-3 size-5" aria-hidden="true" />
@@ -129,22 +130,22 @@ export function ModalOrcamento({ aberto, aoFechar }: PropriedadesModalOrcamento)
                     required
                     rows={4}
                     className="min-w-0 flex-1 resize-y bg-transparent py-3 text-sm font-semibold text-ink outline-none placeholder:text-ink-soft/70"
-                    placeholder="Descreva seu projeto, objetivo e o que você precisa..."
+                    placeholder="Exemplo: sou advogado, nutricionista, dono de loja ou prestador de serviço e preciso de uma presença digital mais profissional."
                   />
                 </span>
               </label>
 
               <button
                 type="submit"
-                className="brand-gradient inline-flex min-h-12 w-full items-center justify-center rounded-2xl px-6 text-sm font-black text-white shadow-[0_18px_42px_rgba(37,99,235,0.24)] transition hover:brightness-105 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+                className="inline-flex min-h-12 w-full items-center justify-center rounded-2xl bg-accent px-6 text-sm font-black text-white shadow-[0_14px_32px_rgba(30,91,184,0.18)] transition hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
               >
-                Enviar solicitação
+                Enviar briefing
               </button>
             </form>
 
             <p className="mt-5 flex items-center justify-center gap-2 text-xs font-semibold text-ink-soft">
               <LockKeyhole className="size-4" aria-hidden="true" />
-              Seus dados estão seguros. Não compartilhamos suas informações.
+              O envio abre no seu app de e-mail com as informações preenchidas.
             </p>
           </motion.div>
         </motion.div>

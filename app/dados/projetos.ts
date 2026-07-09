@@ -1,25 +1,29 @@
-import { caminhoDoAsset } from "@/utilitarios/assets";
-
 export const projetos = [
   {
-    nome: "Landing page institucional da XE Software",
-    categoria: "Landing Page / Marca própria",
+    nome: "XE Software",
+    categoria: "Marca própria / Página comercial",
     ano: "2026",
-    imagem: caminhoDoAsset("/images/project-placeholder-1.svg"),
-    tom: "bg-[#EEF0FF]",
+    problema: "Apresentar páginas, sites e sistemas sem parecer que a empresa faz apenas software web.",
+    entrega: "Página com promessa, segmentos, formatos, transformação, exemplos e briefing direto.",
+    resultado: "O visitante entende que pode pedir desde uma página profissional até um sistema sob medida.",
+    foco: "Confiança comercial",
   },
   {
-    nome: "Sistema de casos clínicos",
-    categoria: "Sistema web / Em desenvolvimento",
+    nome: "Fluxo para casos clínicos",
+    categoria: "Sistema sob medida / Saúde",
     ano: "2026",
-    imagem: caminhoDoAsset("/images/project-placeholder-2.svg"),
-    tom: "bg-[#F0F7F4]",
+    problema: "Organizar cadastros, casos, perguntas e etapas em uma experiência única e rastreável.",
+    entrega: "Interface administrativa, estrutura de dados e base para evolução do processo.",
+    resultado: "O trabalho ganha sequência, histórico e menos dependência de controle paralelo.",
+    foco: "Sistema sob medida",
   },
   {
-    nome: "Páginas profissionais para negócios locais",
-    categoria: "Sites e landing pages / Prospecção",
+    nome: "Página para negócio local",
+    categoria: "Modelo comercial / Página de venda",
     ano: "2026",
-    imagem: caminhoDoAsset("/images/project-placeholder-3.svg"),
-    tom: "bg-[#FFF4E8]",
+    problema: "Receber interessados de Instagram, indicação ou WhatsApp sem uma apresentação profissional própria.",
+    entrega: "Estrutura de oferta, serviços, diferenciais, dúvidas, imagens de apoio e chamada para conversa.",
+    resultado: "O contato chega mais preparado porque a página já explicou valor, confiança e próximo passo.",
+    foco: "Contato preparado",
   },
 ];

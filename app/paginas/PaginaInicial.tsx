@@ -5,12 +5,10 @@ import { ModalOrcamento } from "@/componentes/interface/ModalOrcamento";
 import { DestaqueInicial } from "@/componentes/secoes/DestaqueInicial";
 import { Projetos } from "@/componentes/secoes/Projetos";
 import { Servicos } from "@/componentes/secoes/Servicos";
-import { PorQueEscolher } from "@/componentes/secoes/PorQueEscolher";
 import { ChamadaProjetoTravado } from "@/componentes/secoes/ChamadaProjetoTravado";
 import { MetodoTrabalho } from "@/componentes/secoes/MetodoTrabalho";
-import { Experiencia } from "@/componentes/secoes/Experiencia";
-import { PerguntasFrequentes } from "@/componentes/secoes/PerguntasFrequentes";
-import { Conteudos } from "@/componentes/secoes/Conteudos";
+import { AntesDepois } from "@/componentes/secoes/AntesDepois";
+import { PublicosAtendidos } from "@/componentes/secoes/PublicosAtendidos";
 import { ChamadaFinal } from "@/componentes/secoes/ChamadaFinal";
 
 export function PaginaInicial() {
@@ -23,15 +21,13 @@ export function PaginaInicial() {
       <Cabecalho aoSolicitarOrcamento={abrirModalOrcamento} />
       <main className="brand-page">
         <DestaqueInicial />
-        <Projetos />
-        <Servicos />
-        <PorQueEscolher />
         <ChamadaProjetoTravado />
+        <Servicos />
+        <PublicosAtendidos />
+        <AntesDepois />
+        <Projetos />
         <MetodoTrabalho />
-        <Experiencia />
-        <PerguntasFrequentes />
-        <Conteudos />
-        <ChamadaFinal aoSolicitarOrcamento={abrirModalOrcamento} />
+        <ChamadaFinal />
       </main>
       <Rodape aoSolicitarOrcamento={abrirModalOrcamento} />
       <ModalOrcamento aberto={modalOrcamentoAberto} aoFechar={fecharModalOrcamento} />

@@ -1,96 +1,94 @@
 import { motion } from "motion/react";
+import { ArrowRight, CheckCircle2, HeartPulse, Scale, Store } from "lucide-react";
 import { aparecerSubindo, animacaoEmSequencia } from "@/componentes/animacoes/variantes";
 import { caminhoDoAsset } from "@/utilitarios/assets";
 
-const entregasHero = [
-  {
-    titulo: "Presença profissional",
-    descricao: "Uma página clara, moderna e preparada para apresentar seu negócio.",
-    icone: "/images/hero-monitor.svg",
-  },
-  {
-    titulo: "Contato mais fácil",
-    descricao: "Botões, formulários e chamadas diretas para WhatsApp ou orçamento.",
-    icone: "/images/hero-chat.svg",
-  },
-  {
-    titulo: "Soluções sob medida",
-    descricao: "Sistemas simples ou completos para melhorar a rotina da empresa.",
-    icone: "/images/hero-puzzle.svg",
-  },
+const sinaisHero = [
+  "Oferta clara para quem chega pelo Instagram",
+  "Confiança antes da primeira conversa",
+  "Contato preparado pelo WhatsApp ou e-mail",
 ];
 
 export function DestaqueInicial() {
   return (
     <section id="top" className="relative overflow-hidden px-2 pb-8 pt-24 md:pt-28">
-      <span className="soft-orb -right-32 top-10 h-96 w-96" aria-hidden="true" />
-      <span className="soft-orb -left-40 top-48 h-[34rem] w-[34rem] opacity-70" aria-hidden="true" />
       <motion.div
-        className="brand-card relative mx-auto min-h-[calc(100vh-8rem)] max-w-[1240px] overflow-hidden rounded-[2.5rem] px-5 py-8 text-ink md:px-10 md:py-10"
+        className="hero-panel relative mx-auto min-h-[calc(100vh-8rem)] max-w-[1240px] overflow-hidden px-5 py-8 text-ink md:px-10 md:py-10"
         initial="hidden"
         animate="visible"
         variants={animacaoEmSequencia}
       >
-        <div className="pointer-events-none absolute -right-24 -top-24 h-[30rem] w-[30rem] rounded-full border border-white bg-[radial-gradient(circle,#fff_0%,#F1F2F6_52%,transparent_53%)] opacity-90" />
-        <div className="brand-wave" aria-hidden="true" />
-
-        <div className="relative z-10 flex min-h-[calc(100vh-14rem)] flex-col">
-          <motion.div variants={aparecerSubindo} className="flex items-center gap-4">
-            <img
-              src={caminhoDoAsset("/images/logo-xe-mark.svg")}
-              alt="XE Software"
-              className="h-14 w-auto"
-            />
-            <div className="h-12 w-px bg-line" />
-            <p className="font-mono text-xs font-semibold uppercase text-ink-soft">
-              Software
-            </p>
-          </motion.div>
-
-          <motion.div variants={aparecerSubindo} className="mt-12 grid gap-8 xl:grid-cols-[minmax(0,0.9fr)_minmax(260px,0.34fr)] xl:items-end">
-            <div>
-              <span className="gradient-rule mb-6" />
-              <h1 className="max-w-4xl text-4xl font-extrabold leading-[1.05] text-ink md:text-5xl xl:text-6xl">
-                Sites, landing pages e sistemas para empresas que querem crescer no digital
+        <div className="relative z-10 grid min-h-[calc(100vh-14rem)] items-center gap-10 lg:grid-cols-[1fr_0.76fr]">
+          <motion.div variants={aparecerSubindo} className="max-w-5xl">
+            <div className="flex items-center gap-4">
+              <img
+                src={caminhoDoAsset("/images/logo-xe-mark.svg")}
+                alt="XE Software"
+                className="h-14 w-auto"
+              />
+              <div className="h-12 w-px bg-line" />
+              <p className="font-mono text-xs font-semibold uppercase text-ink-soft">
+                Landing pages, sites e sistemas
+              </p>
+            </div>
+            <div className="mt-12">
+              <p className="font-mono text-xs font-semibold uppercase text-accent">XE Software</p>
+              <h1 className="mt-5 max-w-4xl text-4xl font-extrabold leading-[1.02] text-ink md:text-6xl xl:text-7xl">
+                Páginas, sites e sistemas que fazem seu negócio parecer confiável no digital.
               </h1>
+              <p className="mt-6 max-w-2xl text-base leading-7 text-ink-soft md:text-lg md:leading-8">
+                A XE Software cria presença digital para lojas, escritórios, clínicas, consultórios
+                e prestadores de serviço que precisam vender melhor, apresentar autoridade e organizar
+                processos sem depender só das redes sociais.
+              </p>
+              <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                {sinaisHero.map((sinal) => (
+                  <div key={sinal} className="hero-signal">
+                    <CheckCircle2 className="size-4 text-accent" aria-hidden="true" />
+                    <span>{sinal}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <a
+                  href="#briefing"
+                  className="inline-flex min-h-12 items-center gap-2 rounded-pill bg-accent px-5 text-sm font-extrabold text-white shadow-[0_14px_30px_rgba(30,91,184,0.18)] transition hover:-translate-y-0.5 hover:bg-accent-dark"
+                >
+                  Quero minha página ou sistema
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </a>
+                <a
+                  href="#entregas"
+                  className="inline-flex min-h-12 items-center rounded-pill border border-line bg-white px-5 text-sm font-extrabold text-ink transition hover:border-accent/40 hover:text-accent"
+                >
+                  Ver formatos
+                </a>
+              </div>
             </div>
           </motion.div>
 
-          <motion.div
-            variants={aparecerSubindo}
-            className="mt-auto pt-10"
-          >
-            <div className="rounded-[1.75rem] border border-line bg-white/92 p-6 shadow-card backdrop-blur-xl md:p-7">
-              <p className="text-xl font-extrabold leading-tight md:text-2xl">
-                O que entregamos além de um site bonito
-              </p>
-              <p className="mt-2 max-w-4xl text-sm leading-6 text-ink-soft md:text-base">
-                Mais do que um site ou sistema, entregamos soluções que geram resultados para o seu negócio.
-              </p>
-              <div className="mt-6 grid gap-4 lg:grid-cols-3">
-                {entregasHero.map(({ titulo, descricao, icone }) => (
-                  <article
-                    key={titulo}
-                    className="flex items-center gap-4 rounded-[1.25rem] border border-line bg-white/82 p-4 text-left shadow-[0_14px_34px_rgba(16,24,40,0.05)]"
-                  >
-                    <span className="grid size-20 shrink-0 place-items-center overflow-hidden rounded-2xl">
-                      <img
-                        src={caminhoDoAsset(icone)}
-                        alt=""
-                        aria-hidden="true"
-                        className="size-20 object-contain"
-                      />
-                    </span>
-                    <span>
-                      <strong className="block text-sm font-extrabold text-ink md:text-base">
-                        {titulo}
-                      </strong>
-                      <span className="mt-1 block text-sm font-medium leading-6 text-ink-soft">
-                        {descricao}
-                      </span>
-                    </span>
-                  </article>
-                ))}
+          <motion.div variants={aparecerSubindo} className="hero-proof-board" aria-label="Exemplos de negócios atendidos">
+            <div className="hero-proof-media">
+              <img src={caminhoDoAsset("/images/hero-chat.svg")} alt="" loading="eager" />
+            </div>
+            <div className="hero-proof-content">
+              <p className="font-mono text-xs font-semibold uppercase text-ink-soft">Projetos para negócios reais</p>
+              <div className="mt-5 grid gap-3">
+                <div className="audience-pill">
+                  <Store className="size-5" aria-hidden="true" />
+                  <span>Loja que quer vender com mais contexto</span>
+                </div>
+                <div className="audience-pill">
+                  <Scale className="size-5" aria-hidden="true" />
+                  <span>Advogado que precisa passar seriedade</span>
+                </div>
+                <div className="audience-pill">
+                  <HeartPulse className="size-5" aria-hidden="true" />
+                  <span>Nutricionista ou clínica que precisa orientar o paciente</span>
+                </div>
+              </div>
+              <div className="hero-chat-bubble">
+                "O cliente entende o que você faz antes de perguntar preço."
               </div>
             </div>
           </motion.div>

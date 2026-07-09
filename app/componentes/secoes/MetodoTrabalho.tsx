@@ -3,13 +3,12 @@ import { etapasMetodo, formatosMetodo } from "@/dados/metodoTrabalho";
 
 export function MetodoTrabalho() {
   return (
-    <section className="section-pad section-transition relative overflow-hidden bg-bg">
-      <span className="soft-orb -left-48 top-0 h-[34rem] w-[34rem] opacity-50" aria-hidden="true" />
-      <div className="section-wave-out wave-to-white" aria-hidden="true" />
+    <section id="metodo" className="section-pad section-transition relative overflow-hidden bg-bg">
+      <div className="section-wave-out wave-to-dark" aria-hidden="true" />
       <div className="container-x relative z-10 grid gap-12 lg:grid-cols-[0.9fr_1fr] lg:items-center">
         <RevelarAoRolar>
-          <p className="font-mono text-sm text-ink-soft">Método</p>
-          <h2 className="editorial-h2 mt-4">Processo claro, simples e adaptado ao tamanho do projeto</h2>
+          <p className="font-mono text-sm text-ink-soft">Processo</p>
+          <h2 className="editorial-h2 mt-4">Da conversa inicial à primeira versão publicada</h2>
           <span className="gradient-rule mt-6" />
           <div className="mt-10 space-y-4">
             {formatosMetodo.map((formato) => (
@@ -24,10 +23,13 @@ export function MetodoTrabalho() {
         <RevelarAoRolar atraso={0.1}>
           <div className="brand-card rounded-card p-6">
             <div className="rounded-[1.5rem] bg-white p-5 shadow-[inset_0_0_0_1px_rgba(218,221,230,0.8)]">
-              <div className="flex items-center gap-2">
-                <span className="size-3 rounded-full bg-accent" />
-                <span className="size-3 rounded-full bg-accent-2" />
-                <span className="size-3 rounded-full bg-line" />
+              <div className="flex items-center justify-between gap-4">
+                <p className="font-mono text-xs font-semibold uppercase text-ink-soft">Fluxo base</p>
+                <div className="flex items-center gap-2">
+                  <span className="size-3 rounded-full bg-accent" />
+                  <span className="size-3 rounded-full bg-accent-2" />
+                  <span className="size-3 rounded-full bg-line" />
+                </div>
               </div>
               <div className="mt-8 space-y-3">
                 {etapasMetodo.map((etapa, indice) => (
