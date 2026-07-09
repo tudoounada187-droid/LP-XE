@@ -8,18 +8,18 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
-        title: "XE Software | Sites, landing pages e sistemas sob medida",
+        title: "XE Software | Sites, landing pages e sistemas para vender melhor",
       },
       {
         name: "description",
         content:
-          "Criamos sites, landing pages e sistemas web sob medida para profissionais, empresas e lojas locais que querem melhorar presença digital, atrair clientes e organizar processos.",
+          "Criamos sites, landing pages e sistemas sob medida para lojas, clínicas, escritórios e prestadores de serviço que querem passar confiança e receber mais orçamentos.",
       },
       { property: "og:title", content: "XE Software" },
       {
         property: "og:description",
         content:
-          "Soluções digitais sob medida com design profissional, código organizado e foco em clareza, confiança e conversão.",
+          "Páginas profissionais, sites institucionais e sistemas sob medida com foco em clareza, confiança e conversão.",
       },
       { property: "og:type", content: "website" },
       { property: "og:image", content: caminhoDoAsset("/images/og-cover.svg") },

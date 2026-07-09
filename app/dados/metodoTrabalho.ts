@@ -14,9 +14,24 @@ export const formatosMetodo = [
 ];
 
 export const etapasMetodo = [
-  "Diagnóstico",
-  "Conteúdo e estrutura",
-  "Interface",
-  "Desenvolvimento",
-  "Publicação e ajustes",
+  {
+    titulo: "Briefing",
+    descricao: "Entendimento do negócio, público, oferta e objetivo.",
+  },
+  {
+    titulo: "Design",
+    descricao: "Estrutura visual, seções, textos e direção da interface.",
+  },
+  {
+    titulo: "Desenvolvimento",
+    descricao: "Construção responsiva da página, site ou sistema.",
+  },
+  {
+    titulo: "Publicação",
+    descricao: "Deploy, domínio, ajustes técnicos e revisão final.",
+  },
+  {
+    titulo: "Ajustes",
+    descricao: "Correções iniciais para deixar a entrega pronta para uso.",
+  },
 ];

@@ -1,19 +1,19 @@
+import { CheckCircle2, XCircle } from "lucide-react";
 import { RevelarAoRolar } from "@/componentes/animacoes/RevelarAoRolar";
 import { RotuloSecao } from "@/componentes/interface/RotuloSecao";
 
-const transformacoes = [
-  {
-    antes: "O cliente vê um post, gosta, mas não encontra uma explicação completa.",
-    depois: "A página apresenta oferta, benefícios, provas, dúvidas e chamada para contato.",
-  },
-  {
-    antes: "O escritório ou consultório depende de rede social para parecer confiável.",
-    depois: "O site organiza atuação, diferenciais, método, canais e sinais de credibilidade.",
-  },
-  {
-    antes: "Informação importante fica espalhada entre planilhas, conversas e anotações.",
-    depois: "O fluxo vira uma interface para cadastrar, consultar, acompanhar e decidir.",
-  },
+const antes = [
+  "Só Instagram ou WhatsApp para explicar tudo",
+  "Pouca confiança antes da primeira conversa",
+  "Informações espalhadas em posts, planilhas e mensagens",
+  "Cliente precisa perguntar tudo no direct",
+];
+
+const depois = [
+  "Página profissional com serviços claros",
+  "Botão de orçamento e contato facilitado",
+  "Mais credibilidade para quem compara opções",
+  "Sistema ou formulário para organizar a rotina",
 ];
 
 export function AntesDepois() {
@@ -33,20 +33,32 @@ export function AntesDepois() {
           </p>
         </RevelarAoRolar>
 
-        <div className="mt-12 grid gap-4">
-          {transformacoes.map((item, indice) => (
-            <RevelarAoRolar key={item.antes} atraso={indice * 0.05} className="before-after-row">
-              <div>
-                <p className="font-mono text-xs font-semibold uppercase text-ink-soft">Antes</p>
-                <p className="mt-3 text-xl font-extrabold leading-tight text-ink">{item.antes}</p>
-              </div>
-              <div>
-                <p className="font-mono text-xs font-semibold uppercase text-accent">Depois</p>
-                <p className="mt-3 text-xl font-extrabold leading-tight text-ink">{item.depois}</p>
-              </div>
-            </RevelarAoRolar>
-          ))}
-        </div>
+        <RevelarAoRolar atraso={0.08} className="before-after-board">
+          <article className="before-after-panel before">
+            <p className="font-mono text-xs font-semibold uppercase">Antes</p>
+            <h3>Presença digital improvisada</h3>
+            <div className="mt-6 grid gap-3">
+              {antes.map((item) => (
+                <div key={item} className="before-after-item">
+                  <XCircle className="size-5" aria-hidden="true" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </article>
+          <article className="before-after-panel after">
+            <p className="font-mono text-xs font-semibold uppercase">Depois</p>
+            <h3>Experiência clara para pedir orçamento</h3>
+            <div className="mt-6 grid gap-3">
+              {depois.map((item) => (
+                <div key={item} className="before-after-item">
+                  <CheckCircle2 className="size-5" aria-hidden="true" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </article>
+        </RevelarAoRolar>
       </div>
     </section>
   );

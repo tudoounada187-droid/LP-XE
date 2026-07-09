@@ -11,13 +11,12 @@ export function Projetos() {
       <div className="container-x relative z-10">
         <RevelarAoRolar className="grid gap-6 md:grid-cols-[0.7fr_1fr] md:items-end">
           <div>
-            <p className="font-mono text-sm font-semibold uppercase text-contrast-ink-soft">Provas de direção</p>
-            <h2 className="editorial-h2 mt-3">Exemplos que mostram critério de projeto</h2>
-            <span className="gradient-rule mt-6" />
+            <p className="eyebrow-text">Projetos</p>
+            <h2 className="editorial-h2 mt-3">Trabalhos pensados para gerar confiança e conversão.</h2>
           </div>
           <p className="max-w-xl text-lg leading-8 text-contrast-ink-soft md:justify-self-end">
-            Cada recorte mostra a lógica por trás da entrega: contexto, solução proposta e efeito
-            esperado para quem vai usar ou contratar.
+            Os exemplos abaixo mostram formatos de entrega possíveis, com telas simuladas e uma
+            explicação prática do problema, da solução e do resultado esperado.
           </p>
         </RevelarAoRolar>
         <motion.div

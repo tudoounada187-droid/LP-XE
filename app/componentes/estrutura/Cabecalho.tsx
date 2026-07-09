@@ -1,19 +1,14 @@
 import { motion } from "motion/react";
 import { caminhoDoAsset } from "@/utilitarios/assets";
 
-type PropriedadesCabecalho = {
-  aoSolicitarOrcamento: () => void;
-};
-
 const linksNavegacao = [
-  { label: "Entregas", href: "#entregas" },
-  { label: "Clientes", href: "#publicos" },
-  { label: "Transformação", href: "#transformacao" },
-  { label: "Cases", href: "#projetos" },
+  { label: "Início", href: "#top" },
+  { label: "Projetos", href: "#projetos" },
+  { label: "Serviços", href: "#entregas" },
   { label: "Processo", href: "#metodo" },
 ];
 
-export function Cabecalho({ aoSolicitarOrcamento }: PropriedadesCabecalho) {
+export function Cabecalho() {
   return (
     <motion.header
       className="site-header"
@@ -24,7 +19,6 @@ export function Cabecalho({ aoSolicitarOrcamento }: PropriedadesCabecalho) {
       <div className="site-header-shell">
         <a href="#top" className="site-header-brand" aria-label="Voltar ao início">
           <img src={caminhoDoAsset("/images/logo-xe-mark.svg")} alt="" className="h-8 w-auto" />
-          <span>XE Software</span>
         </a>
         <nav className="site-header-nav" aria-label="Navegação principal">
           {linksNavegacao.map((link) => (
@@ -33,9 +27,9 @@ export function Cabecalho({ aoSolicitarOrcamento }: PropriedadesCabecalho) {
             </a>
           ))}
         </nav>
-        <button type="button" className="site-header-cta" onClick={aoSolicitarOrcamento}>
-          Enviar briefing
-        </button>
+        <a href="#briefing" className="site-header-cta">
+          Vamos conversar
+        </a>
       </div>
     </motion.header>
   );

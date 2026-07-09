@@ -1,107 +1,333 @@
-import { caminhoDoAsset } from "@/utilitarios/assets";
+import { useEffect, useRef } from "react";
 
-const linksNavegacao = [
-  { label: "Cenário", href: "#diagnostico" },
-  { label: "Entregas", href: "#entregas" },
-  { label: "Clientes", href: "#publicos" },
-  { label: "Transformação", href: "#transformacao" },
-  { label: "Cases", href: "#projetos" },
-  { label: "Processo", href: "#metodo" },
-  { label: "Briefing", href: "#briefing" },
-];
+const limitar = (valor: number, minimo: number, maximo: number) =>
+  Math.min(maximo, Math.max(minimo, valor));
 
-const linksServicos = [
-  "Página profissional",
-  "Site institucional",
-  "Sistema sob medida",
-];
+const interpolar = (inicio: number, fim: number, progresso: number) =>
+  Math.round(inicio + (fim - inicio) * progresso);
 
-const linksRedes = [
-  { label: "Instagram", href: "https://www.instagram.com/xe_software/" },
-  { label: "GitHub", href: "https://github.com/EmanuelCandido" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/emanuecandido" },
-];
+function corDoGradiente(progresso: number) {
+  const azul = [28, 61, 253];
+  const violeta = [92, 37, 252];
+  const magenta = [137, 5, 245];
+  const cores = progresso < 0.5 ? [azul, violeta] : [violeta, magenta];
+  const mistura = progresso < 0.5 ? progresso * 2 : (progresso - 0.5) * 2;
 
-type PropriedadesRodape = {
-  aoSolicitarOrcamento: () => void;
-};
+  return cores[0].map((canal, indice) => interpolar(canal, cores[1][indice], mistura));
+}
 
-export function Rodape({ aoSolicitarOrcamento }: PropriedadesRodape) {
+export function Rodape() {
+  const areaDaMarca = useRef<HTMLDivElement>(null);
+  const superficieDaAgua = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const area = areaDaMarca.current;
+    const canvas = superficieDaAgua.current;
+
+    if (!area || !canvas) {
+      return;
+    }
+
+    const contexto = canvas.getContext("2d", { alpha: true });
+    const reduzirMovimento = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (!contexto) {
+      return;
+    }
+
+    const areaAtiva: HTMLDivElement = area;
+    const canvasAtivo: HTMLCanvasElement = canvas;
+    const contextoAtivo: CanvasRenderingContext2D = contexto;
+
+    let largura = 0;
+    let altura = 0;
+    let ondaAtual = new Float32Array(0);
+    let ondaAnterior = new Float32Array(0);
+    let proximaOnda = new Float32Array(0);
+    let velocidadeDaAgua = new Float32Array(0);
+    let imagem: ImageData | null = null;
+    let quadro = 0;
+    let animando = false;
+    let mouseDentro = false;
+    let intensidadeDoBrilho = 0;
+    let cursorX = 0;
+    let cursorY = 0;
+    let ultimoPonto: { x: number; y: number; momento: number } | null = null;
+
+    function ruido(x: number, y: number) {
+      const valor = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
+      return valor - Math.floor(valor);
+    }
+
+    function redimensionar() {
+      const caixa = canvasAtivo.getBoundingClientRect();
+      const escala = Math.max(3, caixa.width / 520);
+
+      largura = Math.max(96, Math.round(caixa.width / escala));
+      altura = Math.max(36, Math.round(caixa.height / escala));
+      canvasAtivo.width = largura;
+      canvasAtivo.height = altura;
+
+      const tamanho = largura * altura;
+      ondaAtual = new Float32Array(tamanho);
+      ondaAnterior = new Float32Array(tamanho);
+      proximaOnda = new Float32Array(tamanho);
+      velocidadeDaAgua = new Float32Array(tamanho);
+      imagem = contextoAtivo.createImageData(largura, altura);
+
+      for (let y = 0; y < altura; y += 1) {
+        for (let x = 0; x < largura; x += 1) {
+          const indice = y * largura + x;
+          velocidadeDaAgua[indice] = 0.482 + ruido(x * 0.17, y * 0.19) * 0.016;
+        }
+      }
+    }
+
+    function perturbarAgua(
+      xCentral: number,
+      yCentral: number,
+      direcaoX: number,
+      direcaoY: number,
+      velocidade: number,
+    ) {
+      const raio = limitar(2.6 + velocidade * 1.8, 2.8, 6.4);
+      const comprimento = raio * limitar(1.15 + velocidade * 0.65, 1.2, 2.15);
+      const larguraDaEsteira = raio * 0.72;
+      const forca = limitar(7 + velocidade * 12, 8, 24);
+      const perpendicularX = -direcaoY;
+      const perpendicularY = direcaoX;
+      const alcance = Math.ceil(comprimento + 2);
+
+      for (let y = -alcance; y <= alcance; y += 1) {
+        const posicaoY = Math.round(yCentral + y);
+
+        if (posicaoY <= 1 || posicaoY >= altura - 2) {
+          continue;
+        }
+
+        for (let x = -alcance; x <= alcance; x += 1) {
+          const posicaoX = Math.round(xCentral + x);
+
+          if (posicaoX <= 1 || posicaoX >= largura - 2) {
+            continue;
+          }
+
+          const aoLongo = x * direcaoX + y * direcaoY;
+          const transversal = x * perpendicularX + y * perpendicularY;
+          const distancia =
+            (aoLongo * aoLongo) / (comprimento * comprimento) +
+            (transversal * transversal) / (larguraDaEsteira * larguraDaEsteira);
+
+          if (distancia >= 1) {
+            continue;
+          }
+
+          const indice = posicaoY * largura + posicaoX;
+          const bordaSuave = Math.cos(Math.sqrt(distancia) * Math.PI * 0.5);
+          const assimetria = 0.72 + ruido(posicaoX * 0.31, posicaoY * 0.29) * 0.5;
+          const esteira = aoLongo < 0 ? 1 : 0.62;
+          const deslocamento = forca * bordaSuave * assimetria * esteira;
+
+          ondaAtual[indice] += deslocamento;
+          ondaAnterior[indice] += deslocamento * 0.32;
+        }
+      }
+
+      const recuoX = Math.round(xCentral - direcaoX * comprimento * 0.85);
+      const recuoY = Math.round(yCentral - direcaoY * comprimento * 0.85);
+
+      if (recuoX > 1 && recuoX < largura - 2 && recuoY > 1 && recuoY < altura - 2) {
+        ondaAtual[recuoY * largura + recuoX] -= forca * 0.72;
+      }
+    }
+
+    function propagar() {
+      let maiorEnergia = 0;
+
+      for (let y = 1; y < altura - 1; y += 1) {
+        for (let x = 1; x < largura - 1; x += 1) {
+          const indice = y * largura + x;
+          const fluxo = (ruido(x * 0.11, y * 0.13) - 0.5) * 0.055;
+          const vizinhos =
+            ondaAtual[indice - 1] * (1 + fluxo) +
+            ondaAtual[indice + 1] * (1 - fluxo) +
+            ondaAtual[indice - largura] * (1 - fluxo * 0.65) +
+            ondaAtual[indice + largura] * (1 + fluxo * 0.65);
+          const valor =
+            (vizinhos * velocidadeDaAgua[indice] - ondaAnterior[indice]) * 0.987;
+
+          proximaOnda[indice] = valor;
+          maiorEnergia = Math.max(maiorEnergia, Math.abs(valor));
+        }
+      }
+
+      const temporaria = ondaAnterior;
+      ondaAnterior = ondaAtual;
+      ondaAtual = proximaOnda;
+      proximaOnda = temporaria;
+
+      return maiorEnergia;
+    }
+
+    function desenhar() {
+      if (!imagem) {
+        return 0;
+      }
+
+      const pixels = imagem.data;
+      const raioDoBrilho = Math.max(24, largura * 0.12);
+      let maiorEnergia = 0;
+
+      pixels.fill(0);
+
+      for (let y = 1; y < altura - 1; y += 1) {
+        for (let x = 1; x < largura - 1; x += 1) {
+          const indice = y * largura + x;
+          const alturaDaOnda = ondaAtual[indice];
+          const inclinacaoX = ondaAtual[indice - 1] - ondaAtual[indice + 1];
+          const inclinacaoY = ondaAtual[indice - largura] - ondaAtual[indice + largura];
+          const energia =
+            Math.abs(alturaDaOnda) * 0.027 +
+            Math.abs(inclinacaoX) * 0.052 +
+            Math.abs(inclinacaoY) * 0.044;
+          const distanciaDoMouse = Math.hypot(x - cursorX, y - cursorY);
+          const brilhoLocal =
+            Math.max(0, 1 - distanciaDoMouse / raioDoBrilho) * intensidadeDoBrilho;
+
+          maiorEnergia = Math.max(maiorEnergia, energia);
+
+          if (energia < 0.003 && brilhoLocal < 0.003) {
+            continue;
+          }
+
+          const variacao = limitar(
+            0.5 + (x - cursorX) / (raioDoBrilho * 1.8) + alturaDaOnda * 0.012,
+            0,
+            1,
+          );
+          const cor = corDoGradiente(variacao);
+          const reflexo = limitar((inclinacaoX - inclinacaoY) * 0.055, 0, 0.4);
+          const indiceDoPixel = indice * 4;
+
+          pixels[indiceDoPixel] = interpolar(cor[0], 255, reflexo);
+          pixels[indiceDoPixel + 1] = interpolar(cor[1], 255, reflexo);
+          pixels[indiceDoPixel + 2] = interpolar(cor[2], 255, reflexo);
+          pixels[indiceDoPixel + 3] = Math.round(
+            limitar(energia * 145 + brilhoLocal * 24, 0, 178),
+          );
+        }
+      }
+
+      contextoAtivo.putImageData(imagem, 0, 0);
+      return maiorEnergia;
+    }
+
+    function animar() {
+      intensidadeDoBrilho += ((mouseDentro ? 1 : 0) - intensidadeDoBrilho) * 0.085;
+      const energiaPropagada = propagar();
+      const energiaDesenhada = desenhar();
+
+      if (mouseDentro || intensidadeDoBrilho > 0.01 || Math.max(energiaPropagada, energiaDesenhada) > 0.018) {
+        quadro = window.requestAnimationFrame(animar);
+        return;
+      }
+
+      contextoAtivo.clearRect(0, 0, largura, altura);
+      animando = false;
+    }
+
+    function iniciarAnimacao() {
+      if (animando || reduzirMovimento.matches) {
+        return;
+      }
+
+      animando = true;
+      quadro = window.requestAnimationFrame(animar);
+    }
+
+    function atualizarMouse(evento: PointerEvent) {
+      const caixaDaArea = areaAtiva.getBoundingClientRect();
+      const caixaDoCanvas = canvasAtivo.getBoundingClientRect();
+      const xNaArea = evento.clientX - caixaDaArea.left;
+      const yNaArea = evento.clientY - caixaDaArea.top;
+      const xNoCanvas = evento.clientX - caixaDoCanvas.left;
+      const yNoCanvas = evento.clientY - caixaDoCanvas.top;
+      const novoX = (xNoCanvas / caixaDoCanvas.width) * largura;
+      const novoY = (yNoCanvas / caixaDoCanvas.height) * altura;
+      const agora = performance.now();
+
+      areaAtiva.style.setProperty("--mouse-x", `${xNaArea}px`);
+      areaAtiva.style.setProperty("--mouse-y", `${yNaArea}px`);
+      cursorX = novoX;
+      cursorY = novoY;
+
+      if (!reduzirMovimento.matches) {
+        if (ultimoPonto) {
+          const deltaX = novoX - ultimoPonto.x;
+          const deltaY = novoY - ultimoPonto.y;
+          const distancia = Math.hypot(deltaX, deltaY);
+          const tempo = Math.max(8, agora - ultimoPonto.momento);
+          const direcaoX = distancia > 0.01 ? deltaX / distancia : 1;
+          const direcaoY = distancia > 0.01 ? deltaY / distancia : 0;
+          const velocidade = limitar(distancia / tempo, 0.05, 1.4);
+          const passos = limitar(Math.ceil(distancia / 3.5), 1, 5);
+
+          for (let passo = 1; passo <= passos; passo += 1) {
+            const progresso = passo / passos;
+            perturbarAgua(
+              ultimoPonto.x + deltaX * progresso,
+              ultimoPonto.y + deltaY * progresso,
+              direcaoX,
+              direcaoY,
+              velocidade,
+            );
+          }
+        } else {
+          perturbarAgua(novoX, novoY, 1, 0, 0.2);
+        }
+      }
+
+      ultimoPonto = { x: novoX, y: novoY, momento: agora };
+      iniciarAnimacao();
+    }
+
+    function entrarNaAgua(evento: PointerEvent) {
+      mouseDentro = true;
+      areaAtiva.dataset.waterActive = "true";
+      atualizarMouse(evento);
+    }
+
+    function sairDaAgua() {
+      mouseDentro = false;
+      ultimoPonto = null;
+      areaAtiva.dataset.waterActive = "false";
+      iniciarAnimacao();
+    }
+
+    redimensionar();
+
+    const observador = new ResizeObserver(redimensionar);
+    observador.observe(areaAtiva);
+    areaAtiva.addEventListener("pointerenter", entrarNaAgua);
+    areaAtiva.addEventListener("pointermove", atualizarMouse);
+    areaAtiva.addEventListener("pointerleave", sairDaAgua);
+
+    return () => {
+      observador.disconnect();
+      areaAtiva.removeEventListener("pointerenter", entrarNaAgua);
+      areaAtiva.removeEventListener("pointermove", atualizarMouse);
+      areaAtiva.removeEventListener("pointerleave", sairDaAgua);
+      window.cancelAnimationFrame(quadro);
+    };
+  }, []);
+
   return (
-    <footer className="footer-editorial relative overflow-hidden py-14 md:py-20">
-      <div className="container-x relative z-10">
-        <div className="grid gap-10 lg:grid-cols-[1fr_0.78fr] lg:items-end">
-          <div>
-            <div className="flex items-center gap-3">
-              <img
-                src={caminhoDoAsset("/images/logo-xe-mark.svg")}
-                alt="Logo da XE Software"
-                loading="lazy"
-                className="h-12 w-auto rounded-xl bg-white p-1"
-              />
-              <p className="font-mono text-xs font-semibold uppercase text-white/50">Software</p>
-            </div>
-            <p className="footer-wordmark mt-8">XE Software</p>
-          </div>
-          <div className="max-w-xl lg:justify-self-end">
-            <p className="text-2xl font-extrabold leading-tight md:text-3xl">
-              Páginas, sites e sistemas para negócios que precisam ser levados a sério no digital.
-            </p>
-            <p className="mt-4 leading-7 text-white/60">
-              A XE transforma oferta, reputação e rotina em uma experiência digital com objetivo,
-              linguagem e caminho de contato claro.
-            </p>
-            <button
-              type="button"
-              onClick={aoSolicitarOrcamento}
-              className="mt-6 inline-flex min-h-11 items-center justify-center rounded-pill bg-white px-5 text-sm font-bold text-ink transition hover:bg-accent-soft"
-            >
-              Começar briefing
-            </button>
-          </div>
+    <footer className="footer-editorial relative overflow-hidden">
+      <div className="footer-brand-stage container-x relative z-10">
+        <div ref={areaDaMarca} className="footer-brand-hover" data-water-active="false">
+          <canvas ref={superficieDaAgua} className="footer-water-canvas" aria-hidden="true" />
+          <p className="footer-wordmark">XE Software</p>
         </div>
-        <div className="mt-14 grid gap-8 border-t border-white/10 pt-8 md:grid-cols-4">
-          <div>
-            <p className="font-mono text-xs font-semibold uppercase text-white/50">Contato</p>
-            <div className="mt-4 space-y-2 text-sm">
-              <a href="https://www.instagram.com/xe_software/" className="footer-link">
-                Instagram: @xe_software
-              </a>
-              <a href="mailto:emanoelcandidolima@gmail.com" className="footer-link">
-                E-mail: emanoelcandidolima@gmail.com
-              </a>
-            </div>
-          </div>
-          <div>
-            <p className="font-mono text-xs font-semibold uppercase text-white/50">Navegação</p>
-            <div className="mt-4 space-y-2 text-sm">
-              {linksNavegacao.map((item) => (
-                <a key={item.href} href={item.href} className="footer-link">
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </div>
-          <div>
-            <p className="font-mono text-xs font-semibold uppercase text-white/50">Serviços</p>
-            <div className="mt-4 space-y-2 text-sm text-white/70">
-              {linksServicos.map((item) => (
-                <p key={item}>{item}</p>
-              ))}
-            </div>
-          </div>
-          <div>
-            <p className="font-mono text-xs font-semibold uppercase text-white/50">Redes</p>
-            <div className="mt-4 space-y-2 text-sm">
-              {linksRedes.map((item) => (
-                <a key={item.href} href={item.href} className="footer-link">
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-        <p className="mt-10 text-sm text-white/40">© 2026 XE Software.</p>
       </div>
     </footer>
   );

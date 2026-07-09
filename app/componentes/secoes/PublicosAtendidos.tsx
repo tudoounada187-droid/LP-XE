@@ -1,31 +1,42 @@
-import { BriefcaseBusiness, HeartPulse, MessageCircleQuestion, Scale, Store } from "lucide-react";
+import { BriefcaseBusiness, Building2, HeartPulse, MessageCircleQuestion, Scale, Store } from "lucide-react";
 import { RevelarAoRolar } from "@/componentes/animacoes/RevelarAoRolar";
 import { RotuloSecao } from "@/componentes/interface/RotuloSecao";
 
 const publicos = [
   {
     titulo: "Lojas e marcas locais",
-    descricao: "Páginas para apresentar produtos, coleções, promoções e diferenciais antes do cliente chamar no WhatsApp.",
+    descricao: "Tenha uma página para apresentar produtos, diferenciais, promoções e botão de WhatsApp.",
     duvida: "A pessoa viu no Instagram, mas ainda não sabe se compra.",
+    solucao: "Página de venda com oferta, prova e contato rápido.",
     icone: Store,
   },
   {
-    titulo: "Advogados e consultores",
-    descricao: "Sites com linguagem sóbria, áreas de atuação, trajetória, canais de contato e sinais de credibilidade.",
+    titulo: "Advogados",
+    descricao: "Mostre áreas de atuação, trajetória, linguagem sóbria e canais de contato sem parecer improvisado.",
     duvida: "O cliente precisa sentir segurança antes de marcar uma conversa.",
+    solucao: "Site institucional com autoridade e clareza.",
     icone: Scale,
   },
   {
     titulo: "Nutricionistas e clínicas",
-    descricao: "Presença digital para explicar atendimentos, especialidades, método de trabalho e próximos passos.",
+    descricao: "Explique atendimentos, especialidades, método, convênios, localização e como agendar.",
     duvida: "O paciente quer entender como funciona antes de agendar.",
+    solucao: "Página clara para orientar e receber contatos.",
     icone: HeartPulse,
   },
   {
     titulo: "Prestadores de serviço",
-    descricao: "Landing pages e sistemas simples para organizar pedidos, orçamentos, cadastros e acompanhamento.",
+    descricao: "Apresente serviços, regiões atendidas, formas de orçamento e informações que o cliente sempre pergunta.",
     duvida: "O negócio cresceu e a rotina ficou espalhada demais.",
+    solucao: "Landing page ou sistema simples para organizar pedidos.",
     icone: BriefcaseBusiness,
+  },
+  {
+    titulo: "Pequenas empresas",
+    descricao: "Organize a presença digital da empresa com páginas, formulários, áreas internas e integrações.",
+    duvida: "A equipe depende de planilhas, mensagens e apresentações soltas.",
+    solucao: "Site e sistema sob medida para ganhar processo.",
+    icone: Building2,
   },
 ];
 
@@ -45,7 +56,7 @@ export function PublicosAtendidos() {
           </p>
         </RevelarAoRolar>
 
-        <div className="mt-12 grid gap-4 md:grid-cols-2">
+        <div className="audience-grid mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {publicos.map((publico, indice) => {
             const Icone = publico.icone;
 
@@ -61,6 +72,7 @@ export function PublicosAtendidos() {
                   </div>
                   <h3 className="mt-5 text-2xl font-extrabold leading-tight text-ink">{publico.titulo}</h3>
                   <p className="mt-3 leading-7 text-ink-soft">{publico.descricao}</p>
+                  <p className="audience-solution">{publico.solucao}</p>
                 </div>
               </RevelarAoRolar>
             );

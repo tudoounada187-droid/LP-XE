@@ -12,7 +12,7 @@
       <stop offset="1" stop-color="#D45AF2" stop-opacity="0.22"/>
     </linearGradient>
   </defs>
-  <path d="M0 77C186 115 341 126 544 101C733 78 912 48 1116 55C1257 60 1357 77 1440 94V220H0V77Z" fill="#0B0D18"/>
+  <path d="M0 77C186 115 341 126 544 101C733 78 912 48 1116 55C1257 60 1357 77 1440 94V220H0V77Z" fill="#050505"/>
   <path d="M0 84C196 121 360 131 558 108C746 86 924 59 1124 66C1263 71 1358 87 1440 104" stroke="url(#accentBand)" stroke-width="30" stroke-linecap="round"/>
   <path d="M0 77C186 115 341 126 544 101C733 78 912 48 1116 55C1257 60 1357 77 1440 94" stroke="url(#line)" stroke-width="1.35"/>
 </svg>
