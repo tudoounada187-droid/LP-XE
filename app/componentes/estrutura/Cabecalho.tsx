@@ -1,11 +1,12 @@
 import { motion } from "motion/react";
+import { BotaoConversar } from "@/componentes/interface/BotaoConversar";
 import { caminhoDoAsset } from "@/utilitarios/assets";
 
 const linksNavegacao = [
-  { label: "Início", href: "#top" },
   { label: "Projetos", href: "#projetos" },
   { label: "Serviços", href: "#entregas" },
   { label: "Processo", href: "#metodo" },
+  { label: "FAQ", href: "#briefing" },
 ];
 
 export function Cabecalho() {
@@ -18,7 +19,7 @@ export function Cabecalho() {
     >
       <div className="site-header-shell">
         <a href="#top" className="site-header-brand" aria-label="Voltar ao início">
-          <img src={caminhoDoAsset("/images/logo-xe-mark.svg")} alt="" className="h-8 w-auto" />
+          <img src={caminhoDoAsset("/images/logo-xe-mark-light.svg")} alt="" className="h-8 w-auto" />
         </a>
         <nav className="site-header-nav" aria-label="Navegação principal">
           {linksNavegacao.map((link) => (
@@ -27,9 +28,9 @@ export function Cabecalho() {
             </a>
           ))}
         </nav>
-        <a href="#briefing" className="site-header-cta">
+        <BotaoConversar href="#briefing" className="site-header-cta">
           Vamos conversar
-        </a>
+        </BotaoConversar>
       </div>
     </motion.header>
   );

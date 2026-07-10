@@ -7,7 +7,6 @@ import { projetos } from "@/dados/projetos";
 export function Projetos() {
   return (
     <section id="projetos" className="brand-dark section-pad section-transition relative overflow-hidden text-contrast-ink">
-      <div className="section-wave-out wave-to-white" aria-hidden="true" />
       <div className="container-x relative z-10">
         <RevelarAoRolar className="grid gap-6 md:grid-cols-[0.7fr_1fr] md:items-end">
           <div>

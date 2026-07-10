@@ -1,20 +1,38 @@
-export const servicos = [
+export type Servico = {
+  id: string;
+  number: string;
+  title: string;
+  image: string;
+  alt: string;
+};
+
+export const servicos: Servico[] = [
   {
-    titulo: "Página profissional de venda",
-    descricao:
-      "Uma página focada em explicar uma oferta, mostrar diferenciais, responder objeções e conduzir o visitante para contato.",
-    indicado: "para lojas, profissionais e serviços que vendem pelo Instagram, indicação ou tráfego pago",
+    id: "landing-pages",
+    number: "01.",
+    title: "Landing Pages",
+    image: "/images/service-landing-page.svg",
+    alt: "Prévia de uma landing page comercial com chamada principal e indicadores de resultado",
   },
   {
-    titulo: "Site institucional",
-    descricao:
-      "Um site para organizar quem é a empresa, o que ela oferece, por que confiar, onde atende e como iniciar uma conversa.",
-    indicado: "para escritórios, clínicas, consultórios, marcas locais e empresas em crescimento",
+    id: "sites-profissionais",
+    number: "02.",
+    title: "Sites Profissionais",
+    image: "/images/service-professional-site.svg",
+    alt: "Prévia de um site profissional com apresentação, serviços e depoimentos",
   },
   {
-    titulo: "Sistema sob medida",
-    descricao:
-      "Uma solução para transformar cadastros, consultas, pedidos, agendamentos e etapas repetidas em um fluxo próprio.",
-    indicado: "para reduzir retrabalho quando planilhas e mensagens já não dão conta",
+    id: "sistemas-sob-medida",
+    number: "03.",
+    title: "Sistemas Sob Medida",
+    image: "/images/service-custom-system.svg",
+    alt: "Prévia de um sistema sob medida com painel, métricas e gestão de tarefas",
+  },
+  {
+    id: "automacao-de-processos",
+    number: "04.",
+    title: "Automação de Processos",
+    image: "/images/service-automation.svg",
+    alt: "Prévia de uma automação conectando etapas de atendimento e operação",
   },
 ];

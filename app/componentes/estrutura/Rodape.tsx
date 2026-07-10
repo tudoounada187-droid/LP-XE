@@ -17,7 +17,7 @@ function corDoGradiente(progresso: number) {
 }
 
 export function Rodape() {
-  const areaDaMarca = useRef<HTMLDivElement>(null);
+  const areaDaMarca = useRef<HTMLElement>(null);
   const superficieDaAgua = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -35,9 +35,16 @@ export function Rodape() {
       return;
     }
 
-    const areaAtiva: HTMLDivElement = area;
+    const textoDaMarca = area.querySelector<HTMLElement>(".footer-wordmark");
+
+    if (!textoDaMarca) {
+      return;
+    }
+
+    const areaAtiva: HTMLElement = area;
     const canvasAtivo: HTMLCanvasElement = canvas;
     const contextoAtivo: CanvasRenderingContext2D = contexto;
+    const textoAtivo: HTMLElement = textoDaMarca;
 
     let largura = 0;
     let altura = 0;
@@ -45,6 +52,8 @@ export function Rodape() {
     let ondaAnterior = new Float32Array(0);
     let proximaOnda = new Float32Array(0);
     let velocidadeDaAgua = new Float32Array(0);
+    let fluxoDaAgua = new Float32Array(0);
+    let absorcaoDasBordas = new Float32Array(0);
     let imagem: ImageData | null = null;
     let quadro = 0;
     let animando = false;
@@ -73,12 +82,22 @@ export function Rodape() {
       ondaAnterior = new Float32Array(tamanho);
       proximaOnda = new Float32Array(tamanho);
       velocidadeDaAgua = new Float32Array(tamanho);
+      fluxoDaAgua = new Float32Array(tamanho);
+      absorcaoDasBordas = new Float32Array(tamanho);
       imagem = contextoAtivo.createImageData(largura, altura);
 
       for (let y = 0; y < altura; y += 1) {
         for (let x = 0; x < largura; x += 1) {
           const indice = y * largura + x;
-          velocidadeDaAgua[indice] = 0.482 + ruido(x * 0.17, y * 0.19) * 0.016;
+          const distanciaDaBorda = Math.min(x, y, largura - 1 - x, altura - 1 - y);
+          const faixaDeAbsorcao = Math.min(22, Math.max(10, Math.round(altura * 0.12)));
+
+          velocidadeDaAgua[indice] = 0.484 + ruido(x * 0.17, y * 0.19) * 0.012;
+          fluxoDaAgua[indice] = (ruido(x * 0.11, y * 0.13) - 0.5) * 0.038;
+          absorcaoDasBordas[indice] =
+            distanciaDaBorda < faixaDeAbsorcao
+              ? 0.91 + (distanciaDaBorda / faixaDeAbsorcao) * 0.069
+              : 0.979;
         }
       }
     }
@@ -90,10 +109,10 @@ export function Rodape() {
       direcaoY: number,
       velocidade: number,
     ) {
-      const raio = limitar(2.6 + velocidade * 1.8, 2.8, 6.4);
-      const comprimento = raio * limitar(1.15 + velocidade * 0.65, 1.2, 2.15);
-      const larguraDaEsteira = raio * 0.72;
-      const forca = limitar(7 + velocidade * 12, 8, 24);
+      const raio = limitar(3 + velocidade * 1.2, 3, 5.4);
+      const comprimento = raio * limitar(1.22 + velocidade * 0.48, 1.25, 1.9);
+      const larguraDaEsteira = raio * 0.82;
+      const forca = limitar(3.4 + velocidade * 5.6, 3.6, 10.5);
       const perpendicularX = -direcaoY;
       const perpendicularY = direcaoX;
       const alcance = Math.ceil(comprimento + 2);
@@ -129,7 +148,7 @@ export function Rodape() {
           const deslocamento = forca * bordaSuave * assimetria * esteira;
 
           ondaAtual[indice] += deslocamento;
-          ondaAnterior[indice] += deslocamento * 0.32;
+          ondaAnterior[indice] += deslocamento * 0.62;
         }
       }
 
@@ -137,7 +156,7 @@ export function Rodape() {
       const recuoY = Math.round(yCentral - direcaoY * comprimento * 0.85);
 
       if (recuoX > 1 && recuoX < largura - 2 && recuoY > 1 && recuoY < altura - 2) {
-        ondaAtual[recuoY * largura + recuoX] -= forca * 0.72;
+        ondaAtual[recuoY * largura + recuoX] -= forca * 0.48;
       }
     }
 
@@ -147,14 +166,16 @@ export function Rodape() {
       for (let y = 1; y < altura - 1; y += 1) {
         for (let x = 1; x < largura - 1; x += 1) {
           const indice = y * largura + x;
-          const fluxo = (ruido(x * 0.11, y * 0.13) - 0.5) * 0.055;
+          const fluxo = fluxoDaAgua[indice];
           const vizinhos =
             ondaAtual[indice - 1] * (1 + fluxo) +
             ondaAtual[indice + 1] * (1 - fluxo) +
             ondaAtual[indice - largura] * (1 - fluxo * 0.65) +
             ondaAtual[indice + largura] * (1 + fluxo * 0.65);
-          const valor =
-            (vizinhos * velocidadeDaAgua[indice] - ondaAnterior[indice]) * 0.987;
+          const valorBruto =
+            (vizinhos * velocidadeDaAgua[indice] - ondaAnterior[indice]) *
+            absorcaoDasBordas[indice];
+          const valor = valorBruto / (1 + Math.abs(valorBruto) * 0.0035);
 
           proximaOnda[indice] = valor;
           maiorEnergia = Math.max(maiorEnergia, Math.abs(valor));
@@ -175,7 +196,7 @@ export function Rodape() {
       }
 
       const pixels = imagem.data;
-      const raioDoBrilho = Math.max(24, largura * 0.12);
+      const raioDoBrilho = Math.max(28, largura * 0.1);
       let maiorEnergia = 0;
 
       pixels.fill(0);
@@ -187,9 +208,9 @@ export function Rodape() {
           const inclinacaoX = ondaAtual[indice - 1] - ondaAtual[indice + 1];
           const inclinacaoY = ondaAtual[indice - largura] - ondaAtual[indice + largura];
           const energia =
-            Math.abs(alturaDaOnda) * 0.027 +
-            Math.abs(inclinacaoX) * 0.052 +
-            Math.abs(inclinacaoY) * 0.044;
+            Math.abs(alturaDaOnda) * 0.02 +
+            Math.abs(inclinacaoX) * 0.038 +
+            Math.abs(inclinacaoY) * 0.034;
           const distanciaDoMouse = Math.hypot(x - cursorX, y - cursorY);
           const brilhoLocal =
             Math.max(0, 1 - distanciaDoMouse / raioDoBrilho) * intensidadeDoBrilho;
@@ -206,14 +227,14 @@ export function Rodape() {
             1,
           );
           const cor = corDoGradiente(variacao);
-          const reflexo = limitar((inclinacaoX - inclinacaoY) * 0.055, 0, 0.4);
+          const reflexo = limitar((inclinacaoX - inclinacaoY) * 0.042, 0, 0.3);
           const indiceDoPixel = indice * 4;
 
           pixels[indiceDoPixel] = interpolar(cor[0], 255, reflexo);
           pixels[indiceDoPixel + 1] = interpolar(cor[1], 255, reflexo);
           pixels[indiceDoPixel + 2] = interpolar(cor[2], 255, reflexo);
           pixels[indiceDoPixel + 3] = Math.round(
-            limitar(energia * 145 + brilhoLocal * 24, 0, 178),
+            limitar(energia * 112 + brilhoLocal * 16, 0, 128),
           );
         }
       }
@@ -248,6 +269,7 @@ export function Rodape() {
     function atualizarMouse(evento: PointerEvent) {
       const caixaDaArea = areaAtiva.getBoundingClientRect();
       const caixaDoCanvas = canvasAtivo.getBoundingClientRect();
+      const caixaDoTexto = textoAtivo.getBoundingClientRect();
       const xNaArea = evento.clientX - caixaDaArea.left;
       const yNaArea = evento.clientY - caixaDaArea.top;
       const xNoCanvas = evento.clientX - caixaDoCanvas.left;
@@ -258,6 +280,14 @@ export function Rodape() {
 
       areaAtiva.style.setProperty("--mouse-x", `${xNaArea}px`);
       areaAtiva.style.setProperty("--mouse-y", `${yNaArea}px`);
+      areaAtiva.style.setProperty(
+        "--wordmark-mouse-x",
+        `${evento.clientX - caixaDoTexto.left}px`,
+      );
+      areaAtiva.style.setProperty(
+        "--wordmark-mouse-y",
+        `${evento.clientY - caixaDoTexto.top}px`,
+      );
       cursorX = novoX;
       cursorY = novoY;
 
@@ -270,7 +300,7 @@ export function Rodape() {
           const direcaoX = distancia > 0.01 ? deltaX / distancia : 1;
           const direcaoY = distancia > 0.01 ? deltaY / distancia : 0;
           const velocidade = limitar(distancia / tempo, 0.05, 1.4);
-          const passos = limitar(Math.ceil(distancia / 3.5), 1, 5);
+          const passos = limitar(Math.ceil(distancia / 5), 1, 3);
 
           for (let passo = 1; passo <= passos; passo += 1) {
             const progresso = passo / passos;
@@ -322,10 +352,14 @@ export function Rodape() {
   }, []);
 
   return (
-    <footer className="footer-editorial relative overflow-hidden">
+    <footer
+      ref={areaDaMarca}
+      className="footer-editorial relative overflow-hidden"
+      data-water-active="false"
+    >
+      <canvas ref={superficieDaAgua} className="footer-water-canvas" aria-hidden="true" />
       <div className="footer-brand-stage container-x relative z-10">
-        <div ref={areaDaMarca} className="footer-brand-hover" data-water-active="false">
-          <canvas ref={superficieDaAgua} className="footer-water-canvas" aria-hidden="true" />
+        <div className="footer-brand-hover">
           <p className="footer-wordmark">XE Software</p>
         </div>
       </div>

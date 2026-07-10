@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "motion/react";
 import { aparecerSubindo, animacaoEmSequencia } from "@/componentes/animacoes/variantes";
+import { BotaoConversar } from "@/componentes/interface/BotaoConversar";
 
 export function DestaqueInicial() {
   return (
@@ -17,10 +18,10 @@ export function DestaqueInicial() {
             Criamos sites, landing pages e sistemas com visual profissional, estratégia e performance
             para transformar visitantes em oportunidades.
           </p>
-          <a href="#briefing" className="button-dark hero-main-cta">
+          <BotaoConversar href="#briefing" className="button-dark hero-main-cta">
             Vamos conversar
             <ArrowUpRight className="size-5" aria-hidden="true" />
-          </a>
+          </BotaoConversar>
         </motion.div>
       </motion.div>
       <div className="section-wave-out wave-to-dark hero-wave-out" aria-hidden="true" />
