@@ -6,7 +6,7 @@ const linksNavegacao = [
   { label: "Projetos", href: "#projetos" },
   { label: "Serviços", href: "#entregas" },
   { label: "Processo", href: "#metodo" },
-  { label: "FAQ", href: "#briefing" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export function Cabecalho() {
@@ -29,7 +29,8 @@ export function Cabecalho() {
           ))}
         </nav>
         <BotaoConversar href="#briefing" className="site-header-cta">
-          Vamos conversar
+          <span className="site-header-cta-light" aria-hidden="true" />
+          <span className="site-header-cta-text">Vamos conversar</span>
         </BotaoConversar>
       </div>
     </motion.header>

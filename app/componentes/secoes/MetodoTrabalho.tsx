@@ -7,6 +7,7 @@ const iconesEtapas = [FileText, Palette, Code2, Rocket, SlidersHorizontal];
 export function MetodoTrabalho() {
   return (
     <section id="metodo" className="brand-dark section-pad section-transition relative overflow-hidden text-contrast-ink">
+      <div className="section-wave-out wave-to-lavender" aria-hidden="true" />
       <div className="container-x relative z-10 grid gap-12 lg:grid-cols-[0.9fr_1fr] lg:items-center">
         <RevelarAoRolar>
           <p className="eyebrow-text">Processo</p>
