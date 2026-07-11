@@ -8,7 +8,13 @@ import {
 
 type BotaoConversarProps = AnchorHTMLAttributes<HTMLAnchorElement>;
 
-export function BotaoConversar({ className = "", onPointerEnter, onAnimationEnd, ...props }: BotaoConversarProps) {
+export function BotaoConversar({
+  className = "",
+  onPointerEnter,
+  onPointerDown,
+  onAnimationEnd,
+  ...props
+}: BotaoConversarProps) {
   const timeoutDaAnimacao = useRef<number | null>(null);
 
   useEffect(() => {
@@ -37,7 +43,7 @@ export function BotaoConversar({ className = "", onPointerEnter, onAnimationEnd,
   function finalizarOnda(evento: AnimationEvent<HTMLAnchorElement>) {
     onAnimationEnd?.(evento);
 
-    if (evento.animationName === "cta-brand-wave") {
+    if (evento.animationName === "cta-brand-wave" || evento.animationName === "mobile-cta-white-wave") {
       if (timeoutDaAnimacao.current !== null) {
         window.clearTimeout(timeoutDaAnimacao.current);
         timeoutDaAnimacao.current = null;
@@ -47,11 +53,28 @@ export function BotaoConversar({ className = "", onPointerEnter, onAnimationEnd,
     }
   }
 
+  function dispararOndaBranca(evento: PointerEvent<HTMLAnchorElement>) {
+    onPointerDown?.(evento);
+
+    const elemento = evento.currentTarget;
+
+    if (!elemento.classList.contains("mobile-quote-cta") || elemento.classList.contains("is-white-wave-running")) {
+      return;
+    }
+
+    elemento.classList.add("is-white-wave-running");
+    timeoutDaAnimacao.current = window.setTimeout(() => {
+      elemento.classList.remove("is-white-wave-running");
+      timeoutDaAnimacao.current = null;
+    }, 720);
+  }
+
   return (
     <a
       {...props}
       className={className}
       onPointerEnter={dispararOnda}
+      onPointerDown={dispararOndaBranca}
       onAnimationEnd={finalizarOnda}
     />
   );

@@ -58,6 +58,8 @@ export function Rodape() {
     let quadro = 0;
     let animando = false;
     let mouseDentro = false;
+    let toqueAtivo = false;
+    let ponteiroDoToque: number | null = null;
     let intensidadeDoBrilho = 0;
     let cursorX = 0;
     let cursorY = 0;
@@ -322,12 +324,54 @@ export function Rodape() {
     }
 
     function entrarNaAgua(evento: PointerEvent) {
+      if (evento.pointerType === "touch") {
+        return;
+      }
+
       mouseDentro = true;
       areaAtiva.dataset.waterActive = "true";
       atualizarMouse(evento);
     }
 
-    function sairDaAgua() {
+    function moverNaAgua(evento: PointerEvent) {
+      if (evento.pointerType === "touch" && !toqueAtivo) {
+        return;
+      }
+
+      atualizarMouse(evento);
+    }
+
+    function sairDaAgua(evento?: PointerEvent) {
+      if (evento?.pointerType === "touch") {
+        return;
+      }
+
+      mouseDentro = false;
+      ultimoPonto = null;
+      areaAtiva.dataset.waterActive = "false";
+      iniciarAnimacao();
+    }
+
+    function iniciarToque(evento: PointerEvent) {
+      if (evento.pointerType !== "touch") {
+        return;
+      }
+
+      toqueAtivo = true;
+      ponteiroDoToque = evento.pointerId;
+      mouseDentro = true;
+      areaAtiva.dataset.waterActive = "true";
+      areaAtiva.setPointerCapture?.(evento.pointerId);
+      atualizarMouse(evento);
+    }
+
+    function encerrarToque(evento: PointerEvent) {
+      if (evento.pointerType !== "touch" || evento.pointerId !== ponteiroDoToque) {
+        return;
+      }
+
+      toqueAtivo = false;
+      ponteiroDoToque = null;
       mouseDentro = false;
       ultimoPonto = null;
       areaAtiva.dataset.waterActive = "false";
@@ -339,14 +383,22 @@ export function Rodape() {
     const observador = new ResizeObserver(redimensionar);
     observador.observe(areaAtiva);
     areaAtiva.addEventListener("pointerenter", entrarNaAgua);
-    areaAtiva.addEventListener("pointermove", atualizarMouse);
+    areaAtiva.addEventListener("pointermove", moverNaAgua);
     areaAtiva.addEventListener("pointerleave", sairDaAgua);
+    areaAtiva.addEventListener("pointerdown", iniciarToque);
+    areaAtiva.addEventListener("pointerup", encerrarToque);
+    areaAtiva.addEventListener("pointercancel", encerrarToque);
+    areaAtiva.addEventListener("lostpointercapture", encerrarToque);
 
     return () => {
       observador.disconnect();
       areaAtiva.removeEventListener("pointerenter", entrarNaAgua);
-      areaAtiva.removeEventListener("pointermove", atualizarMouse);
+      areaAtiva.removeEventListener("pointermove", moverNaAgua);
       areaAtiva.removeEventListener("pointerleave", sairDaAgua);
+      areaAtiva.removeEventListener("pointerdown", iniciarToque);
+      areaAtiva.removeEventListener("pointerup", encerrarToque);
+      areaAtiva.removeEventListener("pointercancel", encerrarToque);
+      areaAtiva.removeEventListener("lostpointercapture", encerrarToque);
       window.cancelAnimationFrame(quadro);
     };
   }, []);

@@ -1,5 +1,6 @@
 import { Cabecalho } from "@/componentes/estrutura/Cabecalho";
 import { Rodape } from "@/componentes/estrutura/Rodape";
+import { BotaoConversar } from "@/componentes/interface/BotaoConversar";
 import { DestaqueInicial } from "@/componentes/secoes/DestaqueInicial";
 import { Projetos } from "@/componentes/secoes/Projetos";
 import { Servicos } from "@/componentes/secoes/Servicos";
@@ -19,9 +20,9 @@ export function PaginaInicial() {
         <PerguntasFrequentes />
         <ChamadaFinal />
       </main>
-      <a href="#briefing" className="mobile-quote-cta">
-        Quero um orçamento
-      </a>
+      <BotaoConversar href="#briefing" className="mobile-quote-cta">
+        <span>Vamos conversar</span>
+      </BotaoConversar>
       <Rodape />
     </>
   );
