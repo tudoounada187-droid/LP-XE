@@ -8,6 +8,7 @@ import { caminhoDoAsset } from "@/utilitarios/assets";
 
 export function Servicos() {
   const [indiceAtivo, setIndiceAtivo] = useState(0);
+  const [indiceEmHoverDesktop, setIndiceEmHoverDesktop] = useState<number | null>(null);
   const [direcao, setDirecao] = useState<1 | -1>(1);
   const indiceAtivoRef = useRef(0);
   const referenciasDesktop = useRef<Array<HTMLButtonElement | null>>([]);
@@ -30,6 +31,11 @@ export function Servicos() {
     setDirecao(novoIndice > indiceAtivoRef.current ? 1 : -1);
     indiceAtivoRef.current = novoIndice;
     setIndiceAtivo(novoIndice);
+  }
+
+  function ativarServicoNoDesktop(indice: number) {
+    setIndiceEmHoverDesktop(indice);
+    ativarServico(indice);
   }
 
   function navegarComTeclado(
@@ -99,13 +105,15 @@ export function Servicos() {
               <BotaoServico
                 key={servico.id}
                 servico={servico}
-                ativo={indice === indiceAtivo}
+                ativo={indice === indiceEmHoverDesktop}
+                focavel={indice === (indiceEmHoverDesktop ?? 0)}
                 indice={indice}
                 variante="desktop"
                 referencia={(elemento) => {
                   referenciasDesktop.current[indice] = elemento;
                 }}
-                aoAtivar={() => ativarServico(indice)}
+                aoAtivar={() => ativarServicoNoDesktop(indice)}
+                aoDesativar={() => setIndiceEmHoverDesktop(null)}
                 aoNavegar={(evento, indiceAtual) => navegarComTeclado(evento, indiceAtual, referenciasDesktop)}
               />
             ))}
@@ -128,12 +136,14 @@ export function Servicos() {
                 <BotaoServico
                   servico={servico}
                   ativo={ativo}
+                  focavel={ativo}
                   indice={indice}
                   variante="mobile"
                   referencia={(elemento) => {
                     referenciasMobile.current[indice] = elemento;
                   }}
                   aoAtivar={() => ativarServico(indice)}
+                  aoDesativar={() => undefined}
                   aoNavegar={(evento, indiceAtual) => navegarComTeclado(evento, indiceAtual, referenciasMobile)}
                 />
                 <AnimatePresence initial={false}>

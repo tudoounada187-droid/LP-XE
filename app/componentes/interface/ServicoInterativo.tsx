@@ -1,5 +1,4 @@
 import type { KeyboardEvent } from "react";
-import { ArrowRight } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import type { Servico } from "@/dados/servicos";
 import { caminhoDoAsset } from "@/utilitarios/assets";
@@ -9,6 +8,15 @@ const transicaoImagem = {
   duration: 0.62,
   ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
 };
+
+function SetaServico() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M2 12H22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M13 3L22 12L13 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
 export function PreviaServico({
   servico,
@@ -62,18 +70,22 @@ export function PreviaServico({
 export function BotaoServico({
   servico,
   ativo,
+  focavel,
   indice,
   variante,
   referencia,
   aoAtivar,
+  aoDesativar,
   aoNavegar,
 }: {
   servico: Servico;
   ativo: boolean;
+  focavel: boolean;
   indice: number;
   variante: "desktop" | "mobile";
   referencia: (elemento: HTMLButtonElement | null) => void;
   aoAtivar: () => void;
+  aoDesativar: () => void;
   aoNavegar: (evento: KeyboardEvent<HTMLButtonElement>, indice: number) => void;
 }) {
   const painel = variante === "desktop" ? "service-panel-desktop" : `service-panel-mobile-${servico.id}`;
@@ -87,10 +99,12 @@ export function BotaoServico({
       aria-selected={ativo}
       aria-expanded={variante === "mobile" ? ativo : undefined}
       aria-controls={painel}
-      tabIndex={ativo ? 0 : -1}
+      tabIndex={focavel ? 0 : -1}
       className={classes("service-selector-item", ativo && "is-active")}
       onMouseEnter={aoAtivar}
+      onMouseLeave={aoDesativar}
       onFocus={aoAtivar}
+      onBlur={aoDesativar}
       onClick={aoAtivar}
       onKeyDown={(evento) => aoNavegar(evento, indice)}
     >
@@ -99,7 +113,7 @@ export function BotaoServico({
         <span className="service-selector-title">{servico.title}</span>
       </span>
       <span className="service-selector-arrow" aria-hidden="true">
-        <ArrowRight />
+        <SetaServico />
       </span>
       <span className="service-selector-line" aria-hidden="true" />
     </button>

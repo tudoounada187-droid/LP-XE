@@ -1797,10 +1797,12 @@ body {
 }
 
 .service-selector-arrow svg {
-  width: 1.05rem;
-  height: 1.05rem;
-  transform: translateX(0) rotate(0deg);
-  transition: transform 0.42s cubic-bezier(0.76, 0, 0.24, 1);
+  width: 18px;
+  height: 18px;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: translate(0, 0) rotate(0deg);
+  transition: transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .service-selector-line {
@@ -1834,7 +1836,7 @@ body {
 }
 
 .service-selector-item.is-active .service-selector-arrow svg {
-  transform: translate(2px, -2px) rotate(-45deg);
+  transform: rotate(-45deg);
 }
 
 .service-selector-item.is-active .service-selector-line {
