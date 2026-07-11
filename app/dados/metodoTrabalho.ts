@@ -17,21 +17,26 @@ export const etapasMetodo = [
   {
     titulo: "Briefing",
     descricao: "Entendimento do negócio, público, oferta e objetivo.",
+    resultado: "Direção e prioridades definidas.",
   },
   {
     titulo: "Design",
     descricao: "Estrutura visual, seções, textos e direção da interface.",
+    resultado: "Estrutura e linguagem visual aprovadas.",
   },
   {
     titulo: "Desenvolvimento",
     descricao: "Construção responsiva da página, site ou sistema.",
+    resultado: "Interface funcional e responsiva.",
   },
   {
     titulo: "Publicação",
     descricao: "Deploy, domínio, ajustes técnicos e revisão final.",
+    resultado: "Projeto disponível para o público.",
   },
   {
     titulo: "Ajustes",
     descricao: "Correções iniciais para deixar a entrega pronta para uso.",
+    resultado: "Entrega revisada e pronta para uso.",
   },
 ];

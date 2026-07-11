@@ -58,10 +58,17 @@ export function BotaoConversar({
 
     const elemento = evento.currentTarget;
 
-    if (!elemento.classList.contains("mobile-quote-cta") || elemento.classList.contains("is-white-wave-running")) {
+    if (!elemento.classList.contains("mobile-quote-cta")) {
       return;
     }
 
+    if (timeoutDaAnimacao.current !== null) {
+      window.clearTimeout(timeoutDaAnimacao.current);
+      timeoutDaAnimacao.current = null;
+    }
+
+    elemento.classList.remove("is-white-wave-running");
+    void elemento.offsetWidth;
     elemento.classList.add("is-white-wave-running");
     timeoutDaAnimacao.current = window.setTimeout(() => {
       elemento.classList.remove("is-white-wave-running");
