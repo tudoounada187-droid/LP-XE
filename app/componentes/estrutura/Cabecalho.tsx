@@ -20,20 +20,22 @@ export function Cabecalho() {
       transition={{ duration: reduzirMovimento ? 0 : 0.62, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="site-header-shell">
-        <a href="#top" className="site-header-brand" aria-label="Voltar ao início">
-          <img src={caminhoDoAsset("/images/logo-xe-mark-light.svg")} alt="" className="h-8 w-auto" />
-        </a>
-        <nav className="site-header-nav" aria-label="Navegação principal">
-          {linksNavegacao.map((link) => (
-            <a key={link.href} href={link.href}>
-              {link.label}
-            </a>
-          ))}
-        </nav>
-        <BotaoConversar href="#briefing" className="site-header-cta">
-          <span className="site-header-cta-light" aria-hidden="true" />
-          <span className="site-header-cta-text">Vamos conversar</span>
-        </BotaoConversar>
+        <div className="site-header-content">
+          <a href="#top" className="site-header-brand" aria-label="Voltar ao início">
+            <img src={caminhoDoAsset("/images/logo-xe-mark-light.svg")} alt="" className="h-8 w-auto" />
+          </a>
+          <nav className="site-header-nav" aria-label="Navegação principal">
+            {linksNavegacao.map((link) => (
+              <a key={link.href} href={link.href}>
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <BotaoConversar href="#briefing" className="site-header-cta">
+            <span className="site-header-cta-light" aria-hidden="true" />
+            <span className="site-header-cta-text">Vamos conversar</span>
+          </BotaoConversar>
+        </div>
       </div>
     </motion.header>
   );
