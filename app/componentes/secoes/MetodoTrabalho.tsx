@@ -1,5 +1,5 @@
 import { Route } from "lucide-react";
-import type { CSSProperties } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import { caminhoDoAsset } from "@/utilitarios/assets";
 
 const etapasDoProcesso = [
@@ -42,6 +42,27 @@ const etapasDoProcesso = [
 ] as const;
 
 export function MetodoTrabalho() {
+  const listaDeCards = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const lista = listaDeCards.current;
+    const ultimoCard = lista?.querySelector<HTMLElement>(".process-card:last-child");
+
+    if (!lista || !ultimoCard) {
+      return;
+    }
+
+    const observador = new IntersectionObserver(
+      ([entrada]) => {
+        lista.classList.toggle("is-final-card-visible", entrada.isIntersecting);
+      },
+      { threshold: 0.01 },
+    );
+
+    observador.observe(ultimoCard);
+    return () => observador.disconnect();
+  }, []);
+
   return (
     <section id="metodo" className="process-cards-section section-pad section-transition relative">
       <div className="section-wave-out wave-to-lavender" aria-hidden="true" />
@@ -55,21 +76,24 @@ export function MetodoTrabalho() {
           <p>Uma sequência simples, com contexto, decisões claras e acompanhamento até a entrega final.</p>
         </header>
 
-        <div className="process-cards-list">
+        <div ref={listaDeCards} className="process-cards-list">
           {etapasDoProcesso.map((etapa, indice) => (
-            <div
-              className="process-card-stage"
+            <article
+              className="process-card"
               key={etapa.titulo}
-              style={{ zIndex: indice + 1 } as CSSProperties}
+              style={
+                {
+                  zIndex: indice + 1,
+                  "--process-stack-offset": `${indice * 10}px`,
+                } as CSSProperties
+              }
             >
-              <article className="process-card">
-                <div className="process-card-copy">
-                  <h3>{etapa.titulo}</h3>
-                  <p>{etapa.descricao}</p>
-                </div>
-                <img src={caminhoDoAsset(etapa.imagem)} alt={etapa.alt} className="process-card-illustration" />
-              </article>
-            </div>
+              <div className="process-card-copy">
+                <h3>{etapa.titulo}</h3>
+                <p>{etapa.descricao}</p>
+              </div>
+              <img src={caminhoDoAsset(etapa.imagem)} alt={etapa.alt} className="process-card-illustration" />
+            </article>
           ))}
         </div>
       </div>
