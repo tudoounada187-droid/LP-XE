@@ -4320,7 +4320,6 @@ body {
 .process-cards-list.is-final-card-released .process-card-stack {
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-2rem);
 }
 
 .process-card-stack::before,
@@ -4357,9 +4356,6 @@ body {
     0 1.7rem 0 -0.58rem rgba(255,255,255,0.44);
   padding: clamp(1.75rem, 4.5vw, 3.8rem);
   transform-origin: center center;
-  transition:
-    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.18s ease 0.34s;
   will-change: transform, opacity;
 }
 
@@ -4367,17 +4363,18 @@ body {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0) scale(1);
-  transition:
-    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.18s ease;
 }
 
-.process-card.is-active.is-entering-forward {
-  animation: process-card-enter-from-bottom 0.78s cubic-bezier(0.22, 1, 0.36, 1) both;
+.process-card.is-scroll-current {
+  opacity: 1;
+  transform: translateY(var(--process-current-offset)) scale(var(--process-current-scale));
+  transition: none;
 }
 
-.process-card.is-active.is-entering-backward {
-  animation: none;
+.process-card.is-scroll-next {
+  opacity: var(--process-next-opacity);
+  pointer-events: none;
+  transform: translateY(calc(var(--process-next-offset) + var(--process-next-gap))) scale(var(--process-next-scale));
   transition: none;
 }
 
@@ -4402,23 +4399,11 @@ body {
 }
 
 .process-scroll-trigger:last-child {
-  min-height: 8svh;
+  min-height: 62svh;
 }
 
 .process-release-sentinel {
   height: 1px;
-}
-
-@keyframes process-card-enter-from-bottom {
-  0% {
-    transform: translateY(calc(100% + 1.5rem)) scale(0.985);
-  }
-  72% {
-    transform: translateY(-0.35rem) scale(1.002);
-  }
-  100% {
-    transform: translateY(0) scale(1);
-  }
 }
 
 .process-card::after {
@@ -4496,7 +4481,7 @@ body {
   }
 
   .process-scroll-trigger:last-child {
-    min-height: 10svh;
+    min-height: 68svh;
   }
 
 

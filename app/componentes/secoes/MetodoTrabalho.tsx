@@ -43,34 +43,51 @@ const etapasDoProcesso = [
 
 export function MetodoTrabalho() {
   const listaDeCards = useRef<HTMLDivElement>(null);
-  const [indiceAtivo, setIndiceAtivo] = useState(0);
-  const [direcaoDeEntrada, setDirecaoDeEntrada] = useState<"forward" | "backward" | null>(null);
+  const quadroDeLeituraRef = useRef<number | null>(null);
+  const [progressoDoProcesso, setProgressoDoProcesso] = useState(0);
   const [cardFinalLiberado, setCardFinalLiberado] = useState(false);
 
   useEffect(() => {
     const gatilhos = listaDeCards.current?.querySelectorAll<HTMLElement>("[data-process-index]");
     if (!gatilhos?.length) return;
 
-    const observador = new IntersectionObserver(
-      (entradas) => {
-        for (const entrada of entradas) {
-          if (entrada.isIntersecting) {
-            const proximoIndice = Number((entrada.target as HTMLElement).dataset.processIndex);
+    const atualizarDestinoPeloScroll = () => {
+      quadroDeLeituraRef.current = null;
+      const linhaDeAtivacao = window.scrollY + window.innerHeight * 0.5;
+      const alturaDoCard = listaDeCards.current?.querySelector<HTMLElement>(".process-card-stack")?.offsetHeight ?? 0;
+      const espacoDeLeitura = alturaDoCard * 0.75;
+      const posicoes = Array.from(
+        gatilhos,
+        (gatilho) => gatilho.getBoundingClientRect().top + window.scrollY + espacoDeLeitura,
+      );
+      let progresso = 0;
 
-            setIndiceAtivo((indiceAtual) => {
-              if (proximoIndice === indiceAtual) return indiceAtual;
+      if (linhaDeAtivacao >= posicoes.at(-1)!) {
+        progresso = etapasDoProcesso.length - 1;
+      } else if (linhaDeAtivacao > posicoes[0]) {
+        const indiceBase = posicoes.findIndex((posicao) => posicao > linhaDeAtivacao) - 1;
+        const inicio = posicoes[indiceBase];
+        const fim = posicoes[indiceBase + 1];
+        progresso = indiceBase + (linhaDeAtivacao - inicio) / (fim - inicio);
+      }
 
-              setDirecaoDeEntrada(proximoIndice > indiceAtual ? "forward" : "backward");
-              return proximoIndice;
-            });
-          }
-        }
-      },
-      { rootMargin: "-42% 0px -42% 0px", threshold: 0.01 },
-    );
+      setProgressoDoProcesso(progresso);
+    };
 
-    gatilhos.forEach((gatilho) => observador.observe(gatilho));
-    return () => observador.disconnect();
+    const agendarLeitura = () => {
+      if (quadroDeLeituraRef.current !== null) return;
+      quadroDeLeituraRef.current = window.requestAnimationFrame(atualizarDestinoPeloScroll);
+    };
+
+    atualizarDestinoPeloScroll();
+    window.addEventListener("scroll", agendarLeitura, { passive: true });
+    window.addEventListener("resize", agendarLeitura);
+
+    return () => {
+      window.removeEventListener("scroll", agendarLeitura);
+      window.removeEventListener("resize", agendarLeitura);
+      if (quadroDeLeituraRef.current !== null) window.cancelAnimationFrame(quadroDeLeituraRef.current);
+    };
   }, []);
 
   useEffect(() => {
@@ -85,6 +102,11 @@ export function MetodoTrabalho() {
     observador.observe(limiteDaSecao);
     return () => observador.disconnect();
   }, []);
+
+  const ultimoIndice = etapasDoProcesso.length - 1;
+  const indiceBase = Math.min(ultimoIndice, Math.floor(progressoDoProcesso));
+  const progressoDaTroca = indiceBase === ultimoIndice ? 0 : progressoDoProcesso - indiceBase;
+  const indiceVisivel = progressoDaTroca >= 0.5 ? indiceBase + 1 : indiceBase;
 
   return (
     <section id="metodo" className="process-cards-section section-pad section-transition relative">
@@ -101,23 +123,50 @@ export function MetodoTrabalho() {
 
         <div
           ref={listaDeCards}
-          className={`process-cards-list${cardFinalLiberado && indiceAtivo === etapasDoProcesso.length - 1 ? " is-final-card-released" : ""}`}
+          className={`process-cards-list${cardFinalLiberado && indiceBase === ultimoIndice ? " is-final-card-released" : ""}`}
         >
           <div className="process-card-stack">
-            {etapasDoProcesso.map((etapa, indice) => (
-              <article
-                className={`process-card ${indice === indiceAtivo ? "is-active" : indice < indiceAtivo ? "is-past" : "is-future"}${indice === indiceAtivo && direcaoDeEntrada ? ` is-entering-${direcaoDeEntrada}` : ""}`}
-                key={etapa.titulo}
-                aria-hidden={indice !== indiceAtivo}
-                style={{ zIndex: indice === indiceAtivo ? 3 : 2 } as CSSProperties}
-              >
-                <div className="process-card-copy">
-                  <h3>{etapa.titulo}</h3>
-                  <p>{etapa.descricao}</p>
-                </div>
-                <img src={caminhoDoAsset(etapa.imagem)} alt={etapa.alt} className="process-card-illustration" />
-              </article>
-            ))}
+            {etapasDoProcesso.map((etapa, indice) => {
+              const eCardBase = indice === indiceBase;
+              const eProximoCard = indice === indiceBase + 1 && indiceBase < ultimoIndice;
+              const classeVisual = eCardBase
+                ? "is-active is-scroll-current"
+                : eProximoCard
+                  ? "is-scroll-next"
+                  : indice < indiceBase
+                    ? "is-past"
+                    : "is-future";
+              const estiloDoCard = eCardBase
+                ? {
+                    zIndex: 3,
+                    "--process-current-offset": `${-1.25 * progressoDaTroca}rem`,
+                    "--process-current-scale": 1 - 0.01 * progressoDaTroca,
+                  }
+                : eProximoCard
+                  ? {
+                      zIndex: 4,
+                      "--process-next-offset": `${(1 - progressoDaTroca) * 100}%`,
+                      "--process-next-gap": `${(1 - progressoDaTroca) * 1.5}rem`,
+                      "--process-next-scale": 0.985 + 0.015 * progressoDaTroca,
+                      "--process-next-opacity": Math.min(1, progressoDaTroca * 4),
+                    }
+                  : { zIndex: 1 };
+
+              return (
+                <article
+                  className={`process-card ${classeVisual}`}
+                  key={etapa.titulo}
+                  aria-hidden={indice !== indiceVisivel}
+                  style={estiloDoCard as CSSProperties}
+                >
+                  <div className="process-card-copy">
+                    <h3>{etapa.titulo}</h3>
+                    <p>{etapa.descricao}</p>
+                  </div>
+                  <img src={caminhoDoAsset(etapa.imagem)} alt={etapa.alt} className="process-card-illustration" />
+                </article>
+              );
+            })}
           </div>
 
           <div className="process-scroll-triggers" aria-hidden="true">
