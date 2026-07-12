@@ -22,7 +22,7 @@ export function Cabecalho() {
       <div className="site-header-shell">
         <div className="site-header-content">
           <a href="#top" className="site-header-brand" aria-label="Voltar ao início">
-            <img src={caminhoDoAsset("/images/logo-xe-mark-light.svg")} alt="" className="h-8 w-auto" />
+            <img src={caminhoDoAsset("/images/logo-xe-mark.svg")} alt="" className="h-8 w-auto" />
           </a>
           <nav className="site-header-nav" aria-label="Navegação principal">
             {linksNavegacao.map((link) => (

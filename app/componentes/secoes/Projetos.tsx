@@ -24,6 +24,7 @@ export function Projetos() {
 
   return (
     <section id="projetos" className="projects-dossier-section section-pad section-transition relative overflow-hidden text-contrast-ink">
+      <div className="section-wave-out wave-to-dark" aria-hidden="true" />
       <div className="container-x relative z-10">
         <RevelarAoRolar className="projects-dossier-heading">
           <div className="section-icon-label">

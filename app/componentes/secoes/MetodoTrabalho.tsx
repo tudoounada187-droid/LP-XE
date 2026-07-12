@@ -1,127 +1,104 @@
 import { Code2, FileText, Palette, Rocket, Route, SlidersHorizontal } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { Fragment, useState } from "react";
-import { RevelarAoRolar } from "@/componentes/animacoes/RevelarAoRolar";
+import { motion, useMotionValueEvent, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import { useRef, useState } from "react";
 import { etapasMetodo, formatosMetodo } from "@/dados/metodoTrabalho";
 import { classes } from "@/utilitarios/classes";
 
 const iconesEtapas = [FileText, Palette, Code2, Rocket, SlidersHorizontal];
-const easeEditorial = [0.22, 1, 0.36, 1] as const;
 
 export function MetodoTrabalho() {
-  const [indiceAtivo, setIndiceAtivo] = useState(0);
   const reduzirMovimento = useReducedMotion();
-  const etapaAtiva = etapasMetodo[indiceAtivo];
-  const progresso = `${(indiceAtivo / (etapasMetodo.length - 1)) * 84}%`;
+  const jornadaRef = useRef<HTMLDivElement>(null);
+  const [indiceAtivo, setIndiceAtivo] = useState(0);
+  const { scrollYProgress } = useScroll({
+    target: jornadaRef,
+    offset: ["start 74%", "end 54%"],
+  });
+  const progressoSuave = useSpring(scrollYProgress, { stiffness: 46, damping: 22, mass: 0.92, restDelta: 0.0005 });
+  const alturaRevelada = useTransform(progressoSuave, [0, 1], [0, 1000]);
 
-  function mudarEtapa(indice: number) {
-    setIndiceAtivo(indice);
-  }
-
-  function navegarEntreEtapas(indice: number, direcao: number) {
-    const proximo = (indice + direcao + etapasMetodo.length) % etapasMetodo.length;
-    mudarEtapa(proximo);
-    document.getElementById(`process-step-${proximo}`)?.focus();
-  }
+  useMotionValueEvent(progressoSuave, "change", (progresso) => {
+    const proximaEtapa = Math.min(etapasMetodo.length - 1, Math.round(progresso * (etapasMetodo.length - 1)));
+    setIndiceAtivo((etapaAtual) => (etapaAtual === proximaEtapa ? etapaAtual : proximaEtapa));
+  });
 
   return (
     <section id="metodo" className="process-route-section section-pad section-transition relative overflow-hidden text-contrast-ink">
       <div className="section-wave-out wave-to-lavender" aria-hidden="true" />
       <div className="container-x relative z-10">
-        <RevelarAoRolar className="process-route-heading">
-          <div className="section-icon-label">
-            <Route aria-hidden="true" />
-            <span>Processo</span>
-          </div>
-          <h2>Da conversa inicial à primeira versão publicada</h2>
-          <p>Cada etapa reduz incertezas e deixa o próximo movimento claro até a publicação.</p>
-        </RevelarAoRolar>
+        <div className="process-amphora-panel process-journey-panel">
+          <header className="process-route-heading process-journey-heading">
+            <div className="section-icon-label">
+              <Route aria-hidden="true" />
+              <span>Processo</span>
+            </div>
+            <h2>Do primeiro contexto <em>à entrega que entra em movimento.</em></h2>
+            <p>Role para acompanhar cada decisão, entrega e ponto de validação até a publicação.</p>
+          </header>
 
-        <RevelarAoRolar atraso={0.08}>
-          <div className="process-route" role="tablist" aria-label="Etapas do processo" style={{ "--route-progress": progresso } as React.CSSProperties}>
+          <div ref={jornadaRef} className="process-journey" role="list" aria-label="Etapas do processo">
+            <svg className="process-journey-path" viewBox="0 0 100 1000" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="process-journey-gradient" x1="18" x2="82" y1="0" y2="1000" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#3C3BFF" />
+                  <stop offset="52%" stopColor="#7776FF" />
+                  <stop offset="100%" stopColor="#A460FF" />
+                </linearGradient>
+                <mask id="process-journey-reveal" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="1000">
+                  <motion.rect
+                    x="0"
+                    y="0"
+                    width="100"
+                    height={reduzirMovimento ? 1000 : alturaRevelada}
+                    fill="#FFFFFF"
+                  />
+                </mask>
+              </defs>
+              <path className="process-journey-path-base" d="M47 0 C69 88 72 170 46 250 C23 322 25 407 48 480 C71 553 72 638 47 710 C24 783 27 890 46 1000 L54 1000 C35 890 34 783 57 710 C82 638 81 553 58 480 C35 407 34 322 57 250 C82 170 81 88 53 0 Z" />
+              <path className="process-journey-path-glow" mask="url(#process-journey-reveal)" d="M47 0 C69 88 72 170 46 250 C23 322 25 407 48 480 C71 553 72 638 47 710 C24 783 27 890 46 1000 L54 1000 C35 890 34 783 57 710 C82 638 81 553 58 480 C35 407 34 322 57 250 C82 170 81 88 53 0 Z" />
+              <path className="process-journey-path-active" mask="url(#process-journey-reveal)" d="M47 0 C69 88 72 170 46 250 C23 322 25 407 48 480 C71 553 72 638 47 710 C24 783 27 890 46 1000 L54 1000 C35 890 34 783 57 710 C82 638 81 553 58 480 C35 407 34 322 57 250 C82 170 81 88 53 0 Z" />
+            </svg>
+
             {etapasMetodo.map((etapa, indice) => {
               const Icone = iconesEtapas[indice];
               const estaAtiva = indice === indiceAtivo;
 
               return (
-                <Fragment key={etapa.titulo}>
-                  <button
-                    id={`process-step-${indice}`}
-                    type="button"
-                    role="tab"
-                    aria-selected={estaAtiva}
-                    aria-controls="process-active-detail"
-                    className={classes("process-route-step", estaAtiva && "is-active")}
-                    onClick={() => mudarEtapa(indice)}
-                    onMouseEnter={() => mudarEtapa(indice)}
-                    onKeyDown={(evento) => {
-                      if (evento.key === "ArrowRight" || evento.key === "ArrowDown") {
-                        evento.preventDefault();
-                        navegarEntreEtapas(indice, 1);
-                      }
-
-                      if (evento.key === "ArrowLeft" || evento.key === "ArrowUp") {
-                        evento.preventDefault();
-                        navegarEntreEtapas(indice, -1);
-                      }
-                    }}
+                <article key={etapa.titulo} role="listitem" className={classes("process-journey-stop", indice % 2 ? "is-right" : "is-left", estaAtiva && "is-active")}>
+                  <motion.span
+                    className="process-journey-node"
+                    animate={{ scale: estaAtiva ? 1 : 0.78, opacity: estaAtiva ? 1 : 0.58 }}
+                    transition={{ type: "spring", stiffness: 180, damping: 20, mass: 0.6 }}
                   >
-                    <span className="process-route-number">{String(indice + 1).padStart(2, "0")}</span>
-                    <span className="process-route-node"><Icone aria-hidden="true" /></span>
-                    <strong>{etapa.titulo}</strong>
-                  </button>
-
-                  {estaAtiva ? (
-                    <AnimatePresence initial={false}>
-                      <motion.article
-                        key={etapa.titulo}
-                        className="process-detail process-detail-mobile"
-                        initial={reduzirMovimento ? { opacity: 0 } : { opacity: 0, y: 12, filter: "blur(4px)" }}
-                        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: reduzirMovimento ? 0.12 : 0.34, ease: easeEditorial }}
-                      >
-                        <p>Saída da etapa</p>
-                        <h3>{etapa.titulo}</h3>
-                        <span>{etapa.descricao}</span>
-                        <strong>{etapa.resultado}</strong>
-                      </motion.article>
-                    </AnimatePresence>
-                  ) : null}
-                </Fragment>
+                    <Icone aria-hidden="true" />
+                  </motion.span>
+                  <motion.div
+                    className="process-journey-bubble"
+                    initial={reduzirMovimento ? false : { opacity: 0, y: 24, filter: "blur(8px)" }}
+                    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    viewport={{ amount: 0.5, once: true }}
+                    transition={{ duration: reduzirMovimento ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <span className="process-journey-kicker">Etapa {String(indice + 1).padStart(2, "0")}</span>
+                    <h3>{etapa.titulo}</h3>
+                    <p>{etapa.descricao}</p>
+                    <strong><span>Entrega</span>{etapa.resultado}</strong>
+                  </motion.div>
+                </article>
               );
             })}
           </div>
 
-          <AnimatePresence initial={false} mode="wait">
-            <motion.article
-              key={etapaAtiva.titulo}
-              id="process-active-detail"
-              role="tabpanel"
-              aria-labelledby={`process-step-${indiceAtivo}`}
-              className="process-detail process-detail-desktop"
-              initial={reduzirMovimento ? { opacity: 0 } : { opacity: 0, y: 14, filter: "blur(4px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: reduzirMovimento ? 0.12 : 0.36, ease: easeEditorial }}
-            >
-              <p>Etapa {String(indiceAtivo + 1).padStart(2, "0")}</p>
-              <h3>{etapaAtiva.titulo}</h3>
-              <span>{etapaAtiva.descricao}</span>
-              <strong>{etapaAtiva.resultado}</strong>
-            </motion.article>
-          </AnimatePresence>
-        </RevelarAoRolar>
-
-        <RevelarAoRolar atraso={0.12} className="process-principles">
-          {formatosMetodo.map((formato, indice) => (
-            <article key={formato.titulo}>
-              <span>{String(indice + 1).padStart(2, "0")}</span>
-              <h3>{formato.titulo}</h3>
-              <p>{formato.descricao}</p>
-            </article>
-          ))}
-        </RevelarAoRolar>
+          <div className="process-journey-principles">
+            {formatosMetodo.map((formato, indice) => (
+              <article key={formato.titulo}>
+                <span>{String(indice + 1).padStart(2, "0")}</span>
+                <h3>{formato.titulo}</h3>
+                <p>{formato.descricao}</p>
+              </article>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
