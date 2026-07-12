@@ -4313,7 +4313,14 @@ body {
   top: max(5.75rem, 16svh);
   height: var(--process-card-height);
   isolation: isolate;
+  transition: opacity 0.22s ease, transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 3;
+}
+
+.process-cards-list.is-final-card-released .process-card-stack {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-2rem);
 }
 
 .process-card-stack::before,
@@ -4396,6 +4403,10 @@ body {
 
 .process-scroll-trigger:last-child {
   min-height: 8svh;
+}
+
+.process-release-sentinel {
+  height: 1px;
 }
 
 @keyframes process-card-enter-from-bottom {

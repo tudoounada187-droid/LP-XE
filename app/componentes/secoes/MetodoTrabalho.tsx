@@ -45,6 +45,7 @@ export function MetodoTrabalho() {
   const listaDeCards = useRef<HTMLDivElement>(null);
   const [indiceAtivo, setIndiceAtivo] = useState(0);
   const [direcaoDeEntrada, setDirecaoDeEntrada] = useState<"forward" | "backward" | null>(null);
+  const [cardFinalLiberado, setCardFinalLiberado] = useState(false);
 
   useEffect(() => {
     const gatilhos = listaDeCards.current?.querySelectorAll<HTMLElement>("[data-process-index]");
@@ -72,6 +73,19 @@ export function MetodoTrabalho() {
     return () => observador.disconnect();
   }, []);
 
+  useEffect(() => {
+    const limiteDaSecao = listaDeCards.current?.querySelector<HTMLElement>(".process-release-sentinel");
+    if (!limiteDaSecao) return;
+
+    const observador = new IntersectionObserver(
+      ([entrada]) => setCardFinalLiberado(entrada.isIntersecting),
+      { rootMargin: "0px 0px -32% 0px", threshold: 0 },
+    );
+
+    observador.observe(limiteDaSecao);
+    return () => observador.disconnect();
+  }, []);
+
   return (
     <section id="metodo" className="process-cards-section section-pad section-transition relative">
       <div className="section-wave-out wave-to-lavender" aria-hidden="true" />
@@ -85,7 +99,10 @@ export function MetodoTrabalho() {
           <p>Uma sequência simples, com contexto, decisões claras e acompanhamento até a entrega final.</p>
         </header>
 
-        <div ref={listaDeCards} className="process-cards-list">
+        <div
+          ref={listaDeCards}
+          className={`process-cards-list${cardFinalLiberado && indiceAtivo === etapasDoProcesso.length - 1 ? " is-final-card-released" : ""}`}
+        >
           <div className="process-card-stack">
             {etapasDoProcesso.map((etapa, indice) => (
               <article
@@ -108,6 +125,7 @@ export function MetodoTrabalho() {
               <div key={etapa.titulo} className="process-scroll-trigger" data-process-index={indice} />
             ))}
           </div>
+          <div className="process-release-sentinel" aria-hidden="true" />
         </div>
       </div>
     </section>
