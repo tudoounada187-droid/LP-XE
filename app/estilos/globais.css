@@ -889,6 +889,29 @@ html {
   min-height: clamp(36rem, 48vw, 43rem);
   background: #020204;
   color: #FFFFFF;
+  isolation: isolate;
+  z-index: 1;
+}
+
+.briefing-section::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  height: clamp(6rem, 11vw, 10rem);
+  background: linear-gradient(180deg, #050505 0%, rgba(5,5,5,0.86) 28%, rgba(5,5,5,0) 100%);
+  pointer-events: none;
+}
+
+.briefing-wave-in {
+  position: absolute;
+  inset-inline: -1%;
+  top: calc(-1 * clamp(5.5rem, 10vw, 9rem));
+  z-index: 3;
+  width: 102%;
+  height: clamp(5.5rem, 10vw, 9rem);
+  background: url("../../public/images/section-wave-to-dark.svg") center / 100% 100% no-repeat;
+  pointer-events: none;
 }
 
 .briefing-glows {
@@ -1704,7 +1727,7 @@ body {
 }
 
 .footer-editorial {
-  background: #050505;
+  background: #020204;
 }
 
 .mobile-quote-cta {
@@ -2679,7 +2702,7 @@ body {
     radial-gradient(circle at 18% 90%, rgba(151,85,255,0.25), transparent 25rem),
     linear-gradient(180deg, #E8D6FF 0%, #E4CEFF 100%);
   color: #08080B;
-  padding-block: 10rem 12rem;
+  padding-block: 10rem clamp(6rem, 8vw, 8rem);
 }
 
 .faq-heading {
@@ -2875,7 +2898,7 @@ body {
 
 @media (max-width: 767px) {
   .faq-section {
-    padding-block: 6rem 8rem;
+    padding-block: 6rem 5rem;
   }
 
   .faq-heading {

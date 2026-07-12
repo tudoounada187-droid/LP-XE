@@ -38,7 +38,6 @@ export function PerguntasFrequentes() {
 
   return (
     <section id="faq" className="faq-section section-pad section-transition relative overflow-hidden">
-      <div className="section-wave-out wave-to-dark" aria-hidden="true" />
       <div className="container-x relative z-10">
         <RevelarAoRolar className="faq-heading">
           <div className="faq-label">
