@@ -7,6 +7,7 @@ const linksNavegacao = [
   { label: "Serviços", href: "#entregas" },
   { label: "Processo", href: "#metodo" },
   { label: "FAQ", href: "#faq" },
+  { label: "Contato", href: "#briefing" },
 ];
 
 export function Cabecalho() {
@@ -32,8 +33,7 @@ export function Cabecalho() {
             ))}
           </nav>
           <BotaoConversar href="#briefing" className="site-header-cta">
-            <span className="site-header-cta-light" aria-hidden="true" />
-            <span className="site-header-cta-text">Vamos conversar</span>
+            <span className="site-header-cta-text">Vamos Trabalhar Juntos</span>
           </BotaoConversar>
         </div>
       </div>

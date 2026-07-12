@@ -4077,6 +4077,144 @@ body {
   letter-spacing: 0.005em;
 }
 
+/* Navbar escura e hero com a aurora fornecida para a direção visual atual. */
+.site-header {
+  top: 0;
+  background: rgba(5, 5, 13, 0.94);
+  border-bottom: 1px solid rgba(177, 136, 255, 0.16);
+  backdrop-filter: blur(16px);
+}
+
+.site-header-shell {
+  width: 100%;
+  height: 4.45rem;
+  max-width: none;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.site-header-shell::before {
+  content: none;
+}
+
+.site-header-content {
+  width: min(calc(100% - 3rem), 960px);
+  max-width: none;
+  height: 100%;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 3rem);
+  padding: 0;
+}
+
+.site-header-brand {
+  flex: 0 0 auto;
+  padding: 0;
+}
+
+.site-header-brand img {
+  height: 1.8rem;
+  filter: brightness(0) invert(1);
+}
+
+.site-header-nav {
+  display: inline-flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  gap: clamp(0.85rem, 2vw, 1.55rem);
+  background: transparent;
+  padding: 0;
+}
+
+.site-header-nav a,
+.site-header-nav a:hover {
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: rgba(255,255,255,0.72);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  padding: 0.35rem 0;
+  text-transform: none;
+  transform: none;
+}
+
+.site-header-nav a:hover,
+.site-header-nav a:focus-visible {
+  color: #FFFFFF;
+  outline: none;
+}
+
+.site-header-cta,
+.site-header-cta:hover {
+  width: auto;
+  min-width: 0;
+  min-height: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 999px;
+  background: #FFFFFF;
+  box-shadow: none;
+  color: #090812;
+  font-size: 0.68rem;
+  font-weight: 650;
+  padding: 0.35rem 0.9rem;
+  transform: none;
+}
+
+.site-header-cta::before,
+.site-header-cta::after {
+  content: none;
+}
+
+.site-header-cta-text {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.hero-amphora {
+  background-color: #080713;
+  background-image:
+    linear-gradient(90deg, rgba(2,2,8,0.2) 0%, rgba(8,4,23,0.04) 50%, rgba(9,5,28,0.25) 100%),
+    url("../../public/images/hero-aurora.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hero-amphora::before {
+  opacity: 0.28;
+  background:
+    linear-gradient(180deg, rgba(2,2,8,0.04) 45%, rgba(2,2,8,0.44) 100%),
+    linear-gradient(90deg, rgba(4,3,14,0.18), transparent 40%, rgba(29,10,65,0.14));
+}
+
+@media (max-width: 860px) {
+  .site-header-content {
+    width: calc(100% - 2rem);
+    gap: 1rem;
+  }
+
+  .site-header-nav {
+    gap: 0.75rem;
+  }
+
+  .site-header-nav a {
+    font-size: 0.66rem;
+  }
+
+  .site-header-cta {
+    font-size: 0.62rem;
+    padding-inline: 0.72rem;
+  }
+}
+
 @media (max-width: 767px) {
   .hero-browser-scene { min-height: 21rem; perspective: 1000px; }
   .hero-browser-depth { inset: 0.8rem -0.7rem -0.9rem 0.9rem; border-radius: 1.15rem; transform: translate3d(0.5rem, 0.65rem, -3rem) rotateY(-8deg) rotateX(3deg); }
