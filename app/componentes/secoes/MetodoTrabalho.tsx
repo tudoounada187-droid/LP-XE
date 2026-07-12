@@ -44,6 +44,7 @@ const etapasDoProcesso = [
 export function MetodoTrabalho() {
   const listaDeCards = useRef<HTMLDivElement>(null);
   const [indiceAtivo, setIndiceAtivo] = useState(0);
+  const [direcaoDeEntrada, setDirecaoDeEntrada] = useState<"forward" | "backward" | null>(null);
 
   useEffect(() => {
     const gatilhos = listaDeCards.current?.querySelectorAll<HTMLElement>("[data-process-index]");
@@ -53,7 +54,14 @@ export function MetodoTrabalho() {
       (entradas) => {
         for (const entrada of entradas) {
           if (entrada.isIntersecting) {
-            setIndiceAtivo(Number((entrada.target as HTMLElement).dataset.processIndex));
+            const proximoIndice = Number((entrada.target as HTMLElement).dataset.processIndex);
+
+            setIndiceAtivo((indiceAtual) => {
+              if (proximoIndice === indiceAtual) return indiceAtual;
+
+              setDirecaoDeEntrada(proximoIndice > indiceAtual ? "forward" : "backward");
+              return proximoIndice;
+            });
           }
         }
       },
@@ -81,7 +89,7 @@ export function MetodoTrabalho() {
           <div className="process-card-stack">
             {etapasDoProcesso.map((etapa, indice) => (
               <article
-                className={`process-card ${indice === indiceAtivo ? "is-active" : indice < indiceAtivo ? "is-past" : "is-future"}`}
+                className={`process-card ${indice === indiceAtivo ? "is-active" : indice < indiceAtivo ? "is-past" : "is-future"}${indice === indiceAtivo && direcaoDeEntrada ? ` is-entering-${direcaoDeEntrada}` : ""}`}
                 key={etapa.titulo}
                 aria-hidden={indice !== indiceAtivo}
                 style={{ zIndex: indice === indiceAtivo ? 3 : 2 } as CSSProperties}

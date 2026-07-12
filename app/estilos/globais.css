@@ -4313,8 +4313,6 @@ body {
   top: max(5.75rem, 16svh);
   height: var(--process-card-height);
   isolation: isolate;
-  overflow: hidden;
-  border-radius: 1.35rem;
   z-index: 3;
 }
 
@@ -4362,10 +4360,17 @@ body {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0) scale(1);
-  animation: process-card-enter 0.78s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition:
     transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.18s ease;
+}
+
+.process-card.is-active.is-entering-forward {
+  animation: process-card-enter-from-bottom 0.78s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.process-card.is-active.is-entering-backward {
+  animation: process-card-enter-from-top 0.78s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .process-card.is-past {
@@ -4375,7 +4380,7 @@ body {
 }
 
 .process-card.is-future {
-  opacity: 1;
+  opacity: 0;
   pointer-events: none;
   transform: translateY(calc(100% + 1.5rem)) scale(0.985);
 }
@@ -4389,15 +4394,27 @@ body {
 }
 
 .process-scroll-trigger:last-child {
-  min-height: 28svh;
+  min-height: 8svh;
 }
 
-@keyframes process-card-enter {
+@keyframes process-card-enter-from-bottom {
   0% {
     transform: translateY(calc(100% + 1.5rem)) scale(0.985);
   }
   72% {
     transform: translateY(-0.35rem) scale(1.002);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes process-card-enter-from-top {
+  0% {
+    transform: translateY(calc(-100% - 1.5rem)) scale(0.985);
+  }
+  72% {
+    transform: translateY(0.35rem) scale(1.002);
   }
   100% {
     transform: translateY(0) scale(1);
@@ -4461,7 +4478,6 @@ body {
 
   .process-card-stack {
     top: max(1rem, 10svh);
-    border-radius: 1.1rem;
   }
 
   .process-card {
@@ -4480,7 +4496,7 @@ body {
   }
 
   .process-scroll-trigger:last-child {
-    min-height: 38svh;
+    min-height: 10svh;
   }
 
 
