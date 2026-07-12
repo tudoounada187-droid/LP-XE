@@ -4203,12 +4203,13 @@ body {
 .process-cards-list {
   margin-top: clamp(3.5rem, 7vw, 6rem);
   position: relative;
-  padding-bottom: min(30vh, 20rem);
+  padding-bottom: clamp(40rem, 120svh, 62rem);
 }
 
 .process-card {
+  --process-stack-offset: 0px;
   position: sticky;
-  top: max(5.75rem, calc(50svh - 9rem));
+  top: calc(max(5.75rem, 16svh) + var(--process-stack-offset));
   display: grid;
   min-height: clamp(15rem, 22vw, 18rem);
   grid-template-columns: minmax(0, 0.9fr) minmax(16rem, 1.1fr);
@@ -4218,15 +4219,18 @@ body {
   border: 1px solid rgba(10,10,16,0.05);
   border-radius: 1.35rem;
   background: #FFFFFF;
-  box-shadow: 0 0.8rem 2.2rem rgba(21,19,31,0.07);
+  box-shadow:
+    0 0.8rem 2.2rem rgba(21,19,31,0.08),
+    0 1.1rem 0 -0.28rem rgba(255,255,255,0.72),
+    0 1.7rem 0 -0.58rem rgba(255,255,255,0.44);
   padding: clamp(1.75rem, 4.5vw, 3.8rem);
-  margin-bottom: clamp(15rem, 29vh, 22rem);
+  margin-bottom: clamp(13rem, 25svh, 19rem);
   transform-origin: center center;
   will-change: transform, opacity;
 }
 
 .process-card:last-child {
-  margin-bottom: 0;
+  margin-bottom: clamp(14rem, 32svh, 23rem);
 }
 
 .process-card::after {
@@ -4280,16 +4284,25 @@ body {
 
   .process-cards-list {
     margin-top: 3rem;
+    padding-bottom: 42rem;
   }
 
   .process-card {
-    top: max(1rem, calc(50svh - 13rem));
+    top: calc(max(1rem, 10svh) + var(--process-stack-offset));
     min-height: 0;
     grid-template-columns: 1fr;
     gap: 1.6rem;
     border-radius: 1.1rem;
     padding: 1.7rem;
-    margin-bottom: 22rem;
+    margin-bottom: 17rem;
+    box-shadow:
+      0 0.8rem 1.8rem rgba(21,19,31,0.08),
+      0 0.85rem 0 -0.22rem rgba(255,255,255,0.72),
+      0 1.3rem 0 -0.48rem rgba(255,255,255,0.44);
+  }
+
+  .process-card:last-child {
+    margin-bottom: 13rem;
   }
 
   .process-card-copy h3 {

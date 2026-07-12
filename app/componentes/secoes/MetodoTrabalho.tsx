@@ -1,5 +1,4 @@
 import { Route } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
 import type { CSSProperties } from "react";
 import { caminhoDoAsset } from "@/utilitarios/assets";
 
@@ -43,8 +42,6 @@ const etapasDoProcesso = [
 ] as const;
 
 export function MetodoTrabalho() {
-  const reduzirMovimento = useReducedMotion();
-
   return (
     <section id="metodo" className="process-cards-section section-pad section-transition relative">
       <div className="section-wave-out wave-to-lavender" aria-hidden="true" />
@@ -60,21 +57,22 @@ export function MetodoTrabalho() {
 
         <div className="process-cards-list">
           {etapasDoProcesso.map((etapa, indice) => (
-            <motion.article
+            <article
               className="process-card"
               key={etapa.titulo}
-              style={{ zIndex: indice + 1 } as CSSProperties}
-              initial={reduzirMovimento ? false : { opacity: 0, y: 64, scale: 0.96 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ amount: 0.52, once: true }}
-              transition={{ duration: reduzirMovimento ? 0 : 0.78, ease: [0.22, 1, 0.36, 1] }}
+              style={
+                {
+                  zIndex: indice + 1,
+                  "--process-stack-offset": `${indice * 10}px`,
+                } as CSSProperties
+              }
             >
               <div className="process-card-copy">
                 <h3>{etapa.titulo}</h3>
                 <p>{etapa.descricao}</p>
               </div>
               <img src={caminhoDoAsset(etapa.imagem)} alt={etapa.alt} className="process-card-illustration" />
-            </motion.article>
+            </article>
           ))}
         </div>
       </div>
