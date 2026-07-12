@@ -1,5 +1,5 @@
 import { Route } from "lucide-react";
-import { useEffect, useRef, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { caminhoDoAsset } from "@/utilitarios/assets";
 
 const etapasDoProcesso = [
@@ -43,23 +43,24 @@ const etapasDoProcesso = [
 
 export function MetodoTrabalho() {
   const listaDeCards = useRef<HTMLDivElement>(null);
+  const [indiceAtivo, setIndiceAtivo] = useState(0);
 
   useEffect(() => {
-    const lista = listaDeCards.current;
-    const ultimoCard = lista?.querySelector<HTMLElement>(".process-card:last-child");
-
-    if (!lista || !ultimoCard) {
-      return;
-    }
+    const gatilhos = listaDeCards.current?.querySelectorAll<HTMLElement>("[data-process-index]");
+    if (!gatilhos?.length) return;
 
     const observador = new IntersectionObserver(
-      ([entrada]) => {
-        lista.classList.toggle("is-final-card-visible", entrada.isIntersecting);
+      (entradas) => {
+        for (const entrada of entradas) {
+          if (entrada.isIntersecting) {
+            setIndiceAtivo(Number((entrada.target as HTMLElement).dataset.processIndex));
+          }
+        }
       },
-      { threshold: 0.01 },
+      { rootMargin: "-42% 0px -42% 0px", threshold: 0.01 },
     );
 
-    observador.observe(ultimoCard);
+    gatilhos.forEach((gatilho) => observador.observe(gatilho));
     return () => observador.disconnect();
   }, []);
 
@@ -77,24 +78,28 @@ export function MetodoTrabalho() {
         </header>
 
         <div ref={listaDeCards} className="process-cards-list">
-          {etapasDoProcesso.map((etapa, indice) => (
-            <article
-              className="process-card"
-              key={etapa.titulo}
-              style={
-                {
-                  zIndex: indice + 1,
-                  "--process-stack-offset": `${indice * 10}px`,
-                } as CSSProperties
-              }
-            >
-              <div className="process-card-copy">
-                <h3>{etapa.titulo}</h3>
-                <p>{etapa.descricao}</p>
-              </div>
-              <img src={caminhoDoAsset(etapa.imagem)} alt={etapa.alt} className="process-card-illustration" />
-            </article>
-          ))}
+          <div className="process-card-stack">
+            {etapasDoProcesso.map((etapa, indice) => (
+              <article
+                className={`process-card ${indice === indiceAtivo ? "is-active" : indice < indiceAtivo ? "is-past" : "is-future"}`}
+                key={etapa.titulo}
+                aria-hidden={indice !== indiceAtivo}
+                style={{ zIndex: indice === indiceAtivo ? 3 : 2 } as CSSProperties}
+              >
+                <div className="process-card-copy">
+                  <h3>{etapa.titulo}</h3>
+                  <p>{etapa.descricao}</p>
+                </div>
+                <img src={caminhoDoAsset(etapa.imagem)} alt={etapa.alt} className="process-card-illustration" />
+              </article>
+            ))}
+          </div>
+
+          <div className="process-scroll-triggers" aria-hidden="true">
+            {etapasDoProcesso.map((etapa, indice) => (
+              <div key={etapa.titulo} className="process-scroll-trigger" data-process-index={indice} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -4102,7 +4102,7 @@ body {
 
 /* Navbar escura e hero com a aurora fornecida para a direção visual atual. */
 .site-header {
-  position: absolute;
+  position: fixed;
   top: 0;
   background: linear-gradient(90deg, rgba(4,4,13,0.52), rgba(19,8,53,0.26), rgba(4,4,13,0.52));
   border-bottom: 1px solid rgba(161,112,255,0.28);
@@ -4125,12 +4125,11 @@ body {
 }
 
 .site-header-content {
-  width: calc(100% - 3rem);
+  width: min(calc(100% - 3rem), 960px);
   max-width: none;
   height: 100%;
   margin-inline: auto;
   display: flex;
-  position: relative;
   align-items: center;
   gap: clamp(1.25rem, 3vw, 3rem);
   padding: 0;
@@ -4148,9 +4147,7 @@ body {
 
 .site-header-nav {
   display: inline-flex;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  flex: 1 1 auto;
   justify-content: center;
   gap: clamp(0.85rem, 2vw, 1.55rem);
   background: transparent;
@@ -4179,7 +4176,6 @@ body {
 
 .site-header-cta,
 .site-header-cta:hover {
-  margin-left: auto;
   width: auto;
   min-width: 0;
   min-height: 2rem;
@@ -4306,17 +4302,43 @@ body {
 }
 
 .process-cards-list {
+  --process-card-height: clamp(18rem, 28vw, 22rem);
   margin-top: clamp(3.5rem, 7vw, 6rem);
   position: relative;
-  padding-bottom: clamp(8rem, 12svh, 10rem);
+  padding-bottom: 0;
+}
+
+.process-card-stack {
+  position: sticky;
+  top: max(5.75rem, 16svh);
+  height: var(--process-card-height);
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 1.35rem;
+  z-index: 3;
+}
+
+.process-card-stack::before,
+.process-card-stack::after {
+  content: "";
+  position: absolute;
+  inset: 0.75rem 0.9rem -0.95rem;
+  z-index: 0;
+  border-radius: 1.35rem;
+  background: rgba(255,255,255,0.78);
+  box-shadow: 0 1.2rem 2.4rem rgba(21,19,31,0.06);
+}
+
+.process-card-stack::after {
+  inset: 0.38rem 0.45rem -0.48rem;
+  background: rgba(255,255,255,0.9);
 }
 
 .process-card {
-  --process-stack-offset: 0px;
-  position: sticky;
-  top: calc(max(5.75rem, 16svh) + var(--process-stack-offset));
+  position: absolute;
+  inset: 0;
   display: grid;
-  min-height: clamp(15rem, 22vw, 18rem);
+  min-height: 0;
   grid-template-columns: minmax(0, 0.9fr) minmax(16rem, 1.1fr);
   align-items: center;
   gap: clamp(1.5rem, 5vw, 5rem);
@@ -4329,20 +4351,57 @@ body {
     0 1.1rem 0 -0.28rem rgba(255,255,255,0.72),
     0 1.7rem 0 -0.58rem rgba(255,255,255,0.44);
   padding: clamp(1.75rem, 4.5vw, 3.8rem);
-  margin-bottom: clamp(13rem, 25svh, 19rem);
   transform-origin: center center;
-  transition: opacity 0.22s ease, visibility 0.22s step-end;
+  transition:
+    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.18s ease 0.34s;
   will-change: transform, opacity;
 }
 
-.process-card:last-child {
-  margin-bottom: 0;
+.process-card.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  animation: process-card-enter 0.78s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition:
+    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.18s ease;
 }
 
-.process-cards-list.is-final-card-visible .process-card:not(:last-child) {
+.process-card.is-past {
   opacity: 0;
   pointer-events: none;
-  visibility: hidden;
+  transform: translateY(-1.25rem) scale(0.99);
+}
+
+.process-card.is-future {
+  opacity: 1;
+  pointer-events: none;
+  transform: translateY(calc(100% + 1.5rem)) scale(0.985);
+}
+
+.process-scroll-triggers {
+  margin-top: calc(-1 * var(--process-card-height));
+}
+
+.process-scroll-trigger {
+  min-height: 78svh;
+}
+
+.process-scroll-trigger:last-child {
+  min-height: 28svh;
+}
+
+@keyframes process-card-enter {
+  0% {
+    transform: translateY(calc(100% + 1.5rem)) scale(0.985);
+  }
+  72% {
+    transform: translateY(-0.35rem) scale(1.002);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
 }
 
 .process-card::after {
@@ -4395,27 +4454,33 @@ body {
   }
 
   .process-cards-list {
+    --process-card-height: min(38rem, 78svh);
     margin-top: 3rem;
-    padding-bottom: 12rem;
+    padding-bottom: 0;
+  }
+
+  .process-card-stack {
+    top: max(1rem, 10svh);
+    border-radius: 1.1rem;
   }
 
   .process-card {
-    top: calc(max(1rem, 10svh) + var(--process-stack-offset));
-    min-height: 0;
     grid-template-columns: 1fr;
     gap: 1.6rem;
     border-radius: 1.1rem;
     padding: 1.7rem;
-    margin-bottom: 17rem;
     box-shadow:
       0 0.8rem 1.8rem rgba(21,19,31,0.08),
       0 0.85rem 0 -0.22rem rgba(255,255,255,0.72),
       0 1.3rem 0 -0.48rem rgba(255,255,255,0.44);
-    margin-bottom: 17rem;
   }
 
-  .process-card:last-child {
-    margin-bottom: 0;
+  .process-scroll-trigger {
+    min-height: 92svh;
+  }
+
+  .process-scroll-trigger:last-child {
+    min-height: 38svh;
   }
 
 
