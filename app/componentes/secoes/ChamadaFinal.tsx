@@ -40,6 +40,12 @@ function enviarBriefing(evento: FormEvent<HTMLFormElement>) {
 export function ChamadaFinal() {
   return (
     <section id="briefing" className="briefing-section relative overflow-hidden">
+      <div className="briefing-glows" aria-hidden="true">
+        <span className="briefing-glow briefing-glow-32" />
+        <span className="briefing-glow briefing-glow-31" />
+        <span className="briefing-glow briefing-glow-30" />
+        <span className="briefing-glow briefing-glow-29" />
+      </div>
       <div className="container-x briefing-layout relative z-10">
         <RevelarAoRolar className="briefing-grid">
           <div className="briefing-copy">

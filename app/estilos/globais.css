@@ -887,11 +887,57 @@ html {
 
 .briefing-section {
   min-height: clamp(36rem, 48vw, 43rem);
-  background:
-    radial-gradient(ellipse 48rem 38rem at 18% 32%, rgba(62, 59, 255, 0.8) 0%, rgba(76, 53, 210, 0.46) 25%, rgba(26, 19, 67, 0.38) 45%, transparent 72%),
-    radial-gradient(ellipse 38rem 30rem at 85% -12%, rgba(164, 96, 255, 0.22), transparent 72%),
-    #020204;
+  background: #020204;
   color: #FFFFFF;
+}
+
+.briefing-glows {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.briefing-glow {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  filter: blur(194.9px);
+  opacity: 1;
+  transform: translateZ(0);
+}
+
+.briefing-glow-32 {
+  width: 337px;
+  height: 312px;
+  left: 336px;
+  top: 82px;
+  background: rgba(192,144,255,0.5);
+}
+
+.briefing-glow-31 {
+  width: 451px;
+  height: 417px;
+  left: 308px;
+  top: -154px;
+  background: #C090FF;
+}
+
+.briefing-glow-30 {
+  width: 551.04px;
+  height: 509.5px;
+  left: 32.71px;
+  top: 24.94px;
+  background: rgba(123,33,243,0.5);
+}
+
+.briefing-glow-29 {
+  width: 551.04px;
+  height: 509.5px;
+  left: -167px;
+  top: 245.5px;
+  background: #3C3BFF;
 }
 
 .briefing-layout {
@@ -1028,6 +1074,26 @@ html {
 
   .briefing-layout {
     padding-block: 5.25rem;
+  }
+
+  .briefing-glow-32 {
+    left: 52%;
+    top: 2rem;
+  }
+
+  .briefing-glow-31 {
+    left: 18%;
+    top: -13rem;
+  }
+
+  .briefing-glow-30 {
+    left: -15rem;
+    top: 2rem;
+  }
+
+  .briefing-glow-29 {
+    left: -22rem;
+    top: 19rem;
   }
 
   .briefing-grid {
@@ -1619,10 +1685,7 @@ body {
 }
 
 .briefing-section {
-  background:
-    radial-gradient(ellipse 48rem 38rem at 18% 32%, rgba(62, 59, 255, 0.8) 0%, rgba(76, 53, 210, 0.46) 25%, rgba(26, 19, 67, 0.38) 45%, transparent 72%),
-    radial-gradient(ellipse 38rem 30rem at 85% -12%, rgba(164, 96, 255, 0.22), transparent 72%),
-    #020204;
+  background: #020204;
 }
 
 .briefing-form {
