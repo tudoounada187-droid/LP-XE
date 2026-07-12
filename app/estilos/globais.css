@@ -4102,10 +4102,11 @@ body {
 
 /* Navbar escura e hero com a aurora fornecida para a direção visual atual. */
 .site-header {
+  position: absolute;
   top: 0;
-  background: rgba(5, 5, 13, 0.94);
-  border-bottom: 1px solid rgba(177, 136, 255, 0.16);
-  backdrop-filter: blur(16px);
+  background: transparent;
+  border-bottom: 0;
+  backdrop-filter: none;
 }
 
 .site-header-shell {
@@ -4333,6 +4334,10 @@ body {
   margin-bottom: 0;
 }
 
+.process-card:nth-last-child(2) {
+  margin-bottom: clamp(22rem, 40svh, 30rem);
+}
+
 .process-card::after {
   content: "";
   position: absolute;
@@ -4403,6 +4408,10 @@ body {
 
   .process-card:last-child {
     margin-bottom: 0;
+  }
+
+  .process-card:nth-last-child(2) {
+    margin-bottom: 24rem;
   }
 
   .process-card-copy h3 {
