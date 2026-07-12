@@ -46,7 +46,7 @@ export function MetodoTrabalho() {
   const reduzirMovimento = useReducedMotion();
 
   return (
-    <section id="metodo" className="process-cards-section section-pad section-transition relative overflow-hidden">
+    <section id="metodo" className="process-cards-section section-pad section-transition relative">
       <div className="section-wave-out wave-to-lavender" aria-hidden="true" />
       <div className="container-x relative z-10">
         <header className="process-cards-heading">
@@ -60,23 +60,21 @@ export function MetodoTrabalho() {
 
         <div className="process-cards-list">
           {etapasDoProcesso.map((etapa, indice) => (
-            <div className="process-card-stage" key={etapa.titulo}>
-              <motion.article
-                className="process-card"
-                style={{ top: `${5.4 + indice * 0.32}rem` } as CSSProperties}
-                initial={reduzirMovimento ? false : { opacity: 0, y: 44, scale: 0.985 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ amount: 0.42, once: true }}
-                transition={{ duration: reduzirMovimento ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <div className="process-card-copy">
-                  <span>Etapa {String(indice + 1).padStart(2, "0")}</span>
-                  <h3>{etapa.titulo}</h3>
-                  <p>{etapa.descricao}</p>
-                </div>
-                <img src={caminhoDoAsset(etapa.imagem)} alt={etapa.alt} className="process-card-illustration" />
-              </motion.article>
-            </div>
+            <motion.article
+              className="process-card"
+              key={etapa.titulo}
+              style={{ zIndex: indice + 1 } as CSSProperties}
+              initial={reduzirMovimento ? false : { opacity: 0, y: 64, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ amount: 0.52, once: true }}
+              transition={{ duration: reduzirMovimento ? 0 : 0.78, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="process-card-copy">
+                <h3>{etapa.titulo}</h3>
+                <p>{etapa.descricao}</p>
+              </div>
+              <img src={caminhoDoAsset(etapa.imagem)} alt={etapa.alt} className="process-card-illustration" />
+            </motion.article>
           ))}
         </div>
       </div>
