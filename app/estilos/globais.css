@@ -4339,7 +4339,7 @@ body {
   margin-bottom: 0;
 }
 
-.process-cards-list.is-final-card-visible .process-card:nth-last-child(2) {
+.process-cards-list.is-final-card-visible .process-card:not(:last-child) {
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
