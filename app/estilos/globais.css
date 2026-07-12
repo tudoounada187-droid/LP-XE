@@ -4370,7 +4370,8 @@ body {
 }
 
 .process-card.is-active.is-entering-backward {
-  animation: process-card-enter-from-top 0.78s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: none;
+  transition: none;
 }
 
 .process-card.is-past {
@@ -4403,18 +4404,6 @@ body {
   }
   72% {
     transform: translateY(-0.35rem) scale(1.002);
-  }
-  100% {
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes process-card-enter-from-top {
-  0% {
-    transform: translateY(calc(-100% - 1.5rem)) scale(0.985);
-  }
-  72% {
-    transform: translateY(0.35rem) scale(1.002);
   }
   100% {
     transform: translateY(0) scale(1);
