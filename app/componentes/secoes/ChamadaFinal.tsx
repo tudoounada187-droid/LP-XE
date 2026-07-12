@@ -1,12 +1,18 @@
-import { type FormEvent, useEffect, useRef, useState } from "react";
+import { type FormEvent } from "react";
 import { RevelarAoRolar } from "@/componentes/animacoes/RevelarAoRolar";
-import { ListChecks, Mail, MessageSquare, User } from "lucide-react";
 
 const tiposDeProjeto = [
-  "Página profissional",
-  "Site institucional",
+  "Landing Page",
+  "Site profissional",
+  "Loja virtual",
   "Sistema sob medida",
-  "Ainda não sei",
+];
+
+const faixasDeOrcamento = [
+  "Ainda estou definindo",
+  "Até R$ 3 mil",
+  "De R$ 3 mil a R$ 8 mil",
+  "Acima de R$ 8 mil",
 ];
 
 function enviarBriefing(evento: FormEvent<HTMLFormElement>) {
@@ -16,14 +22,12 @@ function enviarBriefing(evento: FormEvent<HTMLFormElement>) {
   const contato = String(dados.get("contato") ?? "");
   const nome = String(dados.get("nome") ?? "");
   const tipo = String(dados.get("tipo") ?? "");
-  const projeto = String(dados.get("projeto") ?? "");
+  const orcamento = String(dados.get("orcamento") ?? "");
   const corpo = [
     `Contato: ${contato}`,
-    nome ? `Nome ou empresa: ${nome}` : "",
-    tipo ? `Tipo de projeto: ${tipo}` : "",
-    "",
-    "Briefing:",
-    projeto,
+    `Nome ou empresa: ${nome}`,
+    `Tipo de projeto: ${tipo}`,
+    `Orçamento esperado: ${orcamento}`,
   ]
     .filter(Boolean)
     .join("\n");
@@ -34,112 +38,58 @@ function enviarBriefing(evento: FormEvent<HTMLFormElement>) {
 }
 
 export function ChamadaFinal() {
-  const [tipoSelecionado, setTipoSelecionado] = useState("");
-  const [menuAberto, setMenuAberto] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function fecharAoClicarFora(evento: MouseEvent) {
-      if (!menuRef.current?.contains(evento.target as Node)) {
-        setMenuAberto(false);
-      }
-    }
-
-    document.addEventListener("mousedown", fecharAoClicarFora);
-    return () => document.removeEventListener("mousedown", fecharAoClicarFora);
-  }, []);
-
   return (
-    <section id="briefing" className="briefing-section section-pad relative overflow-hidden">
-      <div className="container-x relative z-10">
-        <RevelarAoRolar className="grid gap-10 lg:grid-cols-[0.82fr_0.72fr] lg:items-start">
-          <div>
-            <p className="eyebrow-text">Formulário</p>
-            <h2 className="editorial-h2 mt-4 max-w-3xl text-white">
-              Conte o que sua empresa precisa construir agora.
+    <section id="briefing" className="briefing-section relative overflow-hidden">
+      <div className="container-x briefing-layout relative z-10">
+        <RevelarAoRolar className="briefing-grid">
+          <div className="briefing-copy">
+            <p className="briefing-kicker">Vamos criar algo juntos</p>
+            <h2>
+              Seu próximo projeto<br />
+              começa com uma<br />
+              boa conversa
             </h2>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/65">
-              Não precisa chegar com escopo fechado. Basta contar se o objetivo é vender melhor,
-              passar mais confiança, receber contatos mais preparados ou organizar uma rotina.
+            <p>
+              Conte o que você precisa e quais resultados deseja alcançar. A XE transforma suas
+              ideias em uma experiência digital pensada para fortalecer sua marca e gerar novas
+              oportunidades.
             </p>
           </div>
 
           <form className="briefing-form" onSubmit={enviarBriefing}>
-            <label>
-              <span>Contato *</span>
-              <div>
-                <Mail className="size-5" aria-hidden="true" />
-                <input name="contato" required placeholder="Seu e-mail ou WhatsApp" />
-              </div>
+            <label className="sr-only" htmlFor="briefing-nome">
+              Seu nome
             </label>
-            <label>
-              <span>Nome ou empresa</span>
-              <div>
-                <User className="size-5" aria-hidden="true" />
-                <input name="nome" placeholder="Quem está falando?" />
-              </div>
+            <input id="briefing-nome" name="nome" required placeholder="Seu nome" />
+
+            <label className="sr-only" htmlFor="briefing-contato">
+              E-mail ou WhatsApp
             </label>
-            <label>
-              <span>Tipo de projeto</span>
-              <div className="briefing-select-shell">
-                <ListChecks className="size-5" aria-hidden="true" />
-                <input type="hidden" name="tipo" value={tipoSelecionado} />
-                <div
-                  className={menuAberto ? "briefing-choice is-open" : "briefing-choice"}
-                  ref={menuRef}
-                  role="group"
-                  aria-label="Tipo de projeto"
-                >
-                  <button
-                    type="button"
-                    className="briefing-choice-trigger"
-                    aria-haspopup="listbox"
-                    aria-expanded={menuAberto}
-                    onClick={() => setMenuAberto((aberto) => !aberto)}
-                    onKeyDown={(evento) => {
-                      if (evento.key === "Escape") {
-                        setMenuAberto(false);
-                      }
-                    }}
-                  >
-                    {tipoSelecionado || "Escolha uma opção"}
-                  </button>
-                  {menuAberto ? (
-                    <div className="briefing-choice-menu" role="listbox">
-                      {tiposDeProjeto.map((tipo) => (
-                        <button
-                          key={tipo}
-                          type="button"
-                          className={tipo === tipoSelecionado ? "is-selected" : undefined}
-                          role="option"
-                          aria-selected={tipo === tipoSelecionado}
-                          onClick={() => {
-                            setTipoSelecionado(tipo);
-                            setMenuAberto(false);
-                          }}
-                        >
-                          {tipo}
-                        </button>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-              </div>
+            <input id="briefing-contato" name="contato" required placeholder="E-mail ou WhatsApp" />
+
+            <label className="sr-only" htmlFor="briefing-tipo">
+              Tipo de projeto
             </label>
-            <label>
-              <span>O que você quer resolver? *</span>
-              <div className="items-start">
-                <MessageSquare className="mt-3 size-5" aria-hidden="true" />
-                <textarea
-                  name="projeto"
-                  required
-                  rows={6}
-                  placeholder="Exemplo: tenho uma loja, escritório ou consultório e quero uma página/site para explicar meu trabalho, passar confiança e receber contatos melhores."
-                />
-              </div>
+            <select id="briefing-tipo" name="tipo" defaultValue={tiposDeProjeto[0]}>
+              {tiposDeProjeto.map((tipo) => (
+                <option key={tipo}>{tipo}</option>
+              ))}
+            </select>
+
+            <label className="sr-only" htmlFor="briefing-orcamento">
+              Orçamento esperado
             </label>
+            <select id="briefing-orcamento" name="orcamento" defaultValue="">
+              <option value="" disabled>
+                Orçamento esperado
+              </option>
+              {faixasDeOrcamento.map((faixa) => (
+                <option key={faixa}>{faixa}</option>
+              ))}
+            </select>
+
             <button type="submit" className="briefing-submit">
-              Solicitar orçamento
+              Enviar
             </button>
           </form>
         </RevelarAoRolar>
