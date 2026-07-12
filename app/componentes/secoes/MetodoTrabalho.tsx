@@ -57,22 +57,19 @@ export function MetodoTrabalho() {
 
         <div className="process-cards-list">
           {etapasDoProcesso.map((etapa, indice) => (
-            <article
-              className="process-card"
+            <div
+              className="process-card-stage"
               key={etapa.titulo}
-              style={
-                {
-                  zIndex: indice + 1,
-                  "--process-stack-offset": `${indice * 10}px`,
-                } as CSSProperties
-              }
+              style={{ zIndex: indice + 1 } as CSSProperties}
             >
-              <div className="process-card-copy">
-                <h3>{etapa.titulo}</h3>
-                <p>{etapa.descricao}</p>
-              </div>
-              <img src={caminhoDoAsset(etapa.imagem)} alt={etapa.alt} className="process-card-illustration" />
-            </article>
+              <article className="process-card">
+                <div className="process-card-copy">
+                  <h3>{etapa.titulo}</h3>
+                  <p>{etapa.descricao}</p>
+                </div>
+                <img src={caminhoDoAsset(etapa.imagem)} alt={etapa.alt} className="process-card-illustration" />
+              </article>
+            </div>
           ))}
         </div>
       </div>

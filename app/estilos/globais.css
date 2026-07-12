@@ -4104,9 +4104,9 @@ body {
 .site-header {
   position: absolute;
   top: 0;
-  background: transparent;
-  border-bottom: 0;
-  backdrop-filter: none;
+  background: linear-gradient(90deg, rgba(4,4,13,0.52), rgba(19,8,53,0.26), rgba(4,4,13,0.52));
+  border-bottom: 1px solid rgba(161,112,255,0.28);
+  backdrop-filter: blur(10px);
 }
 
 .site-header-shell {
@@ -4125,11 +4125,12 @@ body {
 }
 
 .site-header-content {
-  width: min(calc(100% - 3rem), 960px);
+  width: calc(100% - 3rem);
   max-width: none;
   height: 100%;
   margin-inline: auto;
   display: flex;
+  position: relative;
   align-items: center;
   gap: clamp(1.25rem, 3vw, 3rem);
   padding: 0;
@@ -4147,7 +4148,9 @@ body {
 
 .site-header-nav {
   display: inline-flex;
-  flex: 1 1 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   justify-content: center;
   gap: clamp(0.85rem, 2vw, 1.55rem);
   background: transparent;
@@ -4176,6 +4179,7 @@ body {
 
 .site-header-cta,
 .site-header-cta:hover {
+  margin-left: auto;
   width: auto;
   min-width: 0;
   min-height: 2rem;
@@ -4304,13 +4308,21 @@ body {
 .process-cards-list {
   margin-top: clamp(3.5rem, 7vw, 6rem);
   position: relative;
-  padding-bottom: clamp(8rem, 12svh, 10rem);
+  padding-bottom: 0;
+}
+
+.process-card-stage {
+  position: relative;
+  min-height: max(42rem, 82svh);
+}
+
+.process-card-stage:last-child {
+  min-height: calc(clamp(18rem, 28vw, 22rem) + 28svh);
 }
 
 .process-card {
-  --process-stack-offset: 0px;
   position: sticky;
-  top: calc(max(5.75rem, 16svh) + var(--process-stack-offset));
+  top: max(5.75rem, 16svh);
   display: grid;
   min-height: clamp(15rem, 22vw, 18rem);
   grid-template-columns: minmax(0, 0.9fr) minmax(16rem, 1.1fr);
@@ -4325,17 +4337,9 @@ body {
     0 1.1rem 0 -0.28rem rgba(255,255,255,0.72),
     0 1.7rem 0 -0.58rem rgba(255,255,255,0.44);
   padding: clamp(1.75rem, 4.5vw, 3.8rem);
-  margin-bottom: clamp(13rem, 25svh, 19rem);
+  margin: 0;
   transform-origin: center center;
-  will-change: transform, opacity;
-}
-
-.process-card:last-child {
-  margin-bottom: 0;
-}
-
-.process-card:nth-last-child(2) {
-  margin-bottom: clamp(22rem, 40svh, 30rem);
+  will-change: transform;
 }
 
 .process-card::after {
@@ -4389,11 +4393,19 @@ body {
 
   .process-cards-list {
     margin-top: 3rem;
-    padding-bottom: 12rem;
+    padding-bottom: 0;
+  }
+
+  .process-card-stage {
+    min-height: max(46rem, 92svh);
+  }
+
+  .process-card-stage:last-child {
+    min-height: calc(34rem + 24svh);
   }
 
   .process-card {
-    top: calc(max(1rem, 10svh) + var(--process-stack-offset));
+    top: max(1rem, 10svh);
     min-height: 0;
     grid-template-columns: 1fr;
     gap: 1.6rem;
@@ -4406,13 +4418,6 @@ body {
       0 1.3rem 0 -0.48rem rgba(255,255,255,0.44);
   }
 
-  .process-card:last-child {
-    margin-bottom: 0;
-  }
-
-  .process-card:nth-last-child(2) {
-    margin-bottom: 24rem;
-  }
 
   .process-card-copy h3 {
     font-size: clamp(1.75rem, 9vw, 2.35rem);
