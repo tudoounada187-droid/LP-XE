@@ -1,11 +1,10 @@
-import { ArrowUpRight, MousePointer2 } from "lucide-react";
+import { ChevronDown, MousePointer2 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { aparecerSubindo, animacaoEmSequencia } from "@/componentes/animacoes/variantes";
 import { BotaoConversar } from "@/componentes/interface/BotaoConversar";
 
-const tituloHero = "Presença digital que faz seu negócio avançar.";
-const palavrasEmDestaque = 3;
+const tituloHero = "Experiências digitais que fazem sua marca crescer";
 
 const demonstracoes = [
   {
@@ -106,53 +105,30 @@ export function DestaqueInicial() {
       >
         <motion.div variants={animacaoEmSequencia} className="hero-clean-content">
           <h1 aria-label={tituloHero}>
-            {reduzirMovimento
-              ? tituloHero
-              : tituloHero.split(" ").map((palavra, indiceDaPalavra, palavras) => {
-                  const indiceInicial = palavras
-                    .slice(0, indiceDaPalavra)
-                    .reduce((total, palavraAnterior) => total + palavraAnterior.length, 0);
-
-                  return (
-                    <Fragment key={`${palavra}-${indiceDaPalavra}`}>
-                      <span className={`hero-word ${indiceDaPalavra < palavrasEmDestaque ? "hero-word-accent" : ""}`} aria-hidden="true">
-                        {Array.from(palavra).map((letra, indiceDaLetra) => (
-                          <motion.span
-                            key={`${letra}-${indiceDaLetra}`}
-                            className="hero-letter"
-                            initial={{ opacity: 0, y: "0.38em", filter: "blur(10px)" }}
-                            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                            transition={{
-                              duration: 0.46,
-                              delay: 0.05 + (indiceInicial + indiceDaLetra) * 0.021,
-                              ease: [0.22, 1, 0.36, 1],
-                            }}
-                          >
-                            {letra}
-                          </motion.span>
-                        ))}
-                      </span>
-                      {indiceDaPalavra < palavras.length - 1 ? " " : null}
-                    </Fragment>
-                  );
-                })}
+            <span className="hero-reference-title-line hero-reference-title-line--top" aria-hidden="true">Experiências digitais que</span>
+            <span className="hero-reference-title-line hero-reference-title-line--bottom" aria-hidden="true">fazem sua marca crescer</span>
           </h1>
 
-          <motion.div variants={aparecerSubindo} className="hero-amphora-proof">
-            <span className="hero-proof-dot" aria-hidden="true" />
-            Sites, landing pages e sistemas para negócios em movimento.
-          </motion.div>
-
           <motion.p variants={aparecerSubindo}>
-            Criamos sites, landing pages e sistemas com visual profissional, estratégia e performance
-            para transformar visitantes em oportunidades.
+            Criamos sites, landing pages e sistemas que valorizam sua marca, geram confiança e transformam sua presença digital em novas oportunidades de crescimento. Unimos estratégia, design e tecnologia para construir experiências que conectam sua empresa às pessoas certas e geram resultados reais.
           </motion.p>
 
-          <motion.div variants={aparecerSubindo}>
-            <BotaoConversar href="#briefing" className="button-dark hero-main-cta">
-              Vamos conversar
-              <ArrowUpRight className="size-5" aria-hidden="true" />
+          <motion.div variants={aparecerSubindo} className="hero-reference-actions">
+            <BotaoConversar href="#briefing" className="hero-reference-primary">
+              <span>Começar um Projeto</span>
+              <span className="hero-reference-primary-icon" aria-hidden="true">
+                <svg className="hero-reference-primary-arrow" viewBox="0 0 24 24" fill="none" focusable="false">
+                  <path d="M5 19 19 5M8 5h11v11" />
+                </svg>
+              </span>
             </BotaoConversar>
+            <a href="#projetos" className="hero-reference-secondary">
+              Conheça nosso Trabalho
+              <span className="hero-reference-chevron" aria-hidden="true">
+                <ChevronDown />
+                <ChevronDown />
+              </span>
+            </a>
           </motion.div>
         </motion.div>
 
