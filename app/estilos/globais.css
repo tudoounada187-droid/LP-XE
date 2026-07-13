@@ -3088,17 +3088,12 @@ body {
   display: block;
   width: fit-content;
   white-space: nowrap;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+  color: #FFFFFF;
 }
 
-.hero-reference-title-line--top {
-  background-image: linear-gradient(95deg, #FFFFFF 0%, #F0CAFF 100%);
-}
-
-.hero-reference-title-line--bottom {
-  background-image: linear-gradient(95deg, #EE8FFF 0%, #FFFFFF 78%);
+.hero-reference-letter {
+  display: inline-block;
+  will-change: transform, filter, opacity;
 }
 
 .hero-amphora .hero-clean-content p {

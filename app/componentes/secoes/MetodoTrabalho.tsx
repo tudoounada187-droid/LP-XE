@@ -1,5 +1,6 @@
 import { Route } from "lucide-react";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { RevelarAoRolar } from "@/componentes/animacoes/RevelarAoRolar";
 import { caminhoDoAsset } from "@/utilitarios/assets";
 
 const etapasDoProcesso = [
@@ -112,14 +113,14 @@ export function MetodoTrabalho() {
     <section id="metodo" className="process-cards-section section-pad section-transition relative">
       <div className="section-wave-out wave-to-lavender" aria-hidden="true" />
       <div className="container-x relative z-10">
-        <header className="process-cards-heading">
+        <RevelarAoRolar className="process-cards-heading">
           <div className="section-icon-label">
             <Route aria-hidden="true" />
             <span>Processo</span>
           </div>
           <h2>Nosso processo</h2>
           <p>Uma sequência simples, com contexto, decisões claras e acompanhamento até a entrega final.</p>
-        </header>
+        </RevelarAoRolar>
 
         <div
           ref={listaDeCards}

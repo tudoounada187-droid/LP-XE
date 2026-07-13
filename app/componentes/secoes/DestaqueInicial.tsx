@@ -4,7 +4,20 @@ import { useEffect, useState } from "react";
 import { aparecerSubindo, animacaoEmSequencia } from "@/componentes/animacoes/variantes";
 import { BotaoConversar } from "@/componentes/interface/BotaoConversar";
 
-const tituloHero = "Experiências digitais que fazem sua marca crescer";
+const linhasTituloHero = [
+  { texto: "Experiências digitais que", corInicial: "#FFFFFF", corFinal: "#F0CAFF" },
+  { texto: "fazem sua marca crescer", corInicial: "#EE8FFF", corFinal: "#FFFFFF" },
+] as const;
+
+const tituloHero = linhasTituloHero.map(({ texto }) => texto).join(" ");
+
+function interpolarCor(corInicial: string, corFinal: string, progresso: number) {
+  const canaisIniciais = [1, 3, 5].map((posicao) => Number.parseInt(corInicial.slice(posicao, posicao + 2), 16));
+  const canaisFinais = [1, 3, 5].map((posicao) => Number.parseInt(corFinal.slice(posicao, posicao + 2), 16));
+  const canais = canaisIniciais.map((canal, indice) => Math.round(canal + (canaisFinais[indice] - canal) * progresso));
+
+  return `rgb(${canais.join(", ")})`;
+}
 
 const demonstracoes = [
   {
@@ -104,10 +117,38 @@ export function DestaqueInicial() {
         variants={animacaoEmSequencia}
       >
         <motion.div variants={animacaoEmSequencia} className="hero-clean-content">
-          <h1 aria-label={tituloHero}>
-            <span className="hero-reference-title-line hero-reference-title-line--top" aria-hidden="true">Experiências digitais que</span>
-            <span className="hero-reference-title-line hero-reference-title-line--bottom" aria-hidden="true">fazem sua marca crescer</span>
-          </h1>
+          <motion.h1 aria-label={tituloHero}>
+            {linhasTituloHero.map(({ texto, corInicial, corFinal }, indiceDaLinha) => {
+              const atrasoDaLinha = linhasTituloHero
+                .slice(0, indiceDaLinha)
+                .reduce((total, linhaAnterior) => total + linhaAnterior.texto.length, 0);
+
+              return (
+                <span key={texto} className="hero-reference-title-line" aria-hidden="true">
+                  {Array.from(texto).map((letra, indiceDaLetra, letras) => {
+                    const progressoDaCor = letras.length > 1 ? indiceDaLetra / (letras.length - 1) : 0;
+
+                    return (
+                      <motion.span
+                        key={`${letra}-${indiceDaLetra}`}
+                        className="hero-reference-letter"
+                        style={{ color: interpolarCor(corInicial, corFinal, progressoDaCor) }}
+                        initial={reduzirMovimento ? false : { opacity: 0, y: "0.38em", filter: "blur(10px)" }}
+                        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                        transition={{
+                          duration: reduzirMovimento ? 0 : 0.46,
+                          delay: reduzirMovimento ? 0 : 0.05 + (atrasoDaLinha + indiceDaLetra) * 0.021,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
+                      >
+                        {letra === " " ? "\u00A0" : letra}
+                      </motion.span>
+                    );
+                  })}
+                </span>
+              );
+            })}
+          </motion.h1>
 
           <motion.p variants={aparecerSubindo}>
             Criamos sites, landing pages e sistemas que valorizam sua marca, geram confiança e transformam sua presença digital em novas oportunidades de crescimento. Unimos estratégia, design e tecnologia para construir experiências que conectam sua empresa às pessoas certas e geram resultados reais.
