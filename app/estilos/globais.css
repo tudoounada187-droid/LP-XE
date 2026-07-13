@@ -3181,13 +3181,13 @@ body {
 .hero-reference-chevron svg:first-child {
   top: -0.12rem;
   color: #FFFFFF;
-  animation: hero-chevron-pulse-top 1.15s ease-in-out infinite;
+  animation: hero-chevron-pulse-top 2.5s ease-in-out infinite;
 }
 
 .hero-reference-chevron svg:last-child {
   top: 0.26rem;
   color: #FFFFFF;
-  animation: hero-chevron-pulse-bottom 1.15s ease-in-out infinite;
+  animation: hero-chevron-pulse-bottom 2.5s ease-in-out infinite;
 }
 
 @keyframes hero-chevron-pulse-top {
