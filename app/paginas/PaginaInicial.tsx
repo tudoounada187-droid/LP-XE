@@ -21,7 +21,7 @@ export function PaginaInicial() {
         <ChamadaFinal />
       </main>
       <BotaoConversar href="#briefing" className="mobile-quote-cta">
-        <span>Vamos conversar</span>
+        <span>Vamos Trabalhar Juntos</span>
       </BotaoConversar>
       <Rodape />
     </>

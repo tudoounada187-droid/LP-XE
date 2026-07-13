@@ -1,6 +1,6 @@
 import { ChevronDown, MousePointer2 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { aparecerSubindo, animacaoEmSequencia } from "@/componentes/animacoes/variantes";
 import { BotaoConversar } from "@/componentes/interface/BotaoConversar";
 
@@ -125,24 +125,38 @@ export function DestaqueInicial() {
 
               return (
                 <span key={texto} className="hero-reference-title-line" aria-hidden="true">
-                  {Array.from(texto).map((letra, indiceDaLetra, letras) => {
-                    const progressoDaCor = letras.length > 1 ? indiceDaLetra / (letras.length - 1) : 0;
+                  {texto.split(" ").map((palavra, indiceDaPalavra, palavras) => {
+                    const indiceInicialDaPalavra = palavras
+                      .slice(0, indiceDaPalavra)
+                      .reduce((total, palavraAnterior) => total + palavraAnterior.length + 1, 0);
 
                     return (
-                      <motion.span
-                        key={`${letra}-${indiceDaLetra}`}
-                        className="hero-reference-letter"
-                        style={{ color: interpolarCor(corInicial, corFinal, progressoDaCor) }}
-                        initial={reduzirMovimento ? false : { opacity: 0, y: "0.38em", filter: "blur(10px)" }}
-                        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                        transition={{
-                          duration: reduzirMovimento ? 0 : 0.46,
-                          delay: reduzirMovimento ? 0 : 0.05 + (atrasoDaLinha + indiceDaLetra) * 0.021,
-                          ease: [0.22, 1, 0.36, 1],
-                        }}
-                      >
-                        {letra === " " ? "\u00A0" : letra}
-                      </motion.span>
+                      <Fragment key={`${palavra}-${indiceDaPalavra}`}>
+                        {indiceDaPalavra > 0 ? " " : null}
+                        <span className="hero-reference-word">
+                          {Array.from(palavra).map((letra, indiceNaPalavra) => {
+                            const indiceDaLetra = indiceInicialDaPalavra + indiceNaPalavra;
+                            const progressoDaCor = texto.length > 1 ? indiceDaLetra / (texto.length - 1) : 0;
+
+                            return (
+                              <motion.span
+                                key={`${letra}-${indiceDaLetra}`}
+                                className="hero-reference-letter"
+                                style={{ color: interpolarCor(corInicial, corFinal, progressoDaCor) }}
+                                initial={reduzirMovimento ? false : { opacity: 0, y: "0.38em", filter: "blur(10px)" }}
+                                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                                transition={{
+                                  duration: reduzirMovimento ? 0 : 0.46,
+                                  delay: reduzirMovimento ? 0 : 0.05 + (atrasoDaLinha + indiceDaLetra) * 0.021,
+                                  ease: [0.22, 1, 0.36, 1],
+                                }}
+                              >
+                                {letra}
+                              </motion.span>
+                            );
+                          })}
+                        </span>
+                      </Fragment>
                     );
                   })}
                 </span>
