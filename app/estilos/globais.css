@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Geist+Mono:wght@500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Geist+Mono:wght@500;600&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -15,6 +15,7 @@
   --color-accent-soft: #EDF4FF;
   --color-accent-2: #2F6FCC;
   --font-sans: "Inter", system-ui, sans-serif;
+  --font-interface: "Archivo", "Inter", system-ui, sans-serif;
   --font-heading: "SF Pro Rounded", "SF Pro Display", ui-rounded, "Arial Rounded MT Bold", "Nunito", var(--font-sans);
   --font-mono: "Geist Mono", "IBM Plex Mono", monospace;
   --radius-card: 0.85rem;
@@ -4363,7 +4364,7 @@ body {
   max-width: 18ch;
   margin-top: 1.25rem;
   color: #FFFFFF;
-  font-family: var(--font-heading);
+  font-family: "SF Pro Rounded", "SF Pro Display", ui-rounded, "Arial Rounded MT Bold", "Nunito", var(--font-sans);
   font-size: clamp(2.65rem, 5vw, 5.25rem);
   font-weight: 500;
   letter-spacing: 0;
@@ -5011,4 +5012,23 @@ body {
   .project-carousel-progress b {
     transition: none;
   }
+}
+
+/* Tipografia de navegação, subheadlines e ações */
+.site-header-nav a,
+.site-header-cta,
+.site-header-cta-text,
+.hero-reference-primary,
+.hero-reference-secondary,
+button {
+  font-family: var(--font-interface);
+}
+
+.hero-reference-copy > p,
+.services-showcase-heading > p,
+.projects-showcase-heading p,
+.faq-heading > p,
+.process-cards-heading > p,
+.briefing-copy > p:not(.briefing-kicker) {
+  font-family: var(--font-interface);
 }
