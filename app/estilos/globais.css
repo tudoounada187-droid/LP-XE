@@ -4790,7 +4790,7 @@ body {
 }
 
 .project-device-stage.is-details-open .device-mockup {
-  filter: blur(14px) brightness(0.22);
+  filter: blur(10px) brightness(0.22);
   transform: scale(0.98);
   opacity: 0.62;
 }
