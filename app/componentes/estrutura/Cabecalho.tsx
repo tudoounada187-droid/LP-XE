@@ -3,10 +3,11 @@ import { BotaoConversar } from "@/componentes/interface/BotaoConversar";
 import { caminhoDoAsset } from "@/utilitarios/assets";
 
 const linksNavegacao = [
-  { label: "Projetos", href: "#projetos" },
   { label: "Serviços", href: "#entregas" },
+  { label: "Projetos", href: "#projetos" },
   { label: "Processo", href: "#metodo" },
   { label: "FAQ", href: "#faq" },
+  { label: "Contato", href: "#briefing" },
 ];
 
 export function Cabecalho() {

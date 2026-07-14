@@ -14,8 +14,8 @@ export function PaginaInicial() {
       <Cabecalho />
       <main className="brand-page">
         <DestaqueInicial />
-        <Projetos />
         <Servicos />
+        <Projetos />
         <MetodoTrabalho />
         <PerguntasFrequentes />
         <ChamadaFinal />

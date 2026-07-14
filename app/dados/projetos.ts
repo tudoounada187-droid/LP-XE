@@ -1,4 +1,4 @@
-export type TipoPreviewProjeto = "landing" | "dashboard" | "negocio-local";
+export type TipoPreviewProjeto = "advocacia" | "pibic";
 
 export type Projeto = {
   nome: string;
@@ -9,37 +9,29 @@ export type Projeto = {
   resultado: string;
   foco: string;
   preview: TipoPreviewProjeto;
+  url?: string;
 };
 
 export const projetos = [
   {
-    nome: "XE Software",
-    categoria: "Marca própria / Página comercial",
+    nome: "H&C Advocacia Previdenciária",
+    categoria: "Site institucional / Advocacia",
     ano: "2026",
-    problema: "Apresentar páginas, sites e sistemas sem parecer que a empresa faz apenas software web.",
-    entrega: "Página com promessa, segmentos, formatos, transformação, exemplos e briefing direto.",
-    resultado: "O visitante entende que pode pedir desde uma página profissional até um sistema sob medida.",
-    foco: "Confiança comercial",
-    preview: "landing",
+    problema: "Apresentar serviços previdenciários com clareza, autoridade e uma navegação acolhedora.",
+    entrega: "Site institucional responsivo com conteúdo estratégico e caminhos diretos para contato.",
+    resultado: "Uma presença digital profissional que conduz o visitante por toda a proposta do escritório.",
+    foco: "Autoridade e conversão",
+    preview: "advocacia",
   },
   {
-    nome: "Fluxo para casos clínicos",
-    categoria: "Sistema sob medida / Saúde",
+    nome: "PIBIC — Casos Clínicos",
+    categoria: "Sistema educacional / Saúde",
     ano: "2026",
-    problema: "Organizar cadastros, casos, perguntas e etapas em uma experiência única e rastreável.",
-    entrega: "Interface administrativa, estrutura de dados e base para evolução do processo.",
-    resultado: "O trabalho ganha sequência, histórico e menos dependência de controle paralelo.",
-    foco: "Sistema sob medida",
-    preview: "dashboard",
-  },
-  {
-    nome: "Página para negócio local",
-    categoria: "Modelo comercial / Página de venda",
-    ano: "2026",
-    problema: "Receber interessados de Instagram, indicação ou WhatsApp sem uma apresentação profissional própria.",
-    entrega: "Estrutura de oferta, serviços, diferenciais, dúvidas, imagens de apoio e chamada para conversa.",
-    resultado: "O contato chega mais preparado porque a página já explicou valor, confiança e próximo passo.",
-    foco: "Contato preparado",
-    preview: "negocio-local",
+    problema: "Centralizar a criação, organização e avaliação de casos clínicos em um único fluxo.",
+    entrega: "Dashboards para professores, gestão de casos, turmas e acompanhamento de desempenho.",
+    resultado: "As principais telas do sistema ficam organizadas em uma experiência consistente e rastreável.",
+    foco: "Gestão acadêmica",
+    preview: "pibic",
+    url: "https://www.figma.com/design/0orbQZ8ymayjvTkyWfEkFu/PIBIC?node-id=114-624",
   },
 ] satisfies readonly Projeto[];

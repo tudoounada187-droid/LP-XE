@@ -64,7 +64,7 @@ export function Servicos() {
 
   return (
     <section id="entregas" className="services-showcase section-pad section-transition relative overflow-hidden">
-      <div className="section-wave-out wave-to-bg" aria-hidden="true" />
+      <div className="section-wave-out wave-to-dark" aria-hidden="true" />
       <div className="container-x relative z-10">
         <RevelarAoRolar className="services-showcase-heading">
           <div className="services-label">

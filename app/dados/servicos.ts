@@ -22,17 +22,17 @@ export const servicos: Servico[] = [
     alt: "Prévia de um site profissional com apresentação, serviços e depoimentos",
   },
   {
-    id: "sistemas-sob-medida",
+    id: "loja-virtual",
     number: "03.",
+    title: "Loja Virtual",
+    image: "/images/service-online-store.svg",
+    alt: "Prévia de uma loja virtual com vitrine de produtos, categorias e carrinho de compras",
+  },
+  {
+    id: "sistemas-sob-medida",
+    number: "04.",
     title: "Sistemas Sob Medida",
     image: "/images/service-custom-system.svg",
     alt: "Prévia de um sistema sob medida com painel, métricas e gestão de tarefas",
-  },
-  {
-    id: "automacao-de-processos",
-    number: "04.",
-    title: "Automação de Processos",
-    image: "/images/service-automation.svg",
-    alt: "Prévia de uma automação conectando etapas de atendimento e operação",
   },
 ];

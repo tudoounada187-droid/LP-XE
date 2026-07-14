@@ -1,0 +1,18 @@
+<svg width="1440" height="220" viewBox="0 0 1440 220" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="accentBand" x1="0" y1="92" x2="1440" y2="92" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1F66F2" stop-opacity="0.12"/>
+      <stop offset="0.5" stop-color="#7B6BFF" stop-opacity="0.1"/>
+      <stop offset="1" stop-color="#D45AF2" stop-opacity="0.14"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="76" x2="1440" y2="76" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1F66F2" stop-opacity="0"/>
+      <stop offset="0.22" stop-color="#1F66F2" stop-opacity="0.2"/>
+      <stop offset="0.7" stop-color="#7B6BFF" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#D45AF2" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+  <path d="M0 77C186 115 341 126 544 101C733 78 912 48 1116 55C1257 60 1357 77 1440 94V220H0V77Z" fill="#F2F2F3"/>
+  <path d="M0 77C186 115 341 126 544 101C733 78 912 48 1116 55C1257 60 1357 77 1440 94V130C1240 97 1056 88 842 106C650 122 488 149 285 129C161 117 75 94 0 77Z" fill="url(#accentBand)"/>
+  <path d="M0 77C186 115 341 126 544 101C733 78 912 48 1116 55C1257 60 1357 77 1440 94" stroke="url(#line)" stroke-width="1.35"/>
+</svg>

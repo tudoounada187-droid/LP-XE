@@ -1,0 +1,107 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="store-bg" x1="80" y1="40" x2="1120" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#191A25"/>
+      <stop offset="1" stop-color="#090A10"/>
+    </linearGradient>
+    <linearGradient id="store-accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7657FF"/>
+      <stop offset="1" stop-color="#B655FF"/>
+    </linearGradient>
+    <linearGradient id="product-one" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#DDD4FF"/>
+      <stop offset="1" stop-color="#A998F6"/>
+    </linearGradient>
+    <linearGradient id="product-two" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#FFE1C1"/>
+      <stop offset="1" stop-color="#E8A66F"/>
+    </linearGradient>
+    <linearGradient id="product-three" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#CFF7E4"/>
+      <stop offset="1" stop-color="#71CFA2"/>
+    </linearGradient>
+    <filter id="store-shadow" x="45" y="35" width="1110" height="690" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="28" stdDeviation="30" flood-color="#000000" flood-opacity="0.42"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="760" fill="url(#store-bg)"/>
+  <circle cx="1010" cy="120" r="250" fill="#835CFF" fill-opacity="0.12"/>
+  <circle cx="170" cy="690" r="210" fill="#D653FF" fill-opacity="0.08"/>
+
+  <g filter="url(#store-shadow)">
+    <rect x="82" y="70" width="1036" height="620" rx="30" fill="#F7F7FA"/>
+    <path d="M82 100C82 83.4315 95.4315 70 112 70H1088C1104.57 70 1118 83.4315 1118 100V150H82V100Z" fill="#151620"/>
+    <circle cx="124" cy="110" r="7" fill="#FF6967"/>
+    <circle cx="147" cy="110" r="7" fill="#FFC65B"/>
+    <circle cx="170" cy="110" r="7" fill="#4FD389"/>
+    <rect x="220" y="96" width="420" height="29" rx="14.5" fill="#252733"/>
+    <circle cx="246" cy="110.5" r="7.5" stroke="#777A8C" stroke-width="3"/>
+    <path d="M252 116L258 122" stroke="#777A8C" stroke-width="3" stroke-linecap="round"/>
+    <rect x="925" y="93" width="126" height="34" rx="17" fill="url(#store-accent)"/>
+    <path d="M954 105H966L970 118H952L949 100H945" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="956" cy="122" r="2.5" fill="white"/>
+    <circle cx="968" cy="122" r="2.5" fill="white"/>
+    <rect x="983" y="104" width="45" height="10" rx="5" fill="white" fill-opacity="0.9"/>
+
+    <rect x="82" y="150" width="206" height="540" fill="#EEEFF4"/>
+    <rect x="118" y="187" width="120" height="18" rx="9" fill="#171923"/>
+    <rect x="118" y="236" width="135" height="38" rx="12" fill="url(#store-accent)"/>
+    <circle cx="141" cy="255" r="6" fill="white"/>
+    <rect x="158" y="250" width="66" height="10" rx="5" fill="white"/>
+    <circle cx="141" cy="304" r="6" fill="#999CAA"/>
+    <rect x="158" y="299" width="78" height="10" rx="5" fill="#999CAA"/>
+    <circle cx="141" cy="353" r="6" fill="#999CAA"/>
+    <rect x="158" y="348" width="55" height="10" rx="5" fill="#999CAA"/>
+    <circle cx="141" cy="402" r="6" fill="#999CAA"/>
+    <rect x="158" y="397" width="72" height="10" rx="5" fill="#999CAA"/>
+    <rect x="118" y="575" width="134" height="70" rx="16" fill="#FFFFFF" stroke="#DBDDE5"/>
+    <rect x="137" y="594" width="80" height="9" rx="4.5" fill="#858895"/>
+    <rect x="137" y="615" width="52" height="13" rx="6.5" fill="#171923"/>
+
+    <rect x="330" y="188" width="330" height="22" rx="11" fill="#171923"/>
+    <rect x="330" y="225" width="210" height="11" rx="5.5" fill="#999BA7"/>
+    <rect x="912" y="187" width="160" height="44" rx="14" fill="#FFFFFF" stroke="#D9DBE4"/>
+    <path d="M941 200V218M932 205H950M932 213H950" stroke="#747785" stroke-width="2" stroke-linecap="round"/>
+    <rect x="962" y="203" width="79" height="11" rx="5.5" fill="#555866"/>
+
+    <g>
+      <rect x="330" y="278" width="218" height="340" rx="20" fill="#FFFFFF" stroke="#DEE0E7"/>
+      <rect x="346" y="294" width="186" height="196" rx="15" fill="url(#product-one)"/>
+      <path d="M398 353C398 330.909 415.909 313 438 313C460.091 313 478 330.909 478 353V451H398V353Z" fill="#6C53CF"/>
+      <path d="M420 331C420 321.059 428.059 313 438 313C447.941 313 456 321.059 456 331" stroke="#E7E0FF" stroke-width="8" stroke-linecap="round"/>
+      <rect x="350" y="510" width="118" height="13" rx="6.5" fill="#20222C"/>
+      <rect x="350" y="537" width="72" height="10" rx="5" fill="#999CA8"/>
+      <rect x="350" y="570" width="70" height="24" rx="12" fill="#EEE9FF"/>
+      <rect x="364" y="577" width="42" height="10" rx="5" fill="#6C53CF"/>
+      <circle cx="505" cy="582" r="18" fill="#171923"/>
+      <path d="M497 582H513M505 574V590" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    </g>
+
+    <g>
+      <rect x="568" y="278" width="218" height="340" rx="20" fill="#FFFFFF" stroke="#DEE0E7"/>
+      <rect x="584" y="294" width="186" height="196" rx="15" fill="url(#product-two)"/>
+      <path d="M625 414L647 342H708L730 414L714 454H641L625 414Z" fill="#9C5B31"/>
+      <path d="M654 348C654 332.536 666.536 320 682 320C697.464 320 710 332.536 710 348" stroke="#F9DFC6" stroke-width="8" stroke-linecap="round"/>
+      <rect x="588" y="510" width="128" height="13" rx="6.5" fill="#20222C"/>
+      <rect x="588" y="537" width="64" height="10" rx="5" fill="#999CA8"/>
+      <rect x="588" y="570" width="76" height="24" rx="12" fill="#FFF0E3"/>
+      <rect x="602" y="577" width="48" height="10" rx="5" fill="#A96336"/>
+      <circle cx="743" cy="582" r="18" fill="#171923"/>
+      <path d="M735 582H751M743 574V590" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    </g>
+
+    <g>
+      <rect x="806" y="278" width="266" height="340" rx="20" fill="#FFFFFF" stroke="#DEE0E7"/>
+      <rect x="822" y="294" width="234" height="196" rx="15" fill="url(#product-three)"/>
+      <path d="M883 370C883 337.967 908.967 312 941 312C973.033 312 999 337.967 999 370V454H883V370Z" fill="#287C5B"/>
+      <path d="M910 342C910 324.327 924.327 310 942 310C959.673 310 974 324.327 974 342" stroke="#D7F8E8" stroke-width="9" stroke-linecap="round"/>
+      <rect x="826" y="510" width="142" height="13" rx="6.5" fill="#20222C"/>
+      <rect x="826" y="537" width="88" height="10" rx="5" fill="#999CA8"/>
+      <rect x="826" y="570" width="72" height="24" rx="12" fill="#E2F8EC"/>
+      <rect x="840" y="577" width="44" height="10" rx="5" fill="#287C5B"/>
+      <circle cx="1029" cy="582" r="18" fill="#171923"/>
+      <path d="M1021 582H1037M1029 574V590" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>

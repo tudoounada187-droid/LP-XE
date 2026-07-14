@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>H&amp;C Advocacia Previdenciária — Apresentação local</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+    <style>
+      html,
+      body {
+        scrollbar-width: none;
+      }
+
+      html::-webkit-scrollbar,
+      body::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+    </style>
+    <script>
+      const previewBase = new URL(".", window.location.href);
+      const base = document.createElement("base");
+      base.href = previewBase.href;
+      document.head.prepend(base);
+
+      const styles = document.createElement("link");
+      styles.rel = "stylesheet";
+      styles.href = new URL("assets/app.css", previewBase).href;
+      document.head.appendChild(styles);
+
+      window.history.replaceState(null, "", "/");
+
+      const app = document.createElement("script");
+      app.type = "module";
+      app.src = new URL("assets/app.js", previewBase).href;
+      document.head.appendChild(app);
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
