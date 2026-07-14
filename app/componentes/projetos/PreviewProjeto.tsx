@@ -1,6 +1,7 @@
 import type { TipoPreviewProjeto } from "@/dados/projetos";
+import { caminhoDoAsset } from "@/utilitarios/assets";
 
-export type TipoDispositivo = "macbook" | "imac" | "ipad" | "iphone";
+export type TipoDispositivo = "macbook" | "iphone";
 
 type PropriedadesPreviewProjeto = {
   tipo: TipoPreviewProjeto;
@@ -63,22 +64,16 @@ function TelaProjeto({ tipo }: { tipo: TipoPreviewProjeto }) {
 }
 
 export function PreviewProjeto({ tipo, dispositivo }: PropriedadesPreviewProjeto) {
+  const moldura = dispositivo === "macbook"
+    ? caminhoDoAsset("images/device-macbook-pro.png")
+    : caminhoDoAsset("images/device-iphone-11-pro-max.png");
+
   return (
     <div className={`device-mockup device-${dispositivo}`} aria-hidden="true">
-      <div className="device-frame">
-        <span className="device-camera" />
-        <div className="device-screen"><TelaProjeto tipo={tipo} /></div>
-        {dispositivo === "imac" && <span className="device-brand-mark" />}
-        {dispositivo === "iphone" && <span className="device-home-indicator" />}
-      </div>
-      {dispositivo === "macbook" && <div className="device-macbook-base"><span /></div>}
-      {dispositivo === "imac" && <><div className="device-imac-neck" /><div className="device-imac-base" /></>}
-      {(dispositivo === "ipad" || dispositivo === "iphone") && (
-        <>
-          <span className="device-side-button device-side-button-top" />
-          <span className="device-side-button device-side-button-middle" />
-          <span className="device-side-button device-side-button-power" />
-        </>
+      <img className="device-frame-image" src={moldura} alt="" />
+      <div className="device-screen"><TelaProjeto tipo={tipo} /></div>
+      {dispositivo === "iphone" && (
+        <span className="device-iphone-notch"><i /><b /></span>
       )}
     </div>
   );

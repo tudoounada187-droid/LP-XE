@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ChevronLeft, ChevronRight, FolderKanban, Laptop, Monitor, Smartphone, Tablet } from "lucide-react";
+import { ChevronLeft, ChevronRight, FolderKanban, Laptop, Smartphone } from "lucide-react";
 import { useState, type KeyboardEvent } from "react";
 import { RevelarAoRolar } from "@/componentes/animacoes/RevelarAoRolar";
 import { PreviewProjeto, type TipoDispositivo } from "@/componentes/projetos/PreviewProjeto";
@@ -10,14 +10,13 @@ const easeEditorial = [0.22, 1, 0.36, 1] as const;
 
 const dispositivos = [
   { id: "macbook", nome: "MacBook", Icone: Laptop },
-  { id: "imac", nome: "iMac", Icone: Monitor },
-  { id: "ipad", nome: "iPad", Icone: Tablet },
   { id: "iphone", nome: "iPhone", Icone: Smartphone },
 ] satisfies ReadonlyArray<{ id: TipoDispositivo; nome: string; Icone: typeof Laptop }>;
 
 export function Projetos() {
   const [indiceAtivo, setIndiceAtivo] = useState(0);
   const [dispositivoAtivo, setDispositivoAtivo] = useState<TipoDispositivo>("macbook");
+  const [detalhesAbertos, setDetalhesAbertos] = useState(false);
   const [direcao, setDirecao] = useState(1);
   const reduzirMovimento = useReducedMotion();
   const projetoAtivo = projetos[indiceAtivo];
@@ -25,6 +24,11 @@ export function Projetos() {
   function mudarProjeto(passo: number) {
     setDirecao(passo);
     setIndiceAtivo((indiceAtual) => (indiceAtual + passo + projetos.length) % projetos.length);
+  }
+
+  function mudarDispositivo(dispositivo: TipoDispositivo) {
+    setDetalhesAbertos(false);
+    setDispositivoAtivo(dispositivo);
   }
 
   function lidarComTeclado(evento: KeyboardEvent<HTMLDivElement>) {
@@ -60,7 +64,7 @@ export function Projetos() {
               type="button"
               aria-pressed={dispositivoAtivo === id}
               className={classes("device-selector-button", dispositivoAtivo === id && "is-active")}
-              onClick={() => setDispositivoAtivo(id)}
+              onClick={() => mudarDispositivo(id)}
             >
               <Icone aria-hidden="true" />
               <span>{nome}</span>
@@ -88,18 +92,30 @@ export function Projetos() {
                   <h3>{projetoAtivo.nome}</h3>
                 </header>
 
-                <div className="project-device-stage">
+                <button
+                  type="button"
+                  className={classes("project-device-stage", detalhesAbertos && "is-details-open")}
+                  aria-expanded={detalhesAbertos}
+                  aria-label={detalhesAbertos ? "Fechar detalhes do projeto" : "Ver detalhes do projeto"}
+                  onClick={() => setDetalhesAbertos((abertos) => !abertos)}
+                >
                   <PreviewProjeto tipo={projetoAtivo.preview} dispositivo={dispositivoAtivo} />
-                </div>
+                  <div className="project-device-details" aria-hidden={!detalhesAbertos}>
+                    <div className="project-carousel-summary">
+                      <span>Descrição</span>
+                      <p>{projetoAtivo.resultado}</p>
+                    </div>
 
-                <div className="project-carousel-description">
-                  <p>{projetoAtivo.resultado}</p>
-                  <dl>
-                    <div><dt>Problema</dt><dd>{projetoAtivo.problema}</dd></div>
-                    <div><dt>Entrega</dt><dd>{projetoAtivo.entrega}</dd></div>
-                    <div><dt>Foco</dt><dd>{projetoAtivo.foco}</dd></div>
-                  </dl>
-                </div>
+                    <div className="project-carousel-description">
+                      <dl>
+                        <div><dt>Problema</dt><dd>{projetoAtivo.problema}</dd></div>
+                        <div><dt>Entrega</dt><dd>{projetoAtivo.entrega}</dd></div>
+                        <div><dt>Foco</dt><dd>{projetoAtivo.foco}</dd></div>
+                      </dl>
+                    </div>
+                    <span className="project-device-details-action">Clique novamente para voltar</span>
+                  </div>
+                </button>
               </motion.article>
             </AnimatePresence>
           </div>
