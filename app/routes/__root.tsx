@@ -25,7 +25,10 @@ export const Route = createRootRoute({
       { property: "og:image", content: caminhoDoAsset("/images/og-cover.svg") },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "stylesheet", href: estilosGlobais }],
+    links: [
+      { rel: "icon", type: "image/svg+xml", href: caminhoDoAsset("/images/logo-xe-mark.svg") },
+      { rel: "stylesheet", href: estilosGlobais },
+    ],
   }),
   component: RootComponent,
 });
