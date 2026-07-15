@@ -1,6 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Geist+Mono:wght@500;600&display=swap");
 @import "tailwindcss";
 
+@font-face {
+  font-family: "M PLUS Rounded 1c";
+  src: url("/fonts/m-plus-rounded-1c/MPLUSRounded1c-Regular.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-bg: #F8F8FA;
   --color-bg-soft: #FFFFFF;
@@ -16,7 +24,7 @@
   --color-accent-2: #2F6FCC;
   --font-sans: "Inter", system-ui, sans-serif;
   --font-interface: "Archivo", "Inter", system-ui, sans-serif;
-  --font-heading: "SF Pro Rounded", "SF Pro Display", ui-rounded, "Arial Rounded MT Bold", "Nunito", var(--font-sans);
+  --font-heading: "M PLUS Rounded 1c", var(--font-sans);
   --font-mono: "Geist Mono", "IBM Plex Mono", monospace;
   --radius-card: 0.85rem;
   --radius-pill: 999px;
@@ -2798,7 +2806,7 @@ body {
   max-width: 42rem;
   transform: translateX(-1.1rem);
   color: #FFFFFF;
-  font-family: var(--font-sans);
+  font-family: var(--font-heading);
   font-size: clamp(2.6rem, 3.35vw, 4rem);
   font-weight: 400;
   line-height: 1.07;
@@ -3254,7 +3262,7 @@ body {
 }
 
 .process-route-heading h2 em {
-  font-family: "DM Serif Display", Georgia, serif;
+  font-family: inherit;
   font-style: italic;
   font-weight: 400;
   background: linear-gradient(100deg, #3C3BFF, #7776FF 52%, #D08CFF);
@@ -4371,7 +4379,7 @@ body {
   max-width: 18ch;
   margin-top: 1.25rem;
   color: #FFFFFF;
-  font-family: "SF Pro Rounded", "SF Pro Display", ui-rounded, "Arial Rounded MT Bold", "Nunito", var(--font-sans);
+  font-family: var(--font-heading);
   font-size: clamp(2.65rem, 5vw, 5.25rem);
   font-weight: 400;
   letter-spacing: 0;
