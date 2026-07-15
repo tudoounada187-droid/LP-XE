@@ -7,7 +7,6 @@ const linksNavegacao = [
   { label: "Projetos", href: "#projetos" },
   { label: "Processo", href: "#metodo" },
   { label: "FAQ", href: "#faq" },
-  { label: "Contato", href: "#briefing" },
 ];
 
 export function Cabecalho() {

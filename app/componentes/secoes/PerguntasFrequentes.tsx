@@ -101,7 +101,7 @@ export function PerguntasFrequentes() {
                   <p>{perguntasFrequentes[indiceAtivo].resposta}</p>
                 )}
                 <span className="faq-answer-brand" aria-hidden="true">
-                  <img src={caminhoDoAsset("/images/logo-xe-mark.svg")} alt="" />
+                  <img src={caminhoDoAsset("/images/logo-xe-mark-dark.svg")} alt="" />
                 </span>
               </motion.div>
             </AnimatePresence>

@@ -2803,8 +2803,8 @@ body {
 }
 
 .hero-amphora .hero-clean-content h1 {
+  width: 100%;
   max-width: 42rem;
-  transform: translateX(-1.1rem);
   color: #FFFFFF;
   font-family: var(--font-heading);
   font-size: clamp(2.6rem, 3.35vw, 4rem);
