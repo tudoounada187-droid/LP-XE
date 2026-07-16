@@ -76,6 +76,7 @@ export function BotaoServico({
   referencia,
   aoAtivar,
   aoDesativar,
+  aoAbrirDetalhes,
   aoNavegar,
 }: {
   servico: Servico;
@@ -86,6 +87,7 @@ export function BotaoServico({
   referencia: (elemento: HTMLButtonElement | null) => void;
   aoAtivar: () => void;
   aoDesativar: () => void;
+  aoAbrirDetalhes: (elemento: HTMLButtonElement) => void;
   aoNavegar: (evento: KeyboardEvent<HTMLButtonElement>, indice: number) => void;
 }) {
   const painel = variante === "desktop" ? "service-panel-desktop" : `service-panel-mobile-${servico.id}`;
@@ -98,6 +100,7 @@ export function BotaoServico({
       role="tab"
       aria-selected={ativo}
       aria-expanded={variante === "mobile" ? ativo : undefined}
+      aria-haspopup="dialog"
       aria-controls={painel}
       tabIndex={focavel ? 0 : -1}
       className={classes("service-selector-item", ativo && "is-active")}
@@ -105,7 +108,7 @@ export function BotaoServico({
       onMouseLeave={aoDesativar}
       onFocus={aoAtivar}
       onBlur={aoDesativar}
-      onClick={aoAtivar}
+      onClick={(evento) => aoAbrirDetalhes(evento.currentTarget)}
       onKeyDown={(evento) => aoNavegar(evento, indice)}
     >
       <span className="service-selector-copy">

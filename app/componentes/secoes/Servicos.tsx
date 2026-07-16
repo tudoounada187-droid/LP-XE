@@ -1,18 +1,22 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { KeyboardEvent, RefObject } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { RevelarAoRolar } from "@/componentes/animacoes/RevelarAoRolar";
 import { BotaoServico, PreviaServico } from "@/componentes/interface/ServicoInterativo";
+import { DetalheServico } from "@/componentes/servicos/DetalheServico";
 import { servicos } from "@/dados/servicos";
+import type { Servico } from "@/dados/servicos";
 import { caminhoDoAsset } from "@/utilitarios/assets";
 
 export function Servicos() {
   const [indiceAtivo, setIndiceAtivo] = useState(0);
   const [indiceEmHoverDesktop, setIndiceEmHoverDesktop] = useState<number | null>(null);
+  const [servicoDetalhado, setServicoDetalhado] = useState<Servico | null>(null);
   const [direcao, setDirecao] = useState<1 | -1>(1);
   const indiceAtivoRef = useRef(0);
   const referenciasDesktop = useRef<Array<HTMLButtonElement | null>>([]);
   const referenciasMobile = useRef<Array<HTMLButtonElement | null>>([]);
+  const ultimoGatilho = useRef<HTMLButtonElement | null>(null);
   const servicoAtivo = servicos[indiceAtivo];
 
   useEffect(() => {
@@ -37,6 +41,20 @@ export function Servicos() {
     setIndiceEmHoverDesktop(indice);
     ativarServico(indice);
   }
+
+  function abrirDetalhes(servico: Servico, gatilho: HTMLButtonElement) {
+    ultimoGatilho.current = gatilho;
+    setServicoDetalhado(servico);
+  }
+
+  const fecharDetalhes = useCallback(() => {
+    setServicoDetalhado(null);
+    window.requestAnimationFrame(() => ultimoGatilho.current?.focus());
+  }, []);
+
+  const selecionarServicoDetalhado = useCallback((servico: Servico) => {
+    setServicoDetalhado(servico);
+  }, []);
 
   function navegarComTeclado(
     evento: KeyboardEvent<HTMLButtonElement>,
@@ -115,6 +133,7 @@ export function Servicos() {
                 }}
                 aoAtivar={() => ativarServicoNoDesktop(indice)}
                 aoDesativar={() => setIndiceEmHoverDesktop(null)}
+                aoAbrirDetalhes={(gatilho) => abrirDetalhes(servico, gatilho)}
                 aoNavegar={(evento, indiceAtual) => navegarComTeclado(evento, indiceAtual, referenciasDesktop)}
               />
             ))}
@@ -145,6 +164,7 @@ export function Servicos() {
                   }}
                   aoAtivar={() => ativarServico(indice)}
                   aoDesativar={() => undefined}
+                  aoAbrirDetalhes={(gatilho) => abrirDetalhes(servico, gatilho)}
                   aoNavegar={(evento, indiceAtual) => navegarComTeclado(evento, indiceAtual, referenciasMobile)}
                 />
                 <AnimatePresence initial={false}>
@@ -168,6 +188,14 @@ export function Servicos() {
           })}
         </div>
       </div>
+      {servicoDetalhado ? (
+        <DetalheServico
+          servico={servicoDetalhado}
+          outrosServicos={servicos.filter((servico) => servico.id !== servicoDetalhado.id)}
+          aoFechar={fecharDetalhes}
+          aoSelecionarServico={selecionarServicoDetalhado}
+        />
+      ) : null}
     </section>
   );
 }

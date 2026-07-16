@@ -1,10 +1,10 @@
-import { type FormEvent } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
+import { Check } from "lucide-react";
 import { RevelarAoRolar } from "@/componentes/animacoes/RevelarAoRolar";
 
 const tiposDeProjeto = [
   "Landing Page",
-  "Site profissional",
-  "Loja virtual",
+  "Sites/E-commerce",
   "Sistema sob medida",
 ];
 
@@ -15,29 +15,48 @@ const faixasDeOrcamento = [
   "Acima de R$ 8 mil",
 ];
 
-function enviarBriefing(evento: FormEvent<HTMLFormElement>) {
-  evento.preventDefault();
-
-  const dados = new FormData(evento.currentTarget);
-  const contato = String(dados.get("contato") ?? "");
-  const nome = String(dados.get("nome") ?? "");
-  const tipo = String(dados.get("tipo") ?? "");
-  const orcamento = String(dados.get("orcamento") ?? "");
-  const corpo = [
-    `Contato: ${contato}`,
-    `Nome ou empresa: ${nome}`,
-    `Tipo de projeto: ${tipo}`,
-    `Orçamento esperado: ${orcamento}`,
-  ]
-    .filter(Boolean)
-    .join("\n");
-
-  window.location.href = `mailto:emanoelcandidolima@gmail.com?subject=${encodeURIComponent(
-    "Briefing para página, site ou sistema",
-  )}&body=${encodeURIComponent(corpo)}`;
-}
-
 export function ChamadaFinal() {
+  const [envioConfirmado, setEnvioConfirmado] = useState(false);
+  const temporizadorEmailRef = useRef<number | null>(null);
+  const temporizadorResetRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (temporizadorEmailRef.current) window.clearTimeout(temporizadorEmailRef.current);
+      if (temporizadorResetRef.current) window.clearTimeout(temporizadorResetRef.current);
+    };
+  }, []);
+
+  function enviarBriefing(evento: FormEvent<HTMLFormElement>) {
+    evento.preventDefault();
+    if (envioConfirmado) return;
+
+    const dados = new FormData(evento.currentTarget);
+    const contato = String(dados.get("contato") ?? "");
+    const nome = String(dados.get("nome") ?? "");
+    const tipo = String(dados.get("tipo") ?? "");
+    const orcamento = String(dados.get("orcamento") ?? "");
+    const corpo = [
+      `Contato: ${contato}`,
+      `Nome ou empresa: ${nome}`,
+      `Tipo de projeto: ${tipo}`,
+      `Orçamento esperado: ${orcamento}`,
+    ]
+      .filter(Boolean)
+      .join("\n");
+    const email = `mailto:xesoftware.com.br@gmail.com?subject=${encodeURIComponent(
+      "Briefing para página, site ou sistema",
+    )}&body=${encodeURIComponent(corpo)}`;
+
+    setEnvioConfirmado(true);
+    temporizadorEmailRef.current = window.setTimeout(() => {
+      window.location.href = email;
+    }, 450);
+    temporizadorResetRef.current = window.setTimeout(() => {
+      setEnvioConfirmado(false);
+    }, 2200);
+  }
+
   return (
     <section id="briefing" className="briefing-section relative">
       <div className="briefing-wave-in" aria-hidden="true" />
@@ -95,8 +114,15 @@ export function ChamadaFinal() {
               ))}
             </select>
 
-            <button type="submit" className="briefing-submit">
-              Enviar
+            <button
+              type="submit"
+              className={`briefing-submit${envioConfirmado ? " is-approved" : ""}`}
+              disabled={envioConfirmado}
+              aria-label={envioConfirmado ? "Briefing pronto para envio" : "Enviar briefing por e-mail"}
+            >
+              <span key={envioConfirmado ? "aprovado" : "enviar"} className="briefing-submit-content">
+                {envioConfirmado ? <Check aria-hidden="true" strokeWidth={3} /> : "Enviar"}
+              </span>
             </button>
           </form>
         </RevelarAoRolar>
