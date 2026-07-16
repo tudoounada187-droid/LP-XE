@@ -106,9 +106,16 @@ export function BotaoServico({
       className={classes("service-selector-item", ativo && "is-active")}
       onMouseEnter={aoAtivar}
       onMouseLeave={aoDesativar}
-      onFocus={aoAtivar}
+      onFocus={variante === "desktop" ? aoAtivar : undefined}
       onBlur={aoDesativar}
-      onClick={(evento) => aoAbrirDetalhes(evento.currentTarget)}
+      onClick={(evento) => {
+        if (variante === "mobile" && !ativo) {
+          aoAtivar();
+          return;
+        }
+
+        aoAbrirDetalhes(evento.currentTarget);
+      }}
       onKeyDown={(evento) => aoNavegar(evento, indice)}
     >
       <span className="service-selector-copy">
