@@ -16,45 +16,45 @@ const faixasDeOrcamento = [
 ];
 
 export function ChamadaFinal() {
-  const [envioConfirmado, setEnvioConfirmado] = useState(false);
-  const temporizadorEmailRef = useRef<number | null>(null);
+  const [estadoEnvio, setEstadoEnvio] = useState<"inativo" | "enviando" | "aprovado" | "erro">("inativo");
   const temporizadorResetRef = useRef<number | null>(null);
 
   useEffect(() => {
     return () => {
-      if (temporizadorEmailRef.current) window.clearTimeout(temporizadorEmailRef.current);
       if (temporizadorResetRef.current) window.clearTimeout(temporizadorResetRef.current);
     };
   }, []);
 
-  function enviarBriefing(evento: FormEvent<HTMLFormElement>) {
+  async function enviarBriefing(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault();
-    if (envioConfirmado) return;
+    if (estadoEnvio === "enviando" || estadoEnvio === "aprovado") return;
 
     const dados = new FormData(evento.currentTarget);
-    const contato = String(dados.get("contato") ?? "");
-    const nome = String(dados.get("nome") ?? "");
-    const tipo = String(dados.get("tipo") ?? "");
-    const orcamento = String(dados.get("orcamento") ?? "");
-    const corpo = [
-      `Contato: ${contato}`,
-      `Nome ou empresa: ${nome}`,
-      `Tipo de projeto: ${tipo}`,
-      `Orçamento esperado: ${orcamento}`,
-    ]
-      .filter(Boolean)
-      .join("\n");
-    const email = `mailto:xesoftware.com.br@gmail.com?subject=${encodeURIComponent(
-      "Briefing para página, site ou sistema",
-    )}&body=${encodeURIComponent(corpo)}`;
+    dados.set("_subject", "Novo briefing pelo site XE Software");
+    dados.set("_template", "table");
+    dados.set("_captcha", "true");
+    dados.set("_honey", "");
+    setEstadoEnvio("enviando");
 
-    setEnvioConfirmado(true);
-    temporizadorEmailRef.current = window.setTimeout(() => {
-      window.location.href = email;
-    }, 450);
-    temporizadorResetRef.current = window.setTimeout(() => {
-      setEnvioConfirmado(false);
-    }, 2200);
+    try {
+      const resposta = await fetch("https://formsubmit.co/ajax/xesoftware.com.br@gmail.com", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: dados,
+      });
+
+      if (!resposta.ok) throw new Error("Não foi possível enviar o briefing.");
+
+      setEstadoEnvio("aprovado");
+      temporizadorResetRef.current = window.setTimeout(() => {
+        setEstadoEnvio("inativo");
+      }, 2200);
+    } catch {
+      setEstadoEnvio("erro");
+      temporizadorResetRef.current = window.setTimeout(() => {
+        setEstadoEnvio("inativo");
+      }, 2600);
+    }
   }
 
   return (
@@ -114,14 +114,16 @@ export function ChamadaFinal() {
               ))}
             </select>
 
+            <input className="briefing-honeypot" type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+
             <button
               type="submit"
-              className={`briefing-submit${envioConfirmado ? " is-approved" : ""}`}
-              disabled={envioConfirmado}
-              aria-label={envioConfirmado ? "Briefing pronto para envio" : "Enviar briefing por e-mail"}
+              className={`briefing-submit${estadoEnvio === "aprovado" ? " is-approved" : ""}${estadoEnvio === "erro" ? " has-error" : ""}`}
+              disabled={estadoEnvio === "enviando" || estadoEnvio === "aprovado"}
+              aria-label={estadoEnvio === "aprovado" ? "Briefing enviado com sucesso" : "Enviar briefing por e-mail"}
             >
-              <span key={envioConfirmado ? "aprovado" : "enviar"} className="briefing-submit-content">
-                {envioConfirmado ? <Check aria-hidden="true" strokeWidth={3} /> : "Enviar"}
+              <span key={estadoEnvio} className="briefing-submit-content">
+                {estadoEnvio === "aprovado" ? <Check aria-hidden="true" strokeWidth={3} /> : estadoEnvio === "enviando" ? "Enviando..." : estadoEnvio === "erro" ? "Tente novamente" : "Enviar"}
               </span>
             </button>
           </form>

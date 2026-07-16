@@ -1138,6 +1138,15 @@ html {
   height: 1.55rem;
 }
 
+.briefing-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 .briefing-submit.is-approved,
 .briefing-submit.is-approved:hover {
   background: #FFFFFF;
@@ -1146,6 +1155,10 @@ html {
   cursor: default;
   filter: none;
   transform: none;
+}
+
+.briefing-submit.has-error {
+  background: #A33746;
 }
 
 @keyframes briefing-submit-swap {
