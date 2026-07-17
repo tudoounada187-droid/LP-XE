@@ -4736,7 +4736,8 @@ body {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
   animation: project-screen-enter 0.48s ease both;
   pointer-events: none;
   user-select: none;
