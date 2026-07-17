@@ -109,6 +109,6 @@ export const servicos: Servico[] = [
     lancamentoTexto:
       "Desenvolvemos em ciclos curtos, entregando partes funcionais ao longo do projeto. No lançamento, treinamos a equipe e acompanhamos os primeiros dias de uso real.",
     abordagemTexto:
-      "Começamos pelo problema, não pela tecnologia. Só depois de compreender o processo escolhemos a arquitetura mais simples que resolve a necessidade sem complexidade desnecessária.",
+      "Começamos pelo problema, não pela tecnologia. Só depois de compreender o processo escolhemos a arquitetura mais simples que atende à necessidade real, sem complexidade desnecessária.",
   },
 ];

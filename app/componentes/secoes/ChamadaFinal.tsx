@@ -76,9 +76,9 @@ export function ChamadaFinal() {
               boa conversa
             </h2>
             <p>
-              Conte o que você precisa e quais resultados deseja alcançar. A XE transforma suas
-              ideias em uma experiência digital pensada para fortalecer sua marca e gerar novas
-              oportunidades.
+              Conte o que você precisa e o resultado que espera alcançar. A gente responde com os
+              próximos passos e, se fizer sentido, uma proposta clara para o seu projeto. Assim,
+              sua marca transmite mais confiança e conquista mais orçamentos.
             </p>
           </div>
 

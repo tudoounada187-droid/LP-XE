@@ -5,8 +5,8 @@ import { aparecerSubindo, animacaoEmSequencia } from "@/componentes/animacoes/va
 import { BotaoConversar } from "@/componentes/interface/BotaoConversar";
 
 const linhasTituloHero = [
-  { texto: "Experiências digitais que", corInicial: "#FFFFFF", corFinal: "#F0CAFF" },
-  { texto: "fazem sua marca crescer", corInicial: "#EE8FFF", corFinal: "#FFFFFF" },
+  { texto: "Sites que passam confiança", corInicial: "#FFFFFF", corFinal: "#F0CAFF" },
+  { texto: "e trazem mais orçamentos", corInicial: "#EE8FFF", corFinal: "#FFFFFF" },
 ] as const;
 
 const tituloHero = linhasTituloHero.map(({ texto }) => texto).join(" ");
@@ -165,7 +165,7 @@ export function DestaqueInicial() {
           </motion.h1>
 
           <motion.p variants={aparecerSubindo}>
-            Criamos sites, landing pages e sistemas que valorizam sua marca, geram confiança e transformam sua presença digital em novas oportunidades de crescimento. Unimos estratégia, design e tecnologia para construir experiências que conectam sua empresa às pessoas certas e geram resultados reais.
+            Criamos sites, landing pages e sistemas sob medida para lojas, clínicas, escritórios e prestadores de serviço. Cada projeto segue um processo claro, com prazo definido e comunicação direta — para sua marca transmitir confiança e fechar mais orçamentos.
           </motion.p>
 
           <motion.div variants={aparecerSubindo} className="hero-reference-actions">

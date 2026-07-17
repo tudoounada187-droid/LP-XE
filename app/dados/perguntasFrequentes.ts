@@ -29,4 +29,9 @@ export const perguntasFrequentes = [
     resposta:
       "Sim. A entrega inclui os acessos do projeto e orientações de uso. Manutenção ou novas evoluções ficam disponíveis quando precisar.",
   },
+  {
+    pergunta: "Atendem minha cidade?",
+    resposta:
+      "Sim. Todo o processo acontece online — briefing, alinhamento e entrega — então funciona para qualquer lugar do Brasil.",
+  },
 ];

@@ -413,6 +413,21 @@ export function Rodape() {
       <div className="footer-brand-stage container-x relative z-10">
         <div className="footer-brand-hover">
           <p className="footer-wordmark">XE Software</p>
+          <div className="footer-contact">
+            <p>Sites que transmitem confiança e ajudam sua empresa a receber mais orçamentos.</p>
+            <a className="footer-link" href="mailto:xesoftware.com.br@gmail.com">
+              xesoftware.com.br@gmail.com
+            </a>
+            <a
+              className="footer-link"
+              href="https://www.instagram.com/xe.software/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Instagram
+            </a>
+            <p>© 2026 XE Software. Todos os direitos reservados.</p>
+          </div>
         </div>
       </div>
     </footer>

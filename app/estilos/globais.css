@@ -874,12 +874,16 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-block: clamp(4rem, 8vw, 7rem);
 }
 
 .footer-brand-hover {
   position: relative;
   isolation: isolate;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
   padding: 0.16em 0.08em;
   color: #FFFFFF;
   cursor: default;
@@ -887,6 +891,23 @@ html {
   overflow: visible;
   text-align: center;
   text-wrap: nowrap;
+}
+
+.footer-contact {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: clamp(0.78rem, 1.3vw, 0.95rem);
+  line-height: 1.5;
+  text-wrap: balance;
+}
+
+.footer-contact p:first-child {
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .footer-editorial[data-water-active="true"] .footer-wordmark::after {
