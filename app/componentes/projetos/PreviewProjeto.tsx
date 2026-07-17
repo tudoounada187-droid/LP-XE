@@ -104,12 +104,13 @@ function GaleriaBarbearia() {
   }, [reduzirMovimento]);
 
   const tela = telasBarbearia[indice];
+  const caminhoDaTela = caminhoDoAsset(`images/projects/${tela.arquivo}`);
 
   return (
     <div className="project-screen-gallery">
       <img
         key={tela.arquivo}
-        src={caminhoDoAsset(`images/projects/${tela.arquivo}`)}
+        src={caminhoDaTela}
         alt={tela.nome}
       />
 

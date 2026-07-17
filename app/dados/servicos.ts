@@ -76,7 +76,7 @@ export const servicos: Servico[] = [
     descobertaTexto:
       "Mapeamos seu catálogo, as formas de pagamento e envio desejadas e como sua equipe pretende gerenciar estoque e pedidos no dia a dia.",
     lancamentoTexto:
-      "Construímos catálogo, checkout e painel administrativo, testamos o fluxo de compra de ponta a ponta — incluindo pagamento real — e acompanhamos os primeiros pedidos após a publicação.",
+      "Construímos catálogo, checkout e painel administrativo, testamos o fluxo de compra de ponta a ponta, incluindo pagamento real, e acompanhamos os primeiros pedidos após a publicação.",
     abordagemTexto:
       "Cada etapa do checkout é tratada como um ponto onde a venda pode ser perdida. Por isso, simplificamos ao máximo o caminho entre adicionar ao carrinho e receber a confirmação da compra.",
   },
@@ -93,7 +93,7 @@ export const servicos: Servico[] = [
     disponibilidade: "Sob análise de escopo",
     visaoGeral: [
       "Sistemas sob medida resolvem o que nenhuma ferramenta pronta resolve sozinha: o jeito específico como o seu negócio funciona. Mapeamos a operação real para transformar gargalos em um fluxo digital claro.",
-      "Construímos somente o que é necessário para apoiar a rotina, organizar informações e dar visibilidade às decisões — sem funcionalidades genéricas sobrando.",
+      "Construímos somente o que é necessário para apoiar a rotina, organizar informações e dar visibilidade às decisões, sem funcionalidades genéricas sobrando.",
     ],
     incluidos: [
       "Workshop de descoberta do processo atual",

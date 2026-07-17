@@ -32,6 +32,6 @@ export const perguntasFrequentes = [
   {
     pergunta: "Atendem minha cidade?",
     resposta:
-      "Sim. Todo o processo acontece online — briefing, alinhamento e entrega — então funciona para qualquer lugar do Brasil.",
+      "Sim. Todo o processo acontece online: briefing, alinhamento e entrega, então funciona para qualquer lugar do Brasil.",
   },
 ];

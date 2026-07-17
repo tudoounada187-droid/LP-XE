@@ -165,7 +165,7 @@ export function DestaqueInicial() {
           </motion.h1>
 
           <motion.p variants={aparecerSubindo}>
-            Criamos sites, landing pages e sistemas sob medida para lojas, clínicas, escritórios e prestadores de serviço. Cada projeto segue um processo claro, com prazo definido e comunicação direta — para sua marca transmitir confiança e fechar mais orçamentos.
+            Criamos sites, landing pages e sistemas sob medida para lojas, clínicas, escritórios e prestadores de serviço. Cada projeto segue um processo claro, com prazo definido e comunicação direta, para sua marca transmitir confiança e fechar mais orçamentos.
           </motion.p>
 
           <motion.div variants={aparecerSubindo} className="hero-reference-actions">
