@@ -1,4 +1,4 @@
-export type TipoPreviewProjeto = "advocacia" | "pibic";
+export type TipoPreviewProjeto = "advocacia" | "barbearia";
 
 export type Projeto = {
   nome: string;
@@ -24,14 +24,13 @@ export const projetos = [
     preview: "advocacia",
   },
   {
-    nome: "PIBIC — Casos Clínicos",
-    categoria: "Sistema educacional / Saúde",
+    nome: "Sistema de Gestão para Barbearia",
+    categoria: "Sistema de gestão / Barbearia",
     ano: "2026",
-    problema: "Centralizar a criação, organização e avaliação de casos clínicos em um único fluxo.",
-    entrega: "Dashboards para professores, gestão de casos, turmas e acompanhamento de desempenho.",
-    resultado: "Professores passam a acompanhar turmas, casos e desempenho em um só lugar, sem depender de planilhas soltas.",
-    foco: "Gestão acadêmica",
-    preview: "pibic",
-    url: "https://www.figma.com/design/0orbQZ8ymayjvTkyWfEkFu/PIBIC?node-id=114-624",
+    problema: "Centralizar o controle de agendamentos, catálogo de serviços e fluxo financeiro em um único sistema simples de usar.",
+    entrega: "Painel com agenda semanal, catálogo de serviços editável, configuração de horários de atendimento e dashboard financeiro completo.",
+    resultado: "Proprietários de barbearia passam a gerenciar agenda, serviços e faturamento em um só painel, sem depender de cadernos ou planilhas soltas.",
+    foco: "Gestão de barbearias",
+    preview: "barbearia",
   },
 ] satisfies readonly Projeto[];

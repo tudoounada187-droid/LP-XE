@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import type { TipoPreviewProjeto } from "@/dados/projetos";
 import { caminhoDoAsset } from "@/utilitarios/assets";
@@ -7,11 +7,12 @@ type PropriedadesPreviewProjeto = {
   tipo: TipoPreviewProjeto;
 };
 
-const telasPibic = [
-  { arquivo: "pibic-dashboard.png", nome: "Dashboard do professor", dashboard: true },
-  { arquivo: "pibic-criar-caso.png", nome: "Criação de caso clínico" },
-  { arquivo: "pibic-meus-casos.png", nome: "Meus casos" },
-  { arquivo: "pibic-turmas.png", nome: "Turmas do professor" },
+const telasBarbearia = [
+  { arquivo: "barbearia-visao-geral.png", nome: "Visão geral da barbearia" },
+  { arquivo: "barbearia-agenda.png", nome: "Agenda semanal de atendimentos" },
+  { arquivo: "barbearia-servicos.png", nome: "Catálogo de serviços da barbearia" },
+  { arquivo: "barbearia-financeiro.png", nome: "Dashboard financeiro mensal" },
+  { arquivo: "barbearia-horarios.png", nome: "Configuração de horários de atendimento" },
 ] as const;
 
 const LARGURA_VIEWPORT_ADVOCACIA = 1728;
@@ -89,40 +90,39 @@ function ApresentacaoAdvocacia() {
   );
 }
 
-function GaleriaPibic() {
+function GaleriaBarbearia() {
   const [indice, setIndice] = useState(0);
   const reduzirMovimento = useReducedMotion();
 
   useEffect(() => {
     if (reduzirMovimento) return;
-    const intervalo = window.setInterval(() => setIndice((atual) => (atual + 1) % telasPibic.length), 3200);
+    const intervalo = window.setInterval(
+      () => setIndice((atual) => (atual + 1) % telasBarbearia.length),
+      3200,
+    );
     return () => window.clearInterval(intervalo);
   }, [reduzirMovimento]);
 
-  const tela = telasPibic[indice];
+  const tela = telasBarbearia[indice];
 
   return (
-    <div className="project-pibic-gallery">
+    <div className="project-screen-gallery">
       <img
         key={tela.arquivo}
         src={caminhoDoAsset(`images/projects/${tela.arquivo}`)}
         alt={tela.nome}
       />
 
-      <span className="project-pibic-name-mask">Gabriel Soares</span>
-      {"dashboard" in tela && tela.dashboard && (
-        <>
-          <span className="project-pibic-greeting-mask">Bem vindo, <strong>Gabriel!</strong></span>
-          <div className="project-pibic-animated-chart" aria-hidden="true">
-            {[42, 70, 33, 49, 45, 53, 39, 47].map((altura, barra) => (
-              <i key={barra} style={{ "--bar-height": `${altura}%`, "--bar-delay": `${barra * 70}ms` } as CSSProperties} />
-            ))}
-          </div>
-        </>
-      )}
-
-      <div className="project-pibic-progress" aria-label={`Tela ${indice + 1} de ${telasPibic.length}`}>
-        {telasPibic.map((item) => <i key={item.arquivo} className={item.arquivo === tela.arquivo ? "is-active" : ""} />)}
+      <div
+        className="project-screen-progress"
+        aria-label={`Tela ${indice + 1} de ${telasBarbearia.length}`}
+      >
+        {telasBarbearia.map((item) => (
+          <i
+            key={item.arquivo}
+            className={item.arquivo === tela.arquivo ? "is-active" : ""}
+          />
+        ))}
       </div>
     </div>
   );
@@ -133,7 +133,7 @@ export function PreviewProjeto({ tipo }: PropriedadesPreviewProjeto) {
     <div className="device-mockup device-macbook">
       <img className="device-frame-image" src={caminhoDoAsset("images/device-macbook-pro.png")} alt="" />
       <div className="device-screen">
-        {tipo === "advocacia" ? <ApresentacaoAdvocacia /> : <GaleriaPibic />}
+        {tipo === "advocacia" ? <ApresentacaoAdvocacia /> : <GaleriaBarbearia />}
       </div>
     </div>
   );
